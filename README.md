@@ -1,1 +1,1 @@
-# ifex-viewer
+# Interface Exchange Framework (IFEX) Viewer
