@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "The IFEX Viewer is a web component designed to display API specifications created with the Interface Exchange Framework (IFEX).",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/COVESA/ifex-viewer"
+  },
   "type": "module",
   "private": "false",
   "author": "Mercedes-Benz Tech Innovation GmbH",
