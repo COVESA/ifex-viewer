@@ -8,8 +8,8 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
   >
     <MagnifyingGlassIcon class="size-6 shrink-0 mr-2" />
     <input
-      v-model="searchValue"
       ref="searchInput"
+      v-model="searchValue"
       class="w-full h-full outline-hidden dark:bg-gray-800 [&::-webkit-search-cancel-button]:hidden"
       placeholder="Search ..."
       type="search"
@@ -29,9 +29,9 @@ import { watchDebounced, useEventListener } from '@vueuse/core';
 import { useTemplateRef } from 'vue';
 
 enum Platform {
-  MacOs = 'MacOs',
-  Windows = 'Windows',
-  Other = 'Meta',
+  MacOs = 'MacOs', // eslint-disable-line no-unused-vars
+  Windows = 'Windows', // eslint-disable-line no-unused-vars
+  Other = 'Meta', // eslint-disable-line no-unused-vars
 }
 
 const emits = defineEmits<{

@@ -28,6 +28,6 @@ export interface TreeNode {
 }
 
 export enum ViewTabs {
-  MERGE_VIEW = 'Merge View',
-  LAYERED_VIEW = 'Layered View',
+  MERGE_VIEW = 'Merge View', // eslint-disable-line no-unused-vars
+  LAYERED_VIEW = 'Layered View', // eslint-disable-line no-unused-vars
 }

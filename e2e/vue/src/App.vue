@@ -11,14 +11,16 @@
   </div>
 
   <ifex-viewer
+    ref="ifexViewer"
     :specifications="specifications"
     @specloaded="onSpecLoaded"
     @nodeselected="onNodeSelected($event)"
     @clipboardcopiedsuccessful="onClipboardCopied($event)"
-    ref="ifexViewer"
   >
     <template v-if="hasSlots">
+      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <div :slot="headlineSlotPath">{{ headlineSlotText }}</div>
+      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <div :slot="fleetSizeMethodSlotPath">{{ fleetSizeMethodSlotContent }}</div>
     </template>
   </ifex-viewer>

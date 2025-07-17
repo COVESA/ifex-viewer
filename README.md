@@ -148,7 +148,7 @@ For more info about all the configuration options check out the documentation [h
 
 ## Roadmap
 
-- [ ] Visualize deployment layers
+- [x] Visualize deployment layers
 - [ ] Editable IFEX Spec
 - [ ] VSCode Plugin for visualizing IFEX APIs right inside your IDE
 

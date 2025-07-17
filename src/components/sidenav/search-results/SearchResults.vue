@@ -31,5 +31,5 @@ import Badge from '../../shared/components/badge/Badge.vue';
 
 defineProps<SearchResultsProps>();
 
-const emits = defineEmits<{ (e: 'searchResultSelected', searchResult: SearchResult): void }>();
+const emits = defineEmits<{ (e: 'searchResultSelected', searchResult: SearchResult): void }>(); // eslint-disable-line no-unused-vars
 </script>

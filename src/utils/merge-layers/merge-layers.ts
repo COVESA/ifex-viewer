@@ -133,7 +133,7 @@ const getNameAttribute = (value: unknown): [MergedDocument | null, boolean, stri
   }
 
   const valueMap = value as MergedDocument;
-  if (!valueMap.hasOwnProperty('name')) {
+  if (!Object.prototype.hasOwnProperty.call(valueMap, 'name')) {
     return [null, false, ''];
   }
 

@@ -25,7 +25,7 @@ import { ref, computed } from 'vue';
 
 const { tabs } = defineProps<TabsProps>();
 
-const emits = defineEmits<{ (e: 'tabChanged', tab: string): void }>();
+const emits = defineEmits<{ (e: 'tabChanged', tab: string): void }>(); // eslint-disable-line no-unused-vars
 
 const activeTab = ref(tabs[0]);
 const activeTabIndex = computed(() => tabs.indexOf(activeTab.value));
