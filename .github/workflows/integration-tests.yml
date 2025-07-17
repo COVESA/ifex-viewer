@@ -20,6 +20,7 @@ jobs:
         uses: ./.github/actions/run-integration-tests
         with:
           startServerCommand: pnpm dev:e2e:angular
+          frameworkType: 'angular'
 
   test-react:
     timeout-minutes: 20
@@ -31,6 +32,7 @@ jobs:
         uses: ./.github/actions/run-integration-tests
         with:
           startServerCommand: pnpm preview:e2e:react
+          frameworkType: 'react'
 
   test-vue:
     timeout-minutes: 20
@@ -42,3 +44,4 @@ jobs:
         uses: ./.github/actions/run-integration-tests
         with:
           startServerCommand: pnpm preview:e2e:vue
+          frameworkType: 'vue'

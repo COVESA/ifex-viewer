@@ -5,6 +5,14 @@ inputs:
   startServerCommand:
     description: NPM command to start the server.
     required: true
+  frameworkType:
+    description: Framework type to run tests against.
+    required: true
+    default: angular
+    options:
+      - angular
+      - react
+      - vue
 
 runs:
   using: composite
@@ -49,6 +57,6 @@ runs:
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
-        name: playwright-report
+        name: playwright-report-${{ inputs.frameworkType }}
         path: playwright-report/
         retention-days: 7
