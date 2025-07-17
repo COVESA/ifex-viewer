@@ -1,0 +1,43 @@
+name: "🔗 Integration Help"
+description: Request help integrating IFEX Viewer with your project.
+labels: [help wanted]
+title: "[Integration] <short description>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Integration Help
+        Please describe your integration scenario and the help you need.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Project type, framework, and version info
+      placeholder: "e.g. React 18, Vue 3, Angular 16"
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What are you trying to achieve?
+      placeholder: "Describe your integration goal."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem or error are you facing?
+      placeholder: "Describe the issue."
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or references.
+      placeholder: "Add context here."
+    validations:
+      required: false
+

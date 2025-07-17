@@ -1,0 +1,440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IFEX Core IDL (YAML format), version: spec_v1.5",
+  "description": "This file can be used to validate IFEX Core IDL files, which are normally written in YAML, not JSON.  The schema is not the source-of-truth but an artifact generated from the source-of-truth, so it should be consistent",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/definitions/AST"
+    }
+  ],
+  "definitions": {
+    "AST": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "major_version": {
+          "type": "integer"
+        },
+        "minor_version": {
+          "type": "integer"
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Include"
+          }
+        },
+        "namespaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Namespace"
+          }
+        },
+        "filetype": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "Include": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": ["file"],
+      "additionalProperties": false
+    },
+    "Namespace": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "major_version": {
+          "type": "integer"
+        },
+        "minor_version": {
+          "type": "integer"
+        },
+        "version_label": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Method"
+          }
+        },
+        "typedefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Typedef"
+          }
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Include"
+          }
+        },
+        "structs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Struct"
+          }
+        },
+        "enumerations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Enumeration"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        },
+        "namespaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Namespace"
+          }
+        },
+        "interface": {
+          "type": "object",
+          "$ref": "#/definitions/Interface"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Argument": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arraysize": {
+          "type": "integer"
+        },
+        "range": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "datatype"],
+      "additionalProperties": false
+    },
+    "Method": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        },
+        "returns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "datatype": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arraysize": {
+          "type": "integer"
+        },
+        "range": {
+          "type": "string"
+        }
+      },
+      "required": ["datatype"],
+      "additionalProperties": false
+    },
+    "Typedef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "datatypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "arraysize": {
+          "type": "integer"
+        },
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Struct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Member"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Member": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arraysize": {
+          "type": "integer"
+        }
+      },
+      "required": ["name", "datatype"],
+      "additionalProperties": false
+    },
+    "Enumeration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Option"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "datatype", "options"],
+      "additionalProperties": false
+    },
+    "Option": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "value"],
+      "additionalProperties": false
+    },
+    "Property": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arraysize": {
+          "type": "integer"
+        }
+      },
+      "required": ["name", "datatype"],
+      "additionalProperties": false
+    },
+    "Interface": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "major_version": {
+          "type": "integer"
+        },
+        "minor_version": {
+          "type": "integer"
+        },
+        "version_label": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Method"
+          }
+        },
+        "typedefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Typedef"
+          }
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Include"
+          }
+        },
+        "structs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Struct"
+          }
+        },
+        "enumerations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Enumeration"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        },
+        "namespaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Namespace"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    }
+  }
+}

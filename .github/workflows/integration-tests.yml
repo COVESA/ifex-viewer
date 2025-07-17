@@ -1,0 +1,44 @@
+name: Integration Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-angular:
+    timeout-minutes: 20
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install
+        uses: ./.github/actions/run-integration-tests
+        with:
+          startServerCommand: pnpm dev:e2e:angular
+
+  test-react:
+    timeout-minutes: 20
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install
+        uses: ./.github/actions/run-integration-tests
+        with:
+          startServerCommand: pnpm preview:e2e:react
+
+  test-vue:
+    timeout-minutes: 20
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install
+        uses: ./.github/actions/run-integration-tests
+        with:
+          startServerCommand: pnpm preview:e2e:vue

@@ -1,0 +1,25 @@
+<div>
+  <div class="container">Spec loaded: {{ specLoaded() }}</div>
+
+  <div class="container">Selected node: {{ selectedNodePath() }}</div>
+
+  <div class="container">
+    Copied event data: <br />
+    <span>Type: {{ clipboardCopiedEventPayload()?.type ?? '' }} </span>
+    <br />
+    <span>Data: {{ clipboardCopiedEventPayload()?.data ?? '' }} </span>
+  </div>
+
+  <ifex-viewer
+    [specifications]="specifications()"
+    (specloaded)="onSpecLoaded()"
+    (nodeselected)="onNodeSelected($event)"
+    (clipboardcopiedsuccessful)="onClipboardCopied($event)"
+    #ifexViewer
+  >
+    @if (hasSlots$ | async) {
+      <div [slot]="headlineSlotPath">{{ headlineSlotText }}</div>
+      <div [slot]="fleetSizeMethodSlotPath">{{ fleetSizeMethodSlotContent }}</div>
+    }
+  </ifex-viewer>
+</div>

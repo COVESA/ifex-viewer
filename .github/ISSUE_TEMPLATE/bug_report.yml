@@ -1,0 +1,51 @@
+name: Bug Report
+description: File a bug report to help us improve the IFEX Viewer.
+labels: [bug]
+title: "[Bug] <short description>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thank you for reporting a bug!
+        Please fill out the following details to help us reproduce and fix the issue.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, and version info
+      placeholder: "e.g. macOS 14, Chrome 125"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the bug
+      placeholder: "1. Go to ...\n2. Click ...\n3. See error"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: "Describe what you expected."
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: "Describe what actually happened."
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Logs
+      description: Attach screenshots or logs if available
+      placeholder: "Drag and drop images or paste logs here."
+    validations:
+      required: false
+

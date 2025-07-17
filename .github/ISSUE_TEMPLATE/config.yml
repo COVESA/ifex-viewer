@@ -1,0 +1,24 @@
+blank_issues_enabled: false
+issue_templates:
+  - name: '🐞 Bug Report'
+    description: File a bug report to help us improve the IFEX Viewer.
+    file: bug_report.yml
+  - name: '✨ Feature Request'
+    description: Suggest a new feature or improvement for the IFEX Viewer.
+    file: feature_request.yml
+  - name: '📚 Documentation Improvement'
+    description: Suggest changes or additions to the documentation.
+    file: documentation_improvement.yml
+  - name: '🔗 Integration Help'
+    description: Request help integrating IFEX Viewer with your project.
+    file: integration_help.yml
+contact_links:
+  - name: '❓ Question'
+    url: https://github.com/ifex-spec-viewer/discussions
+    about: Please use GitHub Discussions for questions and general help.
+  - name: '📖 Documentation'
+    url: https://github.com/ifex-spec-viewer/docs
+    about: Read the official documentation for IFEX Viewer.
+  - name: '🧑‍💻 Examples & Guides'
+    url: https://github.com/ifex-spec-viewer/docs/examples
+    about: Explore example projects and integration guides.

@@ -1,0 +1,54 @@
+name: Runs integration tests
+description: Runs integration tests with playwright for the given example app.
+
+inputs:
+  startServerCommand:
+    description: NPM command to start the server.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      id: pnpm-install
+      with:
+        version: 10.4.1
+        run_install: false
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22.14.0
+        cache: 'pnpm'
+        cache-dependency-path: '**/pnpm-lock.yaml'
+
+    - name: Install
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
+    - name: Install Playwright Browsers
+      if: steps.cache-playwright.outputs.cache-hit != 'true'
+      shell: bash
+      run: pnpm exec playwright install --with-deps
+
+    - name: Build ifex viewer
+      shell: bash
+      run: pnpm build
+
+    - name: Run application server
+      shell: bash
+      run: ${{ inputs.startServerCommand }} &
+
+    - name: Run Playwright tests
+      shell: bash
+      run: pnpm wait-on http://localhost:4200 && pnpm playwright
+
+    - uses: actions/upload-artifact@v3
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 7

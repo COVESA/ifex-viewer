@@ -1,0 +1,87 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
+*/
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-*: initial;
+  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-primary: #28819d;
+  --color-primary-light: #2f94b6;
+
+  --color-gray-100: #f4f4f4;
+  --color-gray-200: #dbdbdb;
+  --color-gray-300: #bbbbbb;
+  --color-gray-400: #9f9f9f;
+  --color-gray-500: #848484;
+  --color-gray-600: #696969;
+  --color-gray-700: #4f4f4f;
+  --color-gray-800: #262626;
+  --color-gray-900: #1a1a1a;
+
+  --color-blue-100: #cce8ff;
+  --color-blue-200: #9ad2fe;
+  --color-blue-300: #66bbfd;
+  --color-blue-400: #33a4fd;
+  --color-blue-500: #008dfc;
+  --color-blue-600: #036dc1;
+  --color-blue-700: #025497;
+  --color-blue-800: #013c6b;
+  --color-blue-900: #002441;
+
+  --color-red-100: #ffdbdb;
+  --color-red-200: #ffb7b7;
+  --color-red-300: #ff9292;
+  --color-red-400: #ff6e6e;
+  --color-red-500: #ff4a4a;
+  --color-red-600: #c31e1e;
+  --color-red-700: #981717;
+  --color-red-800: #6d1111;
+  --color-red-900: #6d1111;
+
+  --color-green-100: #d3edd6;
+  --color-green-200: #a6daac;
+  --color-green-300: #7ac883;
+  --color-green-400: #4db559;
+  --color-green-500: #21a330;
+  --color-green-600: #177321;
+  --color-green-700: #125a1a;
+  --color-green-800: #0d4013;
+  --color-green-900: #07260b;
+
+  --color-yellow-100: #fef5cc;
+  --color-yellow-200: #fdeb99;
+  --color-yellow-300: #fce066;
+  --color-yellow-400: #fbd633;
+  --color-yellow-500: #facc00;
+  --color-yellow-600: #d1aa00;
+  --color-yellow-700: #a28400;
+  --color-yellow-800: #745f00;
+  --color-yellow-900: #463900;
+
+  /* For some reason these variables are not bundled and has to be redefined here */
+  --tw-border-style: solid;
+  --tw-inset-shadow: 0 0 #0000;
+  --tw-inset-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+@layer base {
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+@utility scrollbar-gutter {
+  scrollbar-gutter: stable;
+}

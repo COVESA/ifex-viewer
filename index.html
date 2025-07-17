@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue + TS</title>
+  </head>
+  <body style="height: 800px">
+    <ifex-viewer id="viewer">
+      <div slot="GalacticEmpire.recruitStormtrooper">High tier</div>
+      <div slot="GalacticEmpire.ImperialNavy.FleetCommand.coordinateAttack.fleetSize">Meta</div>
+      <div slot="GalacticEmpire.ImperialNavy.FleetCommand.coordinateAttack-headline"><button onclick="alert('hello')">Start attack</button></div>
+      <div slot="galacticempire.recruitstormtrooper.planetoforigin"><button onclick="alert('hello')">Get coordinates</button></div>
+      <div slot="GalacticEmpire.Rank.options.General"><button onclick="alert('hello')">Up rank</button></div>
+    </ifex-viewer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  <script>
+    const viewer = document.getElementById('viewer');
+
+    viewer.specifications = [
+      {
+        filename: 'test.yml',
+        content: `
+name: "GalacticEmpireAPI"
+description: "API for the operations and command structure of the Galactic Empire"
+major_version: 1
+minor_version: 0
+namespaces:
+  - name: "GalacticEmpire"
+    description: "Namespace for operations related to the Galactic Empire"
+    major_version: 1
+    minor_version: 0
+    events:
+      - name: "DeathStarDestroyed"
+        description: "Event triggered when a Death Star is destroyed"
+        input:
+          - name: "deathStarId"
+            datatype: "string"
+            description: "The ID of the destroyed Death Star"
+          - name: "destroyedBy"
+            datatype: "string"
+            description: "The name of the entity responsible for the destruction"
+    methods:
+      - name: "recruitStormtrooper"
+        description: "Recruits a new stormtrooper to the Imperial Army"
+        input:
+          - name: "name"
+            datatype: "string"
+            description: "Name of the recruit"
+          - name: "planetOfOrigin"
+            datatype: "string"
+            description: "Planet where the recruit was born"
+        output:
+          - name: "stormtrooperId"
+            datatype: "string"
+            description: "The ID of the newly recruited stormtrooper"
+      - name: "deployStarfleet"
+        description: "Deploys a starfleet to a specified location"
+        input:
+          - name: "destination"
+            datatype: "string"
+            description: "The target destination for the starfleet"
+        errors:
+          - datatype: "string"
+            name: "InsufficientFundsError"
+            description: "Raised when the Empire does not have enough resources to deploy the fleet"
+    structs:
+      - name: "Starship"
+        description: "A struct representing a starship in the Imperial fleet"
+        members:
+          - name: "model"
+            datatype: "string"
+            description: "The model of the starship"
+          - name: "weaponCapacity"
+            datatype: "number"
+            description: "The number of weapons the starship can carry"
+          - name: "hyperdriveRating"
+            datatype: "number"
+            description: "The rating of the starship's hyperdrive"
+    enumerations:
+      - name: "Rank"
+        datatype: "string"
+        options:
+          - name: "Private"
+            value: "PRIVATE"
+            description: "Lowest rank within the stormtrooper ranks"
+          - name: "Sergeant"
+            value: "SERGEANT"
+            description: "A non-commissioned officer rank"
+          - name: "General"
+            value: "GENERAL"
+            description: "High-ranking officer, commanding multiple regiments"
+        description: "Enumeration of ranks within the Imperial Army"
+    properties:
+      - name: "emperor"
+        datatype: "string"
+        description: "The current Emperor of the Galactic Empire"
+    namespaces:
+      - name: "ImperialNavy"
+        description: "Namespace for operations related to the Imperial Navy"
+        major_version: 1
+        minor_version: 0
+        methods:
+          - name: "deployTIEFighters"
+            description: "Deploys TIE fighters to patrol a specified sector"
+            input:
+              - name: "sector"
+                datatype: "string"
+                description: "The sector to patrol"
+              - name: "numberOfFighters"
+                datatype: "number"
+                description: "The number of TIE fighters to deploy"
+            returns:
+              - name: "missionSuccess"
+                datatype: "boolean"
+                description: "Indicates if the deployment was successful"
+              - name: "remainingFighters"
+                datatype: "number"
+                description: "Number of TIE fighters remaining after deployment"
+                arraysize: 1
+            output:
+              - name: "patrolStatus"
+                datatype: "string"
+                description: "Status of the TIE fighter deployment"
+            errors:
+              - name: "insufficientFighters"
+                datatype: "boolean"
+                description: "Indicates if there were not enough TIE fighters available for deployment"
+              - name: "invalidSector"
+                datatype: "string"
+                description: "Error message if the specified sector is invalid"
+              - name: "deploymentFailure"
+                datatype: "string"
+                description: "Detailed message about why the deployment failed"
+                range: "Minor to Critical"
+        interface:
+          name: "FleetCommand"
+          description: "Interface for commanding the Imperial Navy's fleet"
+          major_version: 1
+          minor_version: 0
+          version_label: "v1.0"
+          methods:
+            - name: "coordinateAttack"
+              description: "Coordinates an attack on a Rebel target"
+              input:
+                - name: "targetCoordinates"
+                  datatype: "GalacticCoordinates"
+                  description: "The coordinates of the Rebel target"
+                - name: "fleetSize"
+                  datatype: "number"
+                  description: "The size of the fleet to deploy"
+              output:
+                - name: "attackPlan"
+                  datatype: "string"
+                  description: "The planned attack strategy"
+          typedefs:
+            - name: "GalacticCoordinates"
+              datatype: "object"
+              description: "Represents galactic coordinates for navigation and targeting"
+  - name: "GalacticEmpire2"
+    description: "Namespace for operations related to the Galactic Empire"
+    major_version: 1
+    minor_version: 0
+    version_label: "v1.0"
+    events:
+      - name: "DeathStarDestroyed"
+        description: "Event triggered when a Death Star is destroyed"
+        input:
+          - name: "deathStarId"
+            datatype: "string"
+            description: "The ID of the destroyed Death Star"
+          - name: "destroyedBy"
+            datatype: "string"
+            description: "The name of the entity responsible for the destruction"
+    methods:
+      - name: "recruitStormtrooper"
+        description: "Recruits a new stormtrooper to the Imperial Army"
+        input:
+          - name: "name"
+            datatype: "string"
+            description: "Name of the recruit"
+          - name: "planetOfOrigin"
+            datatype: "string"
+            description: "Planet where the recruit was born"
+        output:
+          - name: "stormtrooperId"
+            datatype: "string"
+            description: "The ID of the newly recruited stormtrooper"
+      - name: "deployStarfleet"
+        description: "Deploys a starfleet to a specified location"
+        input:
+          - name: "destination"
+            datatype: "string"
+            description: "The target destination for the starfleet"
+        errors:
+          - datatype: "string"
+            name: "InsufficientFundsError"
+            description: "Raised when the Empire does not have enough resources to deploy the fleet"
+    structs:
+      - name: "Starship"
+        description: "A struct representing a starship in the Imperial fleet"
+        members:
+          - name: "model"
+            datatype: "string"
+            description: "The model of the starship"
+          - name: "weaponCapacity"
+            datatype: "number"
+            description: "The number of weapons the starship can carry"
+          - name: "hyperdriveRating"
+            datatype: "number"
+            description: "The rating of the starship's hyperdrive"
+    enumerations:
+      - name: "Rank"
+        datatype: "string"
+        options:
+          - name: "Private"
+            value: "PRIVATE"
+            description: "Lowest rank within the stormtrooper ranks"
+          - name: "Sergeant"
+            value: "SERGEANT"
+            description: "A non-commissioned officer rank"
+          - name: "General"
+            value: "GENERAL"
+            description: "High-ranking officer, commanding multiple regiments"
+        description: "Enumeration of ranks within the Imperial Army"
+    properties:
+      - name: "emperor"
+        datatype: "string"
+        description: "The current Emperor of the Galactic Empire"
+    namespaces:
+      - name: "ImperialNavy"
+        description: "Namespace for operations related to the Imperial Navy"
+        major_version: 1
+        minor_version: 0
+        methods:
+          - name: "deployTIEFighters"
+            description: "Deploys TIE fighters to patrol a specified sector"
+            input:
+              - name: "sector"
+                datatype: "string"
+                description: "The sector to patrol"
+              - name: "numberOfFighters"
+                datatype: "number"
+                description: "The number of TIE fighters to deploy"
+            output:
+              - name: "patrolStatus"
+                datatype: "string"
+                description: "Status of the TIE fighter deployment"
+        interface:
+          name: "FleetCommand"
+          description: "Interface for commanding the Imperial Navy's fleet"
+          major_version: 1
+          minor_version: 0
+          version_label: "v1.0"
+          methods:
+            - name: "coordinateAttack"
+              description: "Coordinates an attack on a Rebel target"
+              input:
+                - name: "targetCoordinates"
+                  datatype: "GalacticCoordinates"
+                  description: "The coordinates of the Rebel target"
+                - name: "fleetSize"
+                  datatype: "number"
+                  description: "The size of the fleet to deploy"
+              output:
+                - name: "attackPlan"
+                  datatype: "string"
+                  description: "The planned attack strategy"
+          typedefs:
+            - name: "GalacticCoordinates"
+              datatype: "object"
+              description: "Represents galactic coordinates for navigation and targeting"
+    `,
+      },
+    ];
+
+    viewer.addEventListener('specloaded', () => setTimeout(() => viewer.selectNode('GalacticEmpire.recruitStormtrooper')));
+    viewer.addEventListener('clipboardcopiedsuccessful', () => console.log('Copied to clipboard!'));
+  </script>
+</html>

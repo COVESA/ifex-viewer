@@ -1,0 +1,3421 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`specification-model > should create viewer model for multiple specifications 1`] = `
+{
+  "layeredView": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "description": "Coordinates an attack on a Rebel target",
+                        "input": [
+                          {
+                            "datatype": "GalacticCoordinates",
+                            "description": "The coordinates of the Rebel target",
+                            "name": "targetCoordinates",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The size of the fleet to deploy",
+                            "name": "fleetSize",
+                          },
+                        ],
+                        "name": "coordinateAttack",
+                        "output": [
+                          {
+                            "datatype": "string",
+                            "description": "The planned attack strategy",
+                            "name": "attackPlan",
+                          },
+                        ],
+                      },
+                      "type": "method",
+                    },
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "description": "Detailed information about a sector",
+                        "members": [
+                          {
+                            "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                            "description": "The name of the sector",
+                            "name": "sectorName",
+                          },
+                          {
+                            "datatype": "boolean",
+                            "description": "Whether the sector is controlled by the Galactic Empire",
+                            "name": "isControlled",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The population of the sector",
+                            "name": "population",
+                          },
+                        ],
+                        "name": "SectorDetails",
+                      },
+                      "type": "struct",
+                    },
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "datatypes": [
+                          "string",
+                          "SectorDetails",
+                        ],
+                        "description": "Represents galactic coordinates for navigation and targeting",
+                        "name": "GalacticCoordinates",
+                      },
+                      "type": "typedef",
+                    },
+                  ],
+                  "id": "uuid",
+                  "node": {
+                    "description": "Interface for commanding the Imperial Navy's fleet",
+                    "major_version": 1,
+                    "methods": [
+                      {
+                        "description": "Coordinates an attack on a Rebel target",
+                        "input": [
+                          {
+                            "datatype": "GalacticCoordinates",
+                            "description": "The coordinates of the Rebel target",
+                            "name": "targetCoordinates",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The size of the fleet to deploy",
+                            "name": "fleetSize",
+                          },
+                        ],
+                        "name": "coordinateAttack",
+                        "output": [
+                          {
+                            "datatype": "string",
+                            "description": "The planned attack strategy",
+                            "name": "attackPlan",
+                          },
+                        ],
+                      },
+                    ],
+                    "minor_version": 0,
+                    "name": "FleetCommand",
+                    "structs": [
+                      {
+                        "description": "Detailed information about a sector",
+                        "members": [
+                          {
+                            "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                            "description": "The name of the sector",
+                            "name": "sectorName",
+                          },
+                          {
+                            "datatype": "boolean",
+                            "description": "Whether the sector is controlled by the Galactic Empire",
+                            "name": "isControlled",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The population of the sector",
+                            "name": "population",
+                          },
+                        ],
+                        "name": "SectorDetails",
+                      },
+                    ],
+                    "typedefs": [
+                      {
+                        "datatypes": [
+                          "string",
+                          "SectorDetails",
+                        ],
+                        "description": "Represents galactic coordinates for navigation and targeting",
+                        "name": "GalacticCoordinates",
+                      },
+                    ],
+                    "version_label": "v1.0",
+                  },
+                  "type": "interface",
+                },
+                {
+                  "id": "uuid",
+                  "node": {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                  "type": "method",
+                },
+              ],
+              "id": "uuid",
+              "node": {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+              "type": "namespace",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              "type": "method",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+              "type": "method",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+              "type": "event",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+              "type": "struct",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+              "type": "enumeration",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+              "type": "property",
+            },
+          ],
+          "id": "uuid",
+          "node": {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "enumerations": [
+              {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+            ],
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "methods": [
+              {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+            ],
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+            "namespaces": [
+              {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+            ],
+            "properties": [
+              {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+            ],
+            "structs": [
+              {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+            ],
+          },
+          "type": "namespace",
+        },
+      ],
+      "id": "uuid",
+      "node": {
+        "description": "API for the operations and command structure of the Galactic Empire",
+        "major_version": 1,
+        "minor_version": 0,
+        "name": "GalacticEmpireAPI",
+        "namespaces": [
+          {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "enumerations": [
+              {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+            ],
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "methods": [
+              {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+            ],
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+            "namespaces": [
+              {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+            ],
+            "properties": [
+              {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+            ],
+            "structs": [
+              {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+            ],
+          },
+        ],
+      },
+      "type": "api",
+      "validationErrors": [],
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+              "type": "event",
+            },
+          ],
+          "id": "uuid",
+          "node": {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+          "type": "namespace",
+        },
+      ],
+      "id": "uuid",
+      "node": {
+        "description": "API for the operations and command structure of the Galactic Empire",
+        "major_version": 1,
+        "minor_version": 0,
+        "name": "TinyGalacticEmpireAPI",
+        "namespaces": [
+          {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+        ],
+      },
+      "type": "api",
+      "validationErrors": [],
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "description": "Coordinates an attack on a Rebel target",
+                        "input": [
+                          {
+                            "datatype": "GalacticCoordinates",
+                            "description": "The coordinates of the Rebel target",
+                            "name": "targetCoordinates",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The size of the fleet to deploy",
+                            "name": "fleetSize",
+                          },
+                        ],
+                        "name": "coordinateAttack",
+                        "output": [
+                          {
+                            "datatype": "string",
+                            "description": "The planned attack strategy",
+                            "name": "attackPlan",
+                          },
+                        ],
+                      },
+                      "type": "method",
+                    },
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "description": "Detailed information about a sector",
+                        "members": [
+                          {
+                            "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                            "description": "The name of the sector",
+                            "name": "sectorName",
+                          },
+                          {
+                            "datatype": "boolean",
+                            "description": "Whether the sector is controlled by the Galactic Empire",
+                            "name": "isControlled",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The population of the sector",
+                            "name": "population",
+                          },
+                        ],
+                        "name": "SectorDetails",
+                      },
+                      "type": "struct",
+                    },
+                    {
+                      "id": "uuid",
+                      "node": {
+                        "datatypes": [
+                          "string",
+                          "SectorDetails",
+                        ],
+                        "description": "Represents galactic coordinates for navigation and targeting",
+                        "name": "GalacticCoordinates",
+                      },
+                      "type": "typedef",
+                    },
+                  ],
+                  "id": "uuid",
+                  "node": {
+                    "description": "Interface for commanding the Imperial Navy's fleet",
+                    "major_version": 1,
+                    "methods": [
+                      {
+                        "description": "Coordinates an attack on a Rebel target",
+                        "input": [
+                          {
+                            "datatype": "GalacticCoordinates",
+                            "description": "The coordinates of the Rebel target",
+                            "name": "targetCoordinates",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The size of the fleet to deploy",
+                            "name": "fleetSize",
+                          },
+                        ],
+                        "name": "coordinateAttack",
+                        "output": [
+                          {
+                            "datatype": "string",
+                            "description": "The planned attack strategy",
+                            "name": "attackPlan",
+                          },
+                        ],
+                      },
+                    ],
+                    "minor_version": 0,
+                    "name": "FleetCommand",
+                    "structs": [
+                      {
+                        "description": "Detailed information about a sector",
+                        "members": [
+                          {
+                            "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                            "description": "The name of the sector",
+                            "name": "sectorName",
+                          },
+                          {
+                            "datatype": "boolean",
+                            "description": "Whether the sector is controlled by the Galactic Empire",
+                            "name": "isControlled",
+                          },
+                          {
+                            "datatype": "number",
+                            "description": "The population of the sector",
+                            "name": "population",
+                          },
+                        ],
+                        "name": "SectorDetails",
+                      },
+                    ],
+                    "typedefs": [
+                      {
+                        "datatypes": [
+                          "string",
+                          "SectorDetails",
+                        ],
+                        "description": "Represents galactic coordinates for navigation and targeting",
+                        "name": "GalacticCoordinates",
+                      },
+                    ],
+                    "version_label": "v1.0",
+                  },
+                  "type": "interface",
+                },
+                {
+                  "id": "uuid",
+                  "node": {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                  "type": "method",
+                },
+              ],
+              "id": "uuid",
+              "node": {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+              "type": "namespace",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              "type": "method",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+              "type": "method",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+              "type": "event",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+              "type": "struct",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+              "type": "enumeration",
+            },
+            {
+              "id": "uuid",
+              "node": {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+              "type": "property",
+            },
+          ],
+          "id": "uuid",
+          "node": {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "enumerations": [
+              {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+            ],
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "methods": [
+              {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+            ],
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+            "namespaces": [
+              {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+            ],
+            "properties": [
+              {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+            ],
+            "structs": [
+              {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+            ],
+          },
+          "type": "namespace",
+        },
+      ],
+      "id": "uuid",
+      "node": {
+        "description": "API for the operations and command structure of the Galactic Empire",
+        "major_version": 1,
+        "minor_version": 0,
+        "name": "GalacticEmpireAPI",
+        "namespaces": [
+          {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "enumerations": [
+              {
+                "datatype": "string",
+                "description": "Enumeration of ranks within the Imperial Army",
+                "name": "Rank",
+                "options": [
+                  {
+                    "description": "Lowest rank within the stormtrooper ranks",
+                    "name": "Private",
+                    "value": "PRIVATE",
+                  },
+                  {
+                    "description": "A non-commissioned officer rank",
+                    "name": "Sergeant",
+                    "value": "SERGEANT",
+                  },
+                  {
+                    "description": "High-ranking officer, commanding multiple regiments",
+                    "name": "General",
+                    "value": "GENERAL",
+                  },
+                ],
+              },
+            ],
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "methods": [
+              {
+                "description": "Recruits a new stormtrooper to the Imperial Army",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "Name of the recruit",
+                    "name": "name",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "Planet where the recruit was born",
+                    "name": "planetOfOrigin",
+                  },
+                ],
+                "name": "recruitStormtrooper",
+                "output": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the newly recruited stormtrooper",
+                    "name": "stormtrooperId",
+                  },
+                ],
+              },
+              {
+                "description": "Deploys a starfleet to a specified location",
+                "errors": [
+                  {
+                    "datatype": "string",
+                    "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                    "name": "InsufficientFundsError",
+                  },
+                ],
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The target destination for the starfleet",
+                    "name": "destination",
+                  },
+                ],
+                "name": "deployStarfleet",
+              },
+            ],
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+            "namespaces": [
+              {
+                "description": "Namespace for operations related to the Imperial Navy",
+                "interface": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Deploys TIE fighters to patrol a specified sector",
+                    "errors": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if there were not enough TIE fighters available for deployment",
+                        "name": "insufficientFighters",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Error message if the specified sector is invalid",
+                        "name": "invalidSector",
+                      },
+                      {
+                        "datatype": "string",
+                        "description": "Detailed message about why the deployment failed",
+                        "name": "deploymentFailure",
+                        "range": "Minor to Critical",
+                      },
+                    ],
+                    "input": [
+                      {
+                        "datatype": "string",
+                        "description": "The sector to patrol",
+                        "name": "sector",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The number of TIE fighters to deploy",
+                        "name": "numberOfFighters",
+                      },
+                    ],
+                    "name": "deployTIEFighters",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "Status of the TIE fighter deployment",
+                        "name": "patrolStatus",
+                      },
+                    ],
+                    "returns": [
+                      {
+                        "datatype": "boolean",
+                        "description": "Indicates if the deployment was successful",
+                        "name": "missionSuccess",
+                      },
+                      {
+                        "arraysize": 1,
+                        "datatype": "number",
+                        "description": "Number of TIE fighters remaining after deployment",
+                        "name": "remainingFighters",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "ImperialNavy",
+              },
+            ],
+            "properties": [
+              {
+                "datatype": "string",
+                "description": "The current Emperor of the Galactic Empire",
+                "name": "emperor",
+              },
+            ],
+            "structs": [
+              {
+                "description": "A struct representing a starship in the Imperial fleet",
+                "members": [
+                  {
+                    "datatype": "string",
+                    "description": "The model of the starship",
+                    "name": "model",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The number of weapons the starship can carry",
+                    "name": "weaponCapacity",
+                  },
+                  {
+                    "datatype": "number",
+                    "description": "The rating of the starship's hyperdrive",
+                    "name": "hyperdriveRating",
+                  },
+                ],
+                "name": "Starship",
+              },
+            ],
+          },
+        ],
+      },
+      "type": "api",
+      "validationErrors": [],
+    },
+  ],
+  "mergeView": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "id": "uuid",
+                    "node": {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                    "type": "method",
+                  },
+                  {
+                    "id": "uuid",
+                    "node": {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                    "type": "struct",
+                  },
+                  {
+                    "id": "uuid",
+                    "node": {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                    "type": "typedef",
+                  },
+                ],
+                "id": "uuid",
+                "node": {
+                  "description": "Interface for commanding the Imperial Navy's fleet",
+                  "major_version": 1,
+                  "methods": [
+                    {
+                      "description": "Coordinates an attack on a Rebel target",
+                      "input": [
+                        {
+                          "datatype": "GalacticCoordinates",
+                          "description": "The coordinates of the Rebel target",
+                          "name": "targetCoordinates",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The size of the fleet to deploy",
+                          "name": "fleetSize",
+                        },
+                      ],
+                      "name": "coordinateAttack",
+                      "output": [
+                        {
+                          "datatype": "string",
+                          "description": "The planned attack strategy",
+                          "name": "attackPlan",
+                        },
+                      ],
+                    },
+                  ],
+                  "minor_version": 0,
+                  "name": "FleetCommand",
+                  "structs": [
+                    {
+                      "description": "Detailed information about a sector",
+                      "members": [
+                        {
+                          "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                          "description": "The name of the sector",
+                          "name": "sectorName",
+                        },
+                        {
+                          "datatype": "boolean",
+                          "description": "Whether the sector is controlled by the Galactic Empire",
+                          "name": "isControlled",
+                        },
+                        {
+                          "datatype": "number",
+                          "description": "The population of the sector",
+                          "name": "population",
+                        },
+                      ],
+                      "name": "SectorDetails",
+                    },
+                  ],
+                  "typedefs": [
+                    {
+                      "datatypes": [
+                        "string",
+                        "SectorDetails",
+                      ],
+                      "description": "Represents galactic coordinates for navigation and targeting",
+                      "name": "GalacticCoordinates",
+                    },
+                  ],
+                  "version_label": "v1.0",
+                },
+                "type": "interface",
+              },
+              {
+                "id": "uuid",
+                "node": {
+                  "description": "Deploys TIE fighters to patrol a specified sector",
+                  "errors": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if there were not enough TIE fighters available for deployment",
+                      "name": "insufficientFighters",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Error message if the specified sector is invalid",
+                      "name": "invalidSector",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Detailed message about why the deployment failed",
+                      "name": "deploymentFailure",
+                      "range": "Minor to Critical",
+                    },
+                  ],
+                  "input": [
+                    {
+                      "datatype": "string",
+                      "description": "The sector to patrol",
+                      "name": "sector",
+                    },
+                    {
+                      "datatype": "number",
+                      "description": "The number of TIE fighters to deploy",
+                      "name": "numberOfFighters",
+                    },
+                  ],
+                  "name": "deployTIEFighters",
+                  "output": [
+                    {
+                      "datatype": "string",
+                      "description": "Status of the TIE fighter deployment",
+                      "name": "patrolStatus",
+                    },
+                  ],
+                  "returns": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if the deployment was successful",
+                      "name": "missionSuccess",
+                    },
+                    {
+                      "arraysize": 1,
+                      "datatype": "number",
+                      "description": "Number of TIE fighters remaining after deployment",
+                      "name": "remainingFighters",
+                    },
+                  ],
+                },
+                "type": "method",
+              },
+            ],
+            "id": "uuid",
+            "node": {
+              "description": "Namespace for operations related to the Imperial Navy",
+              "interface": {
+                "description": "Interface for commanding the Imperial Navy's fleet",
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Coordinates an attack on a Rebel target",
+                    "input": [
+                      {
+                        "datatype": "GalacticCoordinates",
+                        "description": "The coordinates of the Rebel target",
+                        "name": "targetCoordinates",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The size of the fleet to deploy",
+                        "name": "fleetSize",
+                      },
+                    ],
+                    "name": "coordinateAttack",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "The planned attack strategy",
+                        "name": "attackPlan",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "FleetCommand",
+                "structs": [
+                  {
+                    "description": "Detailed information about a sector",
+                    "members": [
+                      {
+                        "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                        "description": "The name of the sector",
+                        "name": "sectorName",
+                      },
+                      {
+                        "datatype": "boolean",
+                        "description": "Whether the sector is controlled by the Galactic Empire",
+                        "name": "isControlled",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The population of the sector",
+                        "name": "population",
+                      },
+                    ],
+                    "name": "SectorDetails",
+                  },
+                ],
+                "typedefs": [
+                  {
+                    "datatypes": [
+                      "string",
+                      "SectorDetails",
+                    ],
+                    "description": "Represents galactic coordinates for navigation and targeting",
+                    "name": "GalacticCoordinates",
+                  },
+                ],
+                "version_label": "v1.0",
+              },
+              "major_version": 1,
+              "methods": [
+                {
+                  "description": "Deploys TIE fighters to patrol a specified sector",
+                  "errors": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if there were not enough TIE fighters available for deployment",
+                      "name": "insufficientFighters",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Error message if the specified sector is invalid",
+                      "name": "invalidSector",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Detailed message about why the deployment failed",
+                      "name": "deploymentFailure",
+                      "range": "Minor to Critical",
+                    },
+                  ],
+                  "input": [
+                    {
+                      "datatype": "string",
+                      "description": "The sector to patrol",
+                      "name": "sector",
+                    },
+                    {
+                      "datatype": "number",
+                      "description": "The number of TIE fighters to deploy",
+                      "name": "numberOfFighters",
+                    },
+                  ],
+                  "name": "deployTIEFighters",
+                  "output": [
+                    {
+                      "datatype": "string",
+                      "description": "Status of the TIE fighter deployment",
+                      "name": "patrolStatus",
+                    },
+                  ],
+                  "returns": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if the deployment was successful",
+                      "name": "missionSuccess",
+                    },
+                    {
+                      "arraysize": 1,
+                      "datatype": "number",
+                      "description": "Number of TIE fighters remaining after deployment",
+                      "name": "remainingFighters",
+                    },
+                  ],
+                },
+              ],
+              "minor_version": 0,
+              "name": "ImperialNavy",
+            },
+            "type": "namespace",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "description": "Recruits a new stormtrooper to the Imperial Army",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "Name of the recruit",
+                  "name": "name",
+                },
+                {
+                  "datatype": "string",
+                  "description": "Planet where the recruit was born",
+                  "name": "planetOfOrigin",
+                },
+              ],
+              "name": "recruitStormtrooper",
+              "output": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the newly recruited stormtrooper",
+                  "name": "stormtrooperId",
+                },
+              ],
+            },
+            "type": "method",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "description": "Deploys a starfleet to a specified location",
+              "errors": [
+                {
+                  "datatype": "string",
+                  "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                  "name": "InsufficientFundsError",
+                },
+              ],
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The target destination for the starfleet",
+                  "name": "destination",
+                },
+              ],
+              "name": "deployStarfleet",
+            },
+            "type": "method",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+            "type": "event",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "description": "A struct representing a starship in the Imperial fleet",
+              "members": [
+                {
+                  "datatype": "string",
+                  "description": "The model of the starship",
+                  "name": "model",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The number of weapons the starship can carry",
+                  "name": "weaponCapacity",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The rating of the starship's hyperdrive",
+                  "name": "hyperdriveRating",
+                },
+              ],
+              "name": "Starship",
+            },
+            "type": "struct",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "datatype": "string",
+              "description": "Enumeration of ranks within the Imperial Army",
+              "name": "Rank",
+              "options": [
+                {
+                  "description": "Lowest rank within the stormtrooper ranks",
+                  "name": "Private",
+                  "value": "PRIVATE",
+                },
+                {
+                  "description": "A non-commissioned officer rank",
+                  "name": "Sergeant",
+                  "value": "SERGEANT",
+                },
+                {
+                  "description": "High-ranking officer, commanding multiple regiments",
+                  "name": "General",
+                  "value": "GENERAL",
+                },
+              ],
+            },
+            "type": "enumeration",
+          },
+          {
+            "id": "uuid",
+            "node": {
+              "datatype": "string",
+              "description": "The current Emperor of the Galactic Empire",
+              "name": "emperor",
+            },
+            "type": "property",
+          },
+        ],
+        "id": "uuid",
+        "node": {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "enumerations": [
+            {
+              "datatype": "string",
+              "description": "Enumeration of ranks within the Imperial Army",
+              "name": "Rank",
+              "options": [
+                {
+                  "description": "Lowest rank within the stormtrooper ranks",
+                  "name": "Private",
+                  "value": "PRIVATE",
+                },
+                {
+                  "description": "A non-commissioned officer rank",
+                  "name": "Sergeant",
+                  "value": "SERGEANT",
+                },
+                {
+                  "description": "High-ranking officer, commanding multiple regiments",
+                  "name": "General",
+                  "value": "GENERAL",
+                },
+              ],
+            },
+          ],
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "methods": [
+            {
+              "description": "Recruits a new stormtrooper to the Imperial Army",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "Name of the recruit",
+                  "name": "name",
+                },
+                {
+                  "datatype": "string",
+                  "description": "Planet where the recruit was born",
+                  "name": "planetOfOrigin",
+                },
+              ],
+              "name": "recruitStormtrooper",
+              "output": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the newly recruited stormtrooper",
+                  "name": "stormtrooperId",
+                },
+              ],
+            },
+            {
+              "description": "Deploys a starfleet to a specified location",
+              "errors": [
+                {
+                  "datatype": "string",
+                  "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                  "name": "InsufficientFundsError",
+                },
+              ],
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The target destination for the starfleet",
+                  "name": "destination",
+                },
+              ],
+              "name": "deployStarfleet",
+            },
+          ],
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+          "namespaces": [
+            {
+              "description": "Namespace for operations related to the Imperial Navy",
+              "interface": {
+                "description": "Interface for commanding the Imperial Navy's fleet",
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Coordinates an attack on a Rebel target",
+                    "input": [
+                      {
+                        "datatype": "GalacticCoordinates",
+                        "description": "The coordinates of the Rebel target",
+                        "name": "targetCoordinates",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The size of the fleet to deploy",
+                        "name": "fleetSize",
+                      },
+                    ],
+                    "name": "coordinateAttack",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "The planned attack strategy",
+                        "name": "attackPlan",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "FleetCommand",
+                "structs": [
+                  {
+                    "description": "Detailed information about a sector",
+                    "members": [
+                      {
+                        "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                        "description": "The name of the sector",
+                        "name": "sectorName",
+                      },
+                      {
+                        "datatype": "boolean",
+                        "description": "Whether the sector is controlled by the Galactic Empire",
+                        "name": "isControlled",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The population of the sector",
+                        "name": "population",
+                      },
+                    ],
+                    "name": "SectorDetails",
+                  },
+                ],
+                "typedefs": [
+                  {
+                    "datatypes": [
+                      "string",
+                      "SectorDetails",
+                    ],
+                    "description": "Represents galactic coordinates for navigation and targeting",
+                    "name": "GalacticCoordinates",
+                  },
+                ],
+                "version_label": "v1.0",
+              },
+              "major_version": 1,
+              "methods": [
+                {
+                  "description": "Deploys TIE fighters to patrol a specified sector",
+                  "errors": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if there were not enough TIE fighters available for deployment",
+                      "name": "insufficientFighters",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Error message if the specified sector is invalid",
+                      "name": "invalidSector",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Detailed message about why the deployment failed",
+                      "name": "deploymentFailure",
+                      "range": "Minor to Critical",
+                    },
+                  ],
+                  "input": [
+                    {
+                      "datatype": "string",
+                      "description": "The sector to patrol",
+                      "name": "sector",
+                    },
+                    {
+                      "datatype": "number",
+                      "description": "The number of TIE fighters to deploy",
+                      "name": "numberOfFighters",
+                    },
+                  ],
+                  "name": "deployTIEFighters",
+                  "output": [
+                    {
+                      "datatype": "string",
+                      "description": "Status of the TIE fighter deployment",
+                      "name": "patrolStatus",
+                    },
+                  ],
+                  "returns": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if the deployment was successful",
+                      "name": "missionSuccess",
+                    },
+                    {
+                      "arraysize": 1,
+                      "datatype": "number",
+                      "description": "Number of TIE fighters remaining after deployment",
+                      "name": "remainingFighters",
+                    },
+                  ],
+                },
+              ],
+              "minor_version": 0,
+              "name": "ImperialNavy",
+            },
+          ],
+          "properties": [
+            {
+              "datatype": "string",
+              "description": "The current Emperor of the Galactic Empire",
+              "name": "emperor",
+            },
+          ],
+          "structs": [
+            {
+              "description": "A struct representing a starship in the Imperial fleet",
+              "members": [
+                {
+                  "datatype": "string",
+                  "description": "The model of the starship",
+                  "name": "model",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The number of weapons the starship can carry",
+                  "name": "weaponCapacity",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The rating of the starship's hyperdrive",
+                  "name": "hyperdriveRating",
+                },
+              ],
+              "name": "Starship",
+            },
+          ],
+        },
+        "type": "namespace",
+      },
+    ],
+    "id": "uuid",
+    "node": {
+      "description": "API for the operations and command structure of the Galactic Empire",
+      "major_version": 1,
+      "minor_version": 0,
+      "name": "Merged document",
+      "namespaces": [
+        {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "enumerations": [
+            {
+              "datatype": "string",
+              "description": "Enumeration of ranks within the Imperial Army",
+              "name": "Rank",
+              "options": [
+                {
+                  "description": "Lowest rank within the stormtrooper ranks",
+                  "name": "Private",
+                  "value": "PRIVATE",
+                },
+                {
+                  "description": "A non-commissioned officer rank",
+                  "name": "Sergeant",
+                  "value": "SERGEANT",
+                },
+                {
+                  "description": "High-ranking officer, commanding multiple regiments",
+                  "name": "General",
+                  "value": "GENERAL",
+                },
+              ],
+            },
+          ],
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "methods": [
+            {
+              "description": "Recruits a new stormtrooper to the Imperial Army",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "Name of the recruit",
+                  "name": "name",
+                },
+                {
+                  "datatype": "string",
+                  "description": "Planet where the recruit was born",
+                  "name": "planetOfOrigin",
+                },
+              ],
+              "name": "recruitStormtrooper",
+              "output": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the newly recruited stormtrooper",
+                  "name": "stormtrooperId",
+                },
+              ],
+            },
+            {
+              "description": "Deploys a starfleet to a specified location",
+              "errors": [
+                {
+                  "datatype": "string",
+                  "description": "Raised when the Empire does not have enough resources to deploy the fleet",
+                  "name": "InsufficientFundsError",
+                },
+              ],
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The target destination for the starfleet",
+                  "name": "destination",
+                },
+              ],
+              "name": "deployStarfleet",
+            },
+          ],
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+          "namespaces": [
+            {
+              "description": "Namespace for operations related to the Imperial Navy",
+              "interface": {
+                "description": "Interface for commanding the Imperial Navy's fleet",
+                "major_version": 1,
+                "methods": [
+                  {
+                    "description": "Coordinates an attack on a Rebel target",
+                    "input": [
+                      {
+                        "datatype": "GalacticCoordinates",
+                        "description": "The coordinates of the Rebel target",
+                        "name": "targetCoordinates",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The size of the fleet to deploy",
+                        "name": "fleetSize",
+                      },
+                    ],
+                    "name": "coordinateAttack",
+                    "output": [
+                      {
+                        "datatype": "string",
+                        "description": "The planned attack strategy",
+                        "name": "attackPlan",
+                      },
+                    ],
+                  },
+                ],
+                "minor_version": 0,
+                "name": "FleetCommand",
+                "structs": [
+                  {
+                    "description": "Detailed information about a sector",
+                    "members": [
+                      {
+                        "datatype": "variant<string,number,CoordinatesWithAReallyLongNameHello>",
+                        "description": "The name of the sector",
+                        "name": "sectorName",
+                      },
+                      {
+                        "datatype": "boolean",
+                        "description": "Whether the sector is controlled by the Galactic Empire",
+                        "name": "isControlled",
+                      },
+                      {
+                        "datatype": "number",
+                        "description": "The population of the sector",
+                        "name": "population",
+                      },
+                    ],
+                    "name": "SectorDetails",
+                  },
+                ],
+                "typedefs": [
+                  {
+                    "datatypes": [
+                      "string",
+                      "SectorDetails",
+                    ],
+                    "description": "Represents galactic coordinates for navigation and targeting",
+                    "name": "GalacticCoordinates",
+                  },
+                ],
+                "version_label": "v1.0",
+              },
+              "major_version": 1,
+              "methods": [
+                {
+                  "description": "Deploys TIE fighters to patrol a specified sector",
+                  "errors": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if there were not enough TIE fighters available for deployment",
+                      "name": "insufficientFighters",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Error message if the specified sector is invalid",
+                      "name": "invalidSector",
+                    },
+                    {
+                      "datatype": "string",
+                      "description": "Detailed message about why the deployment failed",
+                      "name": "deploymentFailure",
+                      "range": "Minor to Critical",
+                    },
+                  ],
+                  "input": [
+                    {
+                      "datatype": "string",
+                      "description": "The sector to patrol",
+                      "name": "sector",
+                    },
+                    {
+                      "datatype": "number",
+                      "description": "The number of TIE fighters to deploy",
+                      "name": "numberOfFighters",
+                    },
+                  ],
+                  "name": "deployTIEFighters",
+                  "output": [
+                    {
+                      "datatype": "string",
+                      "description": "Status of the TIE fighter deployment",
+                      "name": "patrolStatus",
+                    },
+                  ],
+                  "returns": [
+                    {
+                      "datatype": "boolean",
+                      "description": "Indicates if the deployment was successful",
+                      "name": "missionSuccess",
+                    },
+                    {
+                      "arraysize": 1,
+                      "datatype": "number",
+                      "description": "Number of TIE fighters remaining after deployment",
+                      "name": "remainingFighters",
+                    },
+                  ],
+                },
+              ],
+              "minor_version": 0,
+              "name": "ImperialNavy",
+            },
+          ],
+          "properties": [
+            {
+              "datatype": "string",
+              "description": "The current Emperor of the Galactic Empire",
+              "name": "emperor",
+            },
+          ],
+          "structs": [
+            {
+              "description": "A struct representing a starship in the Imperial fleet",
+              "members": [
+                {
+                  "datatype": "string",
+                  "description": "The model of the starship",
+                  "name": "model",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The number of weapons the starship can carry",
+                  "name": "weaponCapacity",
+                },
+                {
+                  "datatype": "number",
+                  "description": "The rating of the starship's hyperdrive",
+                  "name": "hyperdriveRating",
+                },
+              ],
+              "name": "Starship",
+            },
+          ],
+        },
+      ],
+    },
+    "type": "api",
+  },
+}
+`;
+
+exports[`specification-model > should create viewer model for one file 1`] = `
+{
+  "layeredView": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+              "type": "event",
+            },
+          ],
+          "id": "uuid",
+          "node": {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+          "type": "namespace",
+        },
+      ],
+      "id": "uuid",
+      "node": {
+        "description": "API for the operations and command structure of the Galactic Empire",
+        "major_version": 1,
+        "minor_version": 0,
+        "name": "TinyGalacticEmpireAPI",
+        "namespaces": [
+          {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+        ],
+      },
+      "type": "api",
+      "validationErrors": [],
+    },
+  ],
+  "mergeView": {
+    "children": [
+      {
+        "children": [
+          {
+            "id": "uuid",
+            "node": {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+            "type": "event",
+          },
+        ],
+        "id": "uuid",
+        "node": {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+        },
+        "type": "namespace",
+      },
+    ],
+    "id": "uuid",
+    "node": {
+      "description": "API for the operations and command structure of the Galactic Empire",
+      "major_version": 1,
+      "minor_version": 0,
+      "name": "Merged document",
+      "namespaces": [
+        {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+        },
+      ],
+    },
+    "type": "api",
+  },
+}
+`;
+
+exports[`specification-model > should create viewer model for one file with validation errors 1`] = `
+{
+  "layeredView": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "id": "uuid",
+              "node": {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                    "some_other_not_known_prop": "Hello",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+              "type": "event",
+              "validationErrors": [
+                {
+                  "instancePath": "/namespaces/0/events/0/input/0",
+                  "keyword": "additionalProperties",
+                  "message": "must NOT have additional properties",
+                  "params": {
+                    "additionalProperty": "some_other_not_known_prop",
+                  },
+                  "schemaPath": "#/definitions/Argument/additionalProperties",
+                },
+              ],
+            },
+          ],
+          "id": "uuid",
+          "node": {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                    "some_other_not_known_prop": "Hello",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+          "type": "namespace",
+        },
+      ],
+      "id": "uuid",
+      "node": {
+        "description": "API for the operations and command structure of the Galactic Empire",
+        "major_version": 1,
+        "minor_version": 0,
+        "name": "TinyGalacticEmpireAPI",
+        "namespaces": [
+          {
+            "description": "Namespace for operations related to the Galactic Empire",
+            "events": [
+              {
+                "description": "Event triggered when a Death Star is destroyed",
+                "input": [
+                  {
+                    "datatype": "string",
+                    "description": "The ID of the destroyed Death Star",
+                    "name": "deathStarId",
+                    "some_other_not_known_prop": "Hello",
+                  },
+                  {
+                    "datatype": "string",
+                    "description": "The name of the entity responsible for the destruction",
+                    "name": "destroyedBy",
+                  },
+                ],
+                "name": "DeathStarDestroyed",
+              },
+            ],
+            "major_version": 1,
+            "minor_version": 0,
+            "name": "GalacticEmpire",
+          },
+        ],
+        "some_not_known_prop": "Hello",
+      },
+      "type": "api",
+      "validationErrors": [
+        {
+          "instancePath": "",
+          "keyword": "additionalProperties",
+          "message": "must NOT have additional properties",
+          "params": {
+            "additionalProperty": "some_not_known_prop",
+          },
+          "schemaPath": "#/additionalProperties",
+        },
+      ],
+    },
+  ],
+  "mergeView": {
+    "children": [
+      {
+        "children": [
+          {
+            "id": "uuid",
+            "node": {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                  "some_other_not_known_prop": "Hello",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+            "type": "event",
+          },
+        ],
+        "id": "uuid",
+        "node": {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                  "some_other_not_known_prop": "Hello",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+        },
+        "type": "namespace",
+      },
+    ],
+    "id": "uuid",
+    "node": {
+      "description": "API for the operations and command structure of the Galactic Empire",
+      "major_version": 1,
+      "minor_version": 0,
+      "name": "Merged document",
+      "namespaces": [
+        {
+          "description": "Namespace for operations related to the Galactic Empire",
+          "events": [
+            {
+              "description": "Event triggered when a Death Star is destroyed",
+              "input": [
+                {
+                  "datatype": "string",
+                  "description": "The ID of the destroyed Death Star",
+                  "name": "deathStarId",
+                  "some_other_not_known_prop": "Hello",
+                },
+                {
+                  "datatype": "string",
+                  "description": "The name of the entity responsible for the destruction",
+                  "name": "destroyedBy",
+                },
+              ],
+              "name": "DeathStarDestroyed",
+            },
+          ],
+          "major_version": 1,
+          "minor_version": 0,
+          "name": "GalacticEmpire",
+        },
+      ],
+      "some_not_known_prop": "Hello",
+    },
+    "type": "api",
+  },
+}
+`;
