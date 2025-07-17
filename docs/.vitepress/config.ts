@@ -32,7 +32,7 @@ export default defineConfig({
       },
     },
     footer: {
-      message: 'Released under the MIT License.',
+      message: 'Released under the Apache-2.0 License.',
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/COVESA/ifex-viewer' }],
   },
