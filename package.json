@@ -5,10 +5,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/COVESA/ifex-viewer"
+    "url": "git+https://github.com/COVESA/ifex-viewer.git"
   },
+  "private": false,
   "type": "module",
-  "private": "false",
   "author": "Mercedes-Benz Tech Innovation GmbH",
   "keywords": [
     "IFEX",
