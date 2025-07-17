@@ -39,7 +39,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "lint": "eslint",
-    "docs:build": "vitepress build docs",
+    "docs:build": "pnpm build && vitepress build docs",
     "docs:dev": "vitepress dev docs",
     "docs:preview": "vitepress preview docs",
     "playwright": "playwright test",
