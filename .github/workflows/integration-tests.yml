@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 20
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: install
         uses: ./.github/actions/run-integration-tests
@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 20
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: install
         uses: ./.github/actions/run-integration-tests
@@ -38,7 +38,7 @@ jobs:
     timeout-minutes: 20
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: install
         uses: ./.github/actions/run-integration-tests
