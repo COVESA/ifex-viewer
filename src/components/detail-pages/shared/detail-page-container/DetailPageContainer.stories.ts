@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import DetailPageContainer from './DetailPageContainer.vue';
 import Headline from '../headline/Headline.vue';
 import { validationErrorMock } from '../../../../tests/mocks/validation-error';

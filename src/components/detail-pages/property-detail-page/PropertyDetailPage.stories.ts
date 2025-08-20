@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { validationErrorMock } from '../../../tests/mocks/validation-error';
 import PropertyDetailPage from './PropertyDetailPage.vue';
 import { propertyMock } from '../../../tests/mocks/properties';

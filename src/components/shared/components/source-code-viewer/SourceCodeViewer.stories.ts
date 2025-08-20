@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import SourceCodeViewer from './SourceCodeViewer.vue';
 import { codeMock } from '../../../../tests/mocks/code.ts';
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import ApiDetailPage from './ApiDetailPage.vue';
 import { apiMock } from '../../../tests/mocks/api';
 

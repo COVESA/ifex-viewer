@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { namespaceMock } from '../../../tests/mocks/namespace';
 import MethodDetailPage from './MethodDetailPage.vue';
 import { methodMock } from '../../../tests/mocks/methods';

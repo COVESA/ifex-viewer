@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import ErrorNotification from './ErrorNotification.vue';
 import { validationErrorMock } from '../../../../tests/mocks/validation-error';
 

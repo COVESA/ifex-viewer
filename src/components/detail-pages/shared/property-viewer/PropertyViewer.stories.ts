@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import PropertyViewer from './PropertyViewer.vue';
 import { methodMock } from '../../../../tests/mocks/methods';
 import { ArgumentWithCustomProperties } from '../../../../types/ifex-core.ts';
