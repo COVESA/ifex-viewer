@@ -1,5 +1,13 @@
 # IFEX Viewer Changelog
 
+## v1.1.0 (2025-08-20)
+
+### Features
+
+- Updated the IFEX logo ([#15](https://github.com/COVESA/ifex-viewer/pull/15))
+- Resolve complex datatype linking by supporting AST path resolution ([#17](https://github.com/COVESA/ifex-viewer/pull/17))
+- Upgraded dependencies ([#16](https://github.com/COVESA/ifex-viewer/pull/16),[#18](https://github.com/COVESA/ifex-viewer/pull/18) & [#19](https://github.com/COVESA/ifex-viewer/pull/19))
+
 ## v1.0.0 (2025-07-15)
 
 Welcome to the initial release of the IFEX Viewer, a powerful web component designed to visualize API specifications created with the Interface Exchange Framework (IFEX).
