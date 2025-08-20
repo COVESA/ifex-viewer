@@ -44,11 +44,26 @@ export const useViewerModelStore = defineStore('viewer-model', () => {
     return viewerModel.value.layeredView;
   });
 
+  const removeApiElements = (tree: IFEXTreeModelNode[]): IFEXTreeModelNode[] => {
+    const result: IFEXTreeModelNode[] = [];
+
+    tree.forEach(node => {
+      if (node.type === 'api' && node.children) {
+        result.push(...node.children);
+      }
+    });
+
+    return result;
+  };
+
+  const viewerModelWithoutApi = computed(() => removeApiElements(activeView.value));
+
   return {
     setSpecifications,
     viewerModel,
     changeSelectedView,
     activeView,
     selectedView,
+    viewerModelWithoutApi,
   };
 });

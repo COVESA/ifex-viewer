@@ -49,7 +49,6 @@ import { computed, provide, watch } from 'vue';
 import { Breadcrumb, BreadcrumbsIconType } from './components/breadcrumbs/types';
 import Sidenav from './components/sidenav/Sidenav.vue';
 import { ClipboardCopiedEvent, CopiedSuccessfulEventKey, IfexViewerProps, NodeSelectedEvent } from './types';
-import { IFEXTreeModelNode } from './types/node';
 import { useDetailPageSelection } from './use-detail-page-selection';
 import { findNodeByPath, getFullPathToNode } from './utils/tree/tree';
 import Breadcrumbs from './components/breadcrumbs/Breadcrumbs.vue';
@@ -61,7 +60,7 @@ import { storeToRefs } from 'pinia';
 const { specifications } = defineProps<IfexViewerProps>();
 
 const viewerModelStore = useViewerModelStore();
-const { viewerModel, activeView } = storeToRefs(viewerModelStore);
+const { viewerModel, activeView, viewerModelWithoutApi } = storeToRefs(viewerModelStore);
 
 watch(
   () => specifications,
@@ -96,8 +95,6 @@ watch(
 );
 
 const emits = defineEmits<{ specloaded: []; clipboardcopiedsuccessful: [payload: ClipboardCopiedEvent]; nodeselected: [payload: NodeSelectedEvent] }>();
-
-const viewerModelWithoutApi = computed(() => removeApiElements(activeView.value));
 
 const hasMoreThanOneLayer = computed(() => viewerModel.value.layeredView.length > 1);
 
@@ -155,18 +152,6 @@ watch(
   },
   { immediate: true },
 );
-
-const removeApiElements = (tree: IFEXTreeModelNode[]): IFEXTreeModelNode[] => {
-  const result: IFEXTreeModelNode[] = [];
-
-  tree.forEach(node => {
-    if (node.type === 'api' && node.children) {
-      result.push(...node.children);
-    }
-  });
-
-  return result;
-};
 
 /**
  * Selects a node in the sidenav by the given path.
