@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
  */
 
-import { useComplexDatatypesStore } from '../stores/complex-datatypes.store.ts';
+import { useComplexDatatypesStore } from '../stores/complex-datatypes/complex-datatypes.store.ts';
 
 export const useGetComplexDatatypeNode = () => {
   const complexDatatypesStore = useComplexDatatypesStore();

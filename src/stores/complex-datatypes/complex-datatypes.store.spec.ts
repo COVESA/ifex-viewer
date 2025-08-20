@@ -6,15 +6,15 @@
 import { createPinia, setActivePinia } from 'pinia';
 import { useComplexDatatypesStore } from './complex-datatypes.store.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { viewerModelComplexDatatypesMock } from '../tests/mocks/viewer-model.ts';
-import { IFEXTreeModelNode } from '../types/node.ts';
+import { viewerModelComplexDatatypesMock } from '../../tests/mocks/viewer-model.ts';
+import { IFEXTreeModelNode } from '../../types/node.ts';
 
 describe('useComplexDatatypesStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
-  it('should set complex datatypes out of given tree nodes', () => {
+  it('should set complex datatypes by given tree nodes', () => {
     const expected: IFEXTreeModelNode[] = [
       {
         id: '21dfbe7c-0fa5-4c38-a563-becddbd804ba',

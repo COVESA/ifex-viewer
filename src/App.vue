@@ -56,7 +56,7 @@ import { findNodeByPath, getFullPathToNode } from './utils/tree/tree';
 import Breadcrumbs from './components/breadcrumbs/Breadcrumbs.vue';
 import { ViewTabs } from './components/sidenav/types.ts';
 import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
-import { useComplexDatatypesStore } from './stores/complex-datatypes.store.ts';
+import { useComplexDatatypesStore } from './stores/complex-datatypes/complex-datatypes.store.ts';
 
 const { specifications } = defineProps<IfexViewerProps>();
 

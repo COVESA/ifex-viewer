@@ -4,7 +4,7 @@
  */
 
 import { defineStore } from 'pinia';
-import { IFEXTreeModelNode } from '../types/node.ts';
+import { IFEXTreeModelNode } from '../../types/node.ts';
 import { computed, ref } from 'vue';
 
 export const useComplexDatatypesStore = defineStore('complex-datatypes', () => {
