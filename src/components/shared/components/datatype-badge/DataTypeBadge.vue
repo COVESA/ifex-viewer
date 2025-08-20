@@ -7,7 +7,9 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
   <Badge v-if="isPrimitiveType" v-bind="$props" type="primitiveType">{{ datatype }}</Badge>
   <Badge v-else v-bind="$props" type="complexType" @click="emits('selected')">
     <div class="flex items-center gap-2 cursor-pointer hover:opacity-90 focus:opacity-90 transition-opacity">
-      {{ datatype }}
+      <span class="text-ellipsis text-nowrap overflow-hidden">
+        {{ datatype }}
+      </span>
       <span data-testid="complex-datatype-linkout">
         <ArrowTopRightOnSquareIcon class="size-4 shrink-0" />
       </span>

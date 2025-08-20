@@ -17,7 +17,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                         "description": "Coordinates an attack on a Rebel target",
                         "input": [
                           {
-                            "datatype": "GalacticCoordinates",
+                            "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                             "description": "The coordinates of the Rebel target",
                             "name": "targetCoordinates",
                           },
@@ -85,7 +85,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                         "description": "Coordinates an attack on a Rebel target",
                         "input": [
                           {
-                            "datatype": "GalacticCoordinates",
+                            "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                             "description": "The coordinates of the Rebel target",
                             "name": "targetCoordinates",
                           },
@@ -214,7 +214,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -565,7 +565,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -825,7 +825,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -1082,7 +1082,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                         "description": "Coordinates an attack on a Rebel target",
                         "input": [
                           {
-                            "datatype": "GalacticCoordinates",
+                            "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                             "description": "The coordinates of the Rebel target",
                             "name": "targetCoordinates",
                           },
@@ -1150,7 +1150,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                         "description": "Coordinates an attack on a Rebel target",
                         "input": [
                           {
-                            "datatype": "GalacticCoordinates",
+                            "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                             "description": "The coordinates of the Rebel target",
                             "name": "targetCoordinates",
                           },
@@ -1279,7 +1279,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -1630,7 +1630,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -1890,7 +1890,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -2059,7 +2059,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -2127,7 +2127,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                       "description": "Coordinates an attack on a Rebel target",
                       "input": [
                         {
-                          "datatype": "GalacticCoordinates",
+                          "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                           "description": "The coordinates of the Rebel target",
                           "name": "targetCoordinates",
                         },
@@ -2256,7 +2256,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                     "description": "Coordinates an attack on a Rebel target",
                     "input": [
                       {
-                        "datatype": "GalacticCoordinates",
+                        "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                         "description": "The coordinates of the Rebel target",
                         "name": "targetCoordinates",
                       },
@@ -2607,7 +2607,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                     "description": "Coordinates an attack on a Rebel target",
                     "input": [
                       {
-                        "datatype": "GalacticCoordinates",
+                        "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                         "description": "The coordinates of the Rebel target",
                         "name": "targetCoordinates",
                       },
@@ -2867,7 +2867,7 @@ exports[`specification-model > should create viewer model for multiple specifica
                     "description": "Coordinates an attack on a Rebel target",
                     "input": [
                       {
-                        "datatype": "GalacticCoordinates",
+                        "datatype": "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates",
                         "description": "The coordinates of the Rebel target",
                         "name": "targetCoordinates",
                       },

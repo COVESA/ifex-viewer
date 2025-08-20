@@ -248,7 +248,7 @@ namespaces:
               description: "Coordinates an attack on a Rebel target"
               input:
                 - name: "targetCoordinates"
-                  datatype: "GalacticCoordinates"
+                  datatype: "GalacticEmpire.ImperialNavy.AdvancedFleetCommand.GalacticCoordinates"
                   description: "The coordinates of the Rebel target"
                 - name: "fleetSize"
                   datatype: "number"
