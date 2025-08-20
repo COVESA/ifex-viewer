@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "2.2.0",
-    "@vueuse/core": "11.1.0",
+    "@vueuse/core": "13.7.0",
     "ajv": "8.17.1",
     "highlight.js": "11.11.1",
     "pinia": "3.0.3",
