@@ -48,7 +48,6 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 import { computed, provide, ref, watch } from 'vue';
 import { Breadcrumb, BreadcrumbsIconType } from './components/breadcrumbs/types';
 import Sidenav from './components/sidenav/Sidenav.vue';
-import { getViewerModel, ViewerModel } from './model/specification-model';
 import { ClipboardCopiedEvent, CopiedSuccessfulEventKey, IfexViewerProps, NodeSelectedEvent } from './types';
 import { IFEXTreeModelNode } from './types/node';
 import { useDetailPageSelection } from './use-detail-page-selection';
@@ -57,10 +56,13 @@ import Breadcrumbs from './components/breadcrumbs/Breadcrumbs.vue';
 import { ViewTabs } from './components/sidenav/types.ts';
 import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 import { useComplexDatatypesStore } from './stores/complex-datatypes/complex-datatypes.store.ts';
+import { useViewerModelStore } from './stores/viewer-model/viewer-model.store.ts';
+import { storeToRefs } from 'pinia';
 
 const { specifications } = defineProps<IfexViewerProps>();
 
-const givenSpecifications = ref<IfexViewerProps['specifications']>([]);
+const viewerModelStore = useViewerModelStore();
+const { viewerModel } = storeToRefs(viewerModelStore);
 
 watch(
   () => specifications,
@@ -72,7 +74,7 @@ watch(
     const nonEmptySpecifications = newSpecifications.filter(spec => !!spec?.content);
 
     if (nonEmptySpecifications?.length !== oldSpecifications?.length) {
-      givenSpecifications.value = nonEmptySpecifications;
+      viewerModelStore.setSpecifications(nonEmptySpecifications);
     }
 
     let specificationsChanged = false;
@@ -88,7 +90,7 @@ watch(
     });
 
     if (specificationsChanged) {
-      givenSpecifications.value = nonEmptySpecifications;
+      viewerModelStore.setSpecifications(nonEmptySpecifications);
     }
   },
   { immediate: true },
@@ -101,17 +103,6 @@ const selectedView = ref<'mergeView' | 'layeredView'>('mergeView');
 const changeSelectedView = (updatedView: string) => {
   selectedView.value = (updatedView as ViewTabs) === ViewTabs.LAYERED_VIEW ? 'layeredView' : 'mergeView';
 };
-
-const viewerModel = computed<ViewerModel>(() => {
-  if (!Array.isArray(givenSpecifications.value) || !givenSpecifications.value?.length) {
-    return {
-      mergeView: null,
-      layeredView: [],
-    };
-  }
-
-  return getViewerModel(givenSpecifications.value);
-});
 
 const activeView = computed<IFEXTreeModelNode[]>(() => {
   if (selectedView.value === 'mergeView') {
