@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import FallbackPage from './FallbackPage.vue';
 
 const meta: Meta<typeof FallbackPage> = {

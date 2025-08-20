@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { structMock } from '../../../tests/mocks/structs';
 import StructDetailPage from './StructDetailPage.vue';
 

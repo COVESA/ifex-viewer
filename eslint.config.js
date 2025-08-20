@@ -1,3 +1,4 @@
+import storybook from 'eslint-plugin-storybook';
 import eslintJs from '@eslint/js';
 import tsEslint from 'typescript-eslint';
 import vueParser from 'vue-eslint-parser';
@@ -9,10 +10,8 @@ export default [
     // GLOBAL IGNORES
     ignores: ['**/dist/', 'stencil/', 'tailwind.config.js', '**/.angular/', '**/.vitepress/', '**/playwright-report/', 'playwright.config.ts'],
   },
-  prettier,
-  // general defaults
-  eslintJs.configs['recommended'],
-  // general
+  prettier, // general defaults
+  eslintJs.configs['recommended'], // general
   {
     files: ['**/*.{js,ts,jsx,tsx,vue}'],
     languageOptions: {
@@ -26,11 +25,8 @@ export default [
     languageOptions: {
       parser: tsEslint.parser,
     },
-  },
-
-  // chosen vue defaults
-  ...pluginVue.configs['flat/recommended'],
-  // vue
+  }, // chosen vue defaults
+  ...pluginVue.configs['flat/recommended'], // vue
   {
     files: ['**/*.vue'],
     rules: {
@@ -67,4 +63,5 @@ export default [
       },
     },
   },
+  ...storybook.configs['flat/recommended'],
 ];

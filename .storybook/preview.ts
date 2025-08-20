@@ -1,5 +1,5 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
-import { type Preview, setup, type VueRenderer } from '@storybook/vue3';
+import { type Preview, setup, type VueRenderer } from '@storybook/vue3-vite';
 import { type App } from 'vue';
 
 import '../src/style.css';

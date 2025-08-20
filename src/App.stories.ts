@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import App from './App.vue';
 import { customLayerSpecificationItemMock, specificationItemMock, specificationMockWithValidationErrors, specificationWithTwoDocs } from './tests/mocks/specification';

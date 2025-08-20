@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { eventMock } from '../../../tests/mocks/events';
 import EventDetailPage from './EventDetailPage.vue';
 

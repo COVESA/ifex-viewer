@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { typedefMock } from '../../../tests/mocks/typedef';
 import TypedefDetailPage from './TypedefDetailPage.vue';
 import { validationErrorMock } from '../../../tests/mocks/validation-error';

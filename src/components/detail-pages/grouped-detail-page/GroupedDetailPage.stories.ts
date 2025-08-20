@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { interfaceMock } from '../../../tests/mocks/interface';
 import { namespaceMock } from '../../../tests/mocks/namespace';
 import GroupedDetailPage from './GroupedDetailPage.vue';
