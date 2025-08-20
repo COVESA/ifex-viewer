@@ -91,7 +91,7 @@ import SearchResults from './search-results/SearchResults.vue';
 const { treeModel, selectedNodeId, showTabs = true } = defineProps<SidenavProps>();
 
 // eslint-disable-next-line no-unused-vars
-const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: string): void }>();
+const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: ViewTabs): void }>();
 
 const SCROLL_CONTAINER_ID = 'scroll-container';
 
@@ -119,7 +119,7 @@ const startResizing = () => {
 };
 
 const onTabChange = (tabName: string) => {
-  emits('viewTabChanged', tabName);
+  emits('viewTabChanged', tabName as ViewTabs);
   // When switching tabs we want to collapse all nodes
   // Otherwise the collapse button could possibly be in
   // the wrong state when switching forth and back

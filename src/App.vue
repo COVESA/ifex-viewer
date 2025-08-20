@@ -10,7 +10,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
         :tree-model="activeView"
         :show-tabs="hasMoreThanOneLayer"
         @node-selected="onNodeSelected"
-        @view-tab-changed="changeSelectedView"
+        @view-tab-changed="viewerModelStore.changeSelectedView"
       />
 
       <div class="flex justify-center w-full pt-6 px-8 bg-white dark:bg-gray-800 overflow-auto scrollbar-gutter">
@@ -45,7 +45,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue';
+import { computed, provide, watch } from 'vue';
 import { Breadcrumb, BreadcrumbsIconType } from './components/breadcrumbs/types';
 import Sidenav from './components/sidenav/Sidenav.vue';
 import { ClipboardCopiedEvent, CopiedSuccessfulEventKey, IfexViewerProps, NodeSelectedEvent } from './types';
@@ -53,7 +53,6 @@ import { IFEXTreeModelNode } from './types/node';
 import { useDetailPageSelection } from './use-detail-page-selection';
 import { findNodeByPath, getFullPathToNode } from './utils/tree/tree';
 import Breadcrumbs from './components/breadcrumbs/Breadcrumbs.vue';
-import { ViewTabs } from './components/sidenav/types.ts';
 import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 import { useComplexDatatypesStore } from './stores/complex-datatypes/complex-datatypes.store.ts';
 import { useViewerModelStore } from './stores/viewer-model/viewer-model.store.ts';
@@ -62,7 +61,7 @@ import { storeToRefs } from 'pinia';
 const { specifications } = defineProps<IfexViewerProps>();
 
 const viewerModelStore = useViewerModelStore();
-const { viewerModel } = storeToRefs(viewerModelStore);
+const { viewerModel, activeView } = storeToRefs(viewerModelStore);
 
 watch(
   () => specifications,
@@ -97,20 +96,6 @@ watch(
 );
 
 const emits = defineEmits<{ specloaded: []; clipboardcopiedsuccessful: [payload: ClipboardCopiedEvent]; nodeselected: [payload: NodeSelectedEvent] }>();
-
-const selectedView = ref<'mergeView' | 'layeredView'>('mergeView');
-
-const changeSelectedView = (updatedView: string) => {
-  selectedView.value = (updatedView as ViewTabs) === ViewTabs.LAYERED_VIEW ? 'layeredView' : 'mergeView';
-};
-
-const activeView = computed<IFEXTreeModelNode[]>(() => {
-  if (selectedView.value === 'mergeView') {
-    return viewerModel.value.mergeView ? [viewerModel.value.mergeView] : [];
-  }
-
-  return viewerModel.value.layeredView;
-});
 
 const viewerModelWithoutApi = computed(() => removeApiElements(activeView.value));
 
