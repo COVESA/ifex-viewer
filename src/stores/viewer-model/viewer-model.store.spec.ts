@@ -10,6 +10,7 @@ import { ViewerModel } from '../../model/specification-model.ts';
 import { IfexSpecificationItem } from '../../types.ts';
 import { useViewerModelStore } from './viewer-model.store.ts';
 import { ViewTabs } from '../../components/sidenav/types.ts';
+import { IFEXTreeModelNode } from '../../types/node.ts';
 
 vi.mock('uuid');
 
@@ -48,6 +49,7 @@ namespaces:
       },
     ];
 
+    // No surrounding API node is present in the expected viewer model
     const expected: ViewerModel = {
       mergeView: {
         id: 'uuid',
@@ -513,5 +515,73 @@ namespaces:
     const result = store.activeView;
 
     expect(result).toEqual([viewerModel.mergeView]);
+  });
+
+  it('should return given viewer model without the surrounding api node', () => {
+    uuidSpy.mockReturnValue('uuid');
+
+    const given: IfexSpecificationItem[] = [
+      {
+        filename: 'core-layer.yml',
+        content: `
+name: "Galactic Empire Core Layer"
+namespaces:
+  - name: "GalacticEmpire"
+    major_version: 1
+    minor_version: 0
+    events:
+      - name: "DeathStarDestroyed"
+        description: "Event triggered when a Death Star is destroyed"
+        input:
+          - name: "deathStarId"
+            datatype: "string"
+            description: "The ID of the destroyed Death Star"
+          - name: "destroyedBy"
+            datatype: "string"
+            description: "The name of the entity responsible for the destruction"
+    `,
+      },
+    ];
+
+    const expected: IFEXTreeModelNode[] = [
+      {
+        id: 'uuid',
+        node: {
+          name: 'GalacticEmpire',
+          major_version: 1,
+          minor_version: 0,
+          events: [
+            {
+              name: 'DeathStarDestroyed',
+              description: 'Event triggered when a Death Star is destroyed',
+              input: [
+                { name: 'deathStarId', datatype: 'string', description: 'The ID of the destroyed Death Star' },
+                { name: 'destroyedBy', datatype: 'string', description: 'The name of the entity responsible for the destruction' },
+              ],
+            },
+          ],
+        },
+        type: 'namespace',
+        children: [
+          {
+            id: 'uuid',
+            node: {
+              name: 'DeathStarDestroyed',
+              description: 'Event triggered when a Death Star is destroyed',
+              input: [
+                { name: 'deathStarId', datatype: 'string', description: 'The ID of the destroyed Death Star' },
+                { name: 'destroyedBy', datatype: 'string', description: 'The name of the entity responsible for the destruction' },
+              ],
+            },
+            type: 'event',
+          },
+        ],
+      },
+    ];
+
+    const store = useViewerModelStore();
+    store.setSpecifications(given);
+
+    expect(store.viewerModelWithoutApi).toEqual(expected);
   });
 });
