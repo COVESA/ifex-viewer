@@ -14,7 +14,7 @@ issue_templates:
     file: integration_help.yml
 contact_links:
   - name: '❓ Question'
-    url: https://github.com/ifex-spec-viewer/discussions
+    url: https://github.com/COVESA/ifex-viewer/discussions
     about: Please use GitHub Discussions for questions and general help.
   - name: '📖 Documentation'
     url: https://covesa.github.io/ifex-viewer/
