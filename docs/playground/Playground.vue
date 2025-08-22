@@ -24,6 +24,7 @@ const specification = computed<IfexSpecificationItem[]>(() => [{ filename: 'test
     <!-- TODO: use lightweight code editor like CodeMirror -->
     <div class="editor"><textarea v-model="specificationVal"></textarea></div>
     <div v-if="mounted" class="ifex-viewer-playground-container">
+      <!-- eslint-disable-next-line vue/html-self-closing -->
       <ifex-viewer :specifications="specification" :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"></ifex-viewer>
     </div>
   </div>
