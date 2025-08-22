@@ -11,8 +11,8 @@ hero:
       text: Getting started
       link: /guide/integration/getting-started
     - theme: alt
-      text: Examples
-      link: /examples
+      text: Playground
+      link: /playground/
 
 features:
   - title: Comprehensive IFEX Core IDL Support
