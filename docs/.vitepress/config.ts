@@ -12,6 +12,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/about/introduction' },
       { text: 'API', link: '/api/' },
       { text: 'Examples', link: '/examples/' },
+      { text: 'Playground', link: '/playground/' },
     ],
     sidebar: {
       '/guide/': {
