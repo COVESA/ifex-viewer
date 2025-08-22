@@ -17,9 +17,9 @@
     .
     <a href="https://covesa.github.io/ifex-viewer/playground/">Try it out</a>
     ·
-    <a href="https://github.com/COVESA/ifex-viewer/issues/new">Report Bug</a>
+    <a href="https://github.com/COVESA/ifex-viewer/issues/new?template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/COVESA/ifex-viewer/issues/new">Request Feature</a>
+    <a href="https://github.com/COVESA/ifex-viewer/issues/new?template=feature_request.yml">Request Feature</a>
   </p>
 </div>
 
