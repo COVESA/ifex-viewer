@@ -14,6 +14,7 @@ import { Compartment, EditorState, RangeSet, RangeSetBuilder } from '@codemirror
 import YAML, { Document as YAMLDocument, YAMLError } from 'yaml';
 import { gutter, GutterMarker, keymap } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
+import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
 
@@ -89,20 +90,6 @@ const errorMap = computed<Map<number, string[]>>(() => {
 });
 
 const errorGutterCompartment = new Compartment();
-
-class ErrorMarkerWithMessage extends GutterMarker {
-  constructor(readonly messages: string[]) {
-    super();
-  }
-
-  toDOM() {
-    const el = document.createElement('div');
-    el.textContent = '!';
-    el.title = this.messages.join('\n');
-    el.setAttribute('class', 'error-marker');
-    return el;
-  }
-}
 
 onMounted(() => {
   // Workaround for lazy loading web components in SSR
@@ -195,7 +182,7 @@ const resize = (event: MouseEvent) => {
 
 <template>
   <div class="playground-container">
-    <div ref="editor" :id="SCROLL_CONTAINER_ID" class="editor" :style="{ width: editorSize + 'px' }"></div>
+    <div :id="SCROLL_CONTAINER_ID" ref="editor" class="editor" :style="{ width: editorSize + 'px' }"></div>
     <div class="resizer" data-testid="resizer" @mousedown="startResizing"></div>
     <div v-if="mounted" class="ifex-viewer-playground-container">
       <!-- eslint-disable-next-line vue/html-self-closing -->
