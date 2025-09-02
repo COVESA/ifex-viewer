@@ -194,3 +194,11 @@ export const getFullPathToNode = (nodeId: string, tree: IFEXTreeModelNode[], pat
 
   return null;
 };
+
+// TODO: add test
+export const getFullDotNotationPath = (nodeId: string, viewerModel: IFEXTreeModelNode[]) => {
+  const path = getFullPathToNode(nodeId, viewerModel);
+  const namesOnly = path?.map(item => item.node.name || '') || [];
+
+  return namesOnly.join('.');
+};

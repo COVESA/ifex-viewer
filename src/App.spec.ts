@@ -289,6 +289,84 @@ describe('App', () => {
     expect(getViewerModelSpy).toHaveBeenCalledTimes(1); // should still call only once
   });
 
+  it('should keep currently selected node when given specifications did change and node still exists', async () => {
+    const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
+    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
+    const eventToSelect = 'DeathStarDestroyed';
+
+    const { rerender, user, emitted } = renderComponent({
+      ...props,
+    });
+
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+
+    const nodeToSelect = screen.getByText(eventToSelect);
+    await user.click(nodeToSelect);
+
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+
+    await rerender({ specifications: [{ filename: 'different.yml', content: specificationItemMock.content }] });
+
+    expect(getViewerModelSpy).toHaveBeenCalledTimes(2);
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+    expect(emitted('specloaded')).toBeTruthy();
+  });
+
+  it('should NOT keep currently selected node when given specifications did change and node does not exist in new specification anymore', async () => {
+    const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
+    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
+    const eventToSelect = 'DeathStarDestroyed';
+
+    const { rerender, user, emitted } = renderComponent({
+      ...props,
+    });
+
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+
+    const nodeToSelect = screen.getByText(eventToSelect);
+    await user.click(nodeToSelect);
+
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+
+    await rerender({
+      specifications: [
+        {
+          filename: 'updated.yml',
+          content: `
+name: "GalacticEmpireCustomAPI"
+description: "Custom layer for the operations and command structure of the Galactic Empire"
+major_version: 1
+minor_version: 1
+namespaces:
+  - name: "GalacticEmpire"
+    description: "Namespace for operations related to the Galactic Empire"
+    major_version: 1
+    minor_version: 1
+    events:
+      - name: "RebelBaseDiscovered"
+        description: "Event triggered when a Rebel base is discovered"
+        input:
+          - name: "baseLocation"
+            datatype: "GalacticCoordinates"
+            description: "The coordinates of the discovered Rebel base"
+            example: "12.345, 67.891"
+          - name: "discoveredBy"
+            datatype: "string"
+            description: "The name of the entity that discovered the base"
+            example: "Darth Vader"
+    `,
+        },
+      ],
+    });
+
+    expect(getViewerModelSpy).toHaveBeenCalledTimes(2);
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+    expect(within(getDetailPageContainer()).getByText('Merged document')).toBeInTheDocument();
+    expect(emitted('specloaded')).toBeTruthy();
+  });
+
   it('should show merge view as default view', async () => {
     const givenSpecifications = [specificationItemMock, { filename: 'two-docs.yml', content: specificationWithTwoDocs }];
     const props: IfexViewerProps = { specifications: givenSpecifications };

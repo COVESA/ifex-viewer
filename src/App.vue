@@ -45,12 +45,12 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 </template>
 
 <script setup lang="ts">
-import { computed, provide, watch } from 'vue';
+import { computed, provide, ref, watch } from 'vue';
 import { Breadcrumb, BreadcrumbsIconType } from './components/breadcrumbs/types';
 import Sidenav from './components/sidenav/Sidenav.vue';
 import { ClipboardCopiedEvent, CopiedSuccessfulEventKey, IfexViewerProps, NodeSelectedEvent } from './types';
 import { useDetailPageSelection } from './use-detail-page-selection';
-import { findNodeByPath, getFullPathToNode } from './utils/tree/tree';
+import { findNodeByPath, getFullDotNotationPath, getFullPathToNode } from './utils/tree/tree';
 import Breadcrumbs from './components/breadcrumbs/Breadcrumbs.vue';
 import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 import { useComplexDatatypesStore } from './stores/complex-datatypes/complex-datatypes.store.ts';
@@ -61,12 +61,21 @@ const { specifications } = defineProps<IfexViewerProps>();
 
 const viewerModelStore = useViewerModelStore();
 const { viewerModel, activeView, viewerModelWithoutApi } = storeToRefs(viewerModelStore);
+const { changeSelection, detailPage, selectCoreLayer, selectedNode } = useDetailPageSelection(activeView, viewerModelWithoutApi);
+
+// Keep track of the previously active node in order to restore the selection when the viewerModel changes (e.g. new specifications are loaded)
+const previouslyActiveNode = ref<string | null>(null);
 
 watch(
   () => specifications,
   (newSpecifications, oldSpecifications) => {
     if (!newSpecifications) {
       return;
+    }
+
+    if (selectedNode.value?.id) {
+      const currentlySelectedNodeId = selectedNode.value.id;
+      previouslyActiveNode.value = getFullDotNotationPath(currentlySelectedNodeId, viewerModelWithoutApi.value);
     }
 
     const nonEmptySpecifications = newSpecifications.filter(spec => !!spec?.content);
@@ -110,8 +119,6 @@ const onNodeSelected = (nodeId: string) => {
   }
 };
 
-const { changeSelection, detailPage, selectCoreLayer, selectedNode } = useDetailPageSelection(activeView, viewerModelWithoutApi);
-
 const breadcrumbs = computed<Breadcrumb[]>(() => {
   const selectedNodeVal = selectedNode.value;
   if (!selectedNodeVal || selectedNode.value?.type === 'api') {
@@ -143,12 +150,30 @@ const getPublicSlotName = (dotNoationPath: string) => dotNoationPath.toLowerCase
 
 const complexDatatypeStore = useComplexDatatypesStore();
 
+const newSpecLoaded = () => {
+  previouslyActiveNode.value = null;
+  complexDatatypeStore.setComplexDatatypes(activeView.value);
+  emits('specloaded');
+};
+
 watch(
   activeView,
   () => {
-    selectCoreLayer();
-    complexDatatypeStore.setComplexDatatypes(activeView.value);
-    emits('specloaded');
+    if (!previouslyActiveNode.value) {
+      selectCoreLayer();
+      newSpecLoaded();
+      return;
+    }
+
+    const node = findNodeByPath(previouslyActiveNode.value, '', viewerModelWithoutApi.value);
+
+    if (node?.id) {
+      changeSelection(node.id);
+    } else {
+      selectCoreLayer();
+    }
+
+    newSpecLoaded();
   },
   { immediate: true },
 );
