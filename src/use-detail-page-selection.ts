@@ -15,7 +15,7 @@ import EnumerationDetailPage from './components/detail-pages/enumeration-detail-
 import FallbackPage from './components/detail-pages/fallback-page/FallbackPage.vue';
 import { IFEXTreeModelNode, NodeType } from './types/node';
 import { computed, ComputedRef, ref } from 'vue';
-import { findNodeById, getFullPathToNode } from './utils/tree/tree';
+import { findNodeById, getFullDotNotationPath } from './utils/tree/tree';
 import { AST, Enumeration, Event, Interface, Method, Namespace, Property, Struct, Typedef } from './types/ifex-core.ts';
 import { DetailPageBaseProps } from './components/detail-pages/shared/types.ts';
 
@@ -50,10 +50,7 @@ export const useDetailPageSelection = (viewerModel: ComputedRef<IFEXTreeModelNod
     }
 
     // The dot notation path should start with the root namespace and not with the name of the api
-    const path = getFullPathToNode(selectedNode.value.id, viewerModelWithoutApi.value);
-    const namesOnly = path?.map(item => item.node.name || '') || [];
-
-    return namesOnly.join('.');
+    return getFullDotNotationPath(selectedNode.value.id, viewerModelWithoutApi.value);
   };
 
   const selectCoreLayer = () => (selectedNode.value = viewerModel.value[0]); // TODO: pass core layer into composable
