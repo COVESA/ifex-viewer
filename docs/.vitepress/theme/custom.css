@@ -3,3 +3,36 @@
   --vp-c-brand-2: #2f94b6;
   --vp-c-brand-3: #28819d;
 }
+
+/*
+ * Custom styling for Codemirror instance. Used in Playground.vue
+ * Needs to be declared globally due to scoping issues.
+*/
+.cm-editor {
+  flex-grow: 1;
+  height: 100%;
+  /* Ensure the editor content scrolls inside */
+  overflow: auto;
+}
+
+.cm-editor.ͼo {
+  background: transparent;
+}
+
+.cm-editor.cm-focused {
+  outline: none;
+}
+
+.cm-editor.ͼo .cm-gutters {
+  background-color: var(--vp-c-gray-3);
+}
+
+.cm-editor.ͼo .cm-activeLineGutter {
+  background-color: var(--vp-c-gray-1);
+}
+
+.error-marker {
+  background-color: var(--vp-c-red-3);
+  color: transparent;
+  cursor: help;
+}
