@@ -3,14 +3,14 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <div class="flex rounded-md bg-gray-100 dark:bg-gray-900 p-4 gap-4 items-start" data-testid="error-notification">
-    <ExclamationCircleIcon class="shrink-0 size-7 text-red-600" />
-    <div class="flex flex-col gap-3 w-full">
-      <div class="flex justify-between">
-        <h4 class="text-lg font-medium leading-5 mt-1 text-gray-900 dark:text-gray-200">Error in {{ validationError.instancePath }}</h4>
+  <div class="grid grid-cols-[1.7rem_auto_1.7rem] notification-grid rounded-md bg-gray-100 dark:bg-gray-900 p-4 gap-x-4 gap-y-3 items-start" data-testid="error-notification">
+    <ExclamationCircleIcon class="shrink-0 size-7 text-red-600 col-start-1 col-end-2 self-center" />
+    <h4 class="col-start-2 col-end-3 text-lg font-medium leading-5 mt-1 text-gray-900 dark:text-gray-200 text-ellipsis text-nowrap overflow-hidden self-center">
+      Error in {{ validationError.instancePath }}
+    </h4>
+    <ToggleButton class="col-start-3 col-end-4 self-center" :expanded="false" @toggled="expandedState => (detailsExpanded = expandedState)" />
 
-        <ToggleButton :expanded="false" @toggled="expandedState => (detailsExpanded = expandedState)" />
-      </div>
+    <div class="flex flex-col gap-3 w-full col-start-2 col-end-4">
       <Text v-if="validationError.message?.length">{{ validationError.message }}</Text>
 
       <div v-if="detailsExpanded" data-testid="error-notification-details" class="bg-white dark:bg-gray-800 dark:text-gray-200 rounded-md py-2 pl-4 pr-12 relative">
