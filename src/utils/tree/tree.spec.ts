@@ -5,7 +5,7 @@
 
 import { ErrorObject } from 'ajv';
 import { Method, Namespace, Typedef } from '../../types/ifex-core';
-import { createTreeModel, findNodeById, findNodeByPath, getFullPathToNode } from './tree';
+import { createTreeModel, findNodeById, findNodeByPath, getFullPathToNode, getFullDotNotationPath } from './tree';
 import { enumerationMock } from '../../tests/mocks/enumeration';
 import { eventMock } from '../../tests/mocks/events';
 import { methodMock } from '../../tests/mocks/methods';
@@ -1199,6 +1199,54 @@ describe('tree', () => {
       const tree = createTreeModel(nodes, '/namespaces', new Map([[instancePath, [existingError]]]));
 
       expect(tree).toEqual(expected);
+    });
+  });
+
+  describe('getFullDotNotationPath', () => {
+    it('should return dot notation path for root node', () => {
+      const id = 'root-id';
+      const node = { name: 'Root', description: '' };
+      const tree: IFEXTreeModelNode[] = [{ id, node, type: 'namespace', children: [] }];
+      expect(getFullDotNotationPath(id, tree)).toBe('Root');
+    });
+
+    it('should return dot notation path for deeply nested node', () => {
+      const id1 = '1';
+      const id2 = '2';
+      const id3 = '3';
+      const tree: IFEXTreeModelNode[] = [
+        {
+          id: id1,
+          node: { name: 'A', description: '' },
+          type: 'namespace',
+          children: [
+            {
+              id: id2,
+              node: { name: 'B', description: '' },
+              type: 'namespace',
+              children: [
+                {
+                  id: id3,
+                  node: { name: 'C', description: '' },
+                  type: 'namespace',
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ];
+      expect(getFullDotNotationPath(id3, tree)).toBe('A.B.C');
+    });
+
+    it('should return empty string if nodeId does not exist', () => {
+      const id = 'root-id';
+      const tree: IFEXTreeModelNode[] = [{ id, node: { name: 'Root', description: '' }, type: 'namespace', children: [] }];
+      expect(getFullDotNotationPath('non-existent', tree)).toBe('');
+    });
+
+    it('should return empty string for empty tree', () => {
+      expect(getFullDotNotationPath('any-id', [])).toBe('');
     });
   });
 });

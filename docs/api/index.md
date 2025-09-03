@@ -4,12 +4,26 @@
 
 ### `specifications: Array<IfexSpecificationItem>`
 
-This property is used to pass all the ifex specification layers to the viewer. The specification is an array of objects with the following structure:
+This property is used to pass all the IFEX specification layers to the viewer. The specification is an array of objects with the following structure:
 
 ```ts
 interface IfexSpecificationItem {
-  filename: string;
-  content: string;
+  filename: string; // The name of the specification file (e.g. your-spec.yml). The filename is displayed as a label in the UI if no name is present in the specification document.
+  content: string; // The content of the specification file in YAML format as a string.
+}
+```
+
+### `layout: IfexViewerLayout`
+
+This property is used to customize the layout of the viewer. The layout object has the following structure:
+
+```ts
+interface IfexViewerLayout {
+  /**
+   * Determines whether the side navigation is positioned on the left or right side of the viewer. Default is 'left'.
+   * @default 'left'
+   */
+  sidenavPosition?: 'left' | 'right';
 }
 ```
 
@@ -57,6 +71,16 @@ This event triggers when a node was selected in the sidenav.
 interface NodeSelectedEvent {
   path: string;
 }
+```
+
+### `sidenavPositionChanged`
+
+This event triggers when the position of the sidenav was changed.
+
+#### Event payload
+
+```ts
+type SidebarPositionChangedEvent = 'left' | 'right';
 ```
 
 ## Methods

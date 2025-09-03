@@ -74,3 +74,19 @@ export const PartiallyEmptyFile: Story = {
     specifications: [{ ...specificationItemMock, content: specificationWithTwoDocs }, null as any],
   },
 };
+
+export const SidenavRight: Story = {
+  render: args => ({
+    components: { App },
+    setup() {
+      return { args };
+    },
+    template: '<App v-bind="args" />',
+  }),
+  args: {
+    specifications: [{ ...specificationItemMock, content: specificationWithTwoDocs }, null as any],
+    layout: {
+      sidenavPosition: 'right',
+    },
+  },
+};

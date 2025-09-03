@@ -40,6 +40,7 @@ describe('Sidenav', () => {
   it('should render all nodes of the given tree', () => {
     const otherNamespace: Namespace = { ...namespaceMock, name: 'Other namespace' };
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '1',
       treeModel: [
         {
@@ -92,6 +93,7 @@ describe('Sidenav', () => {
   it('should emit event when node was selected', async () => {
     const nodeIdToSelect = '1';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -115,6 +117,7 @@ describe('Sidenav', () => {
   it('should collapse node on click', async () => {
     const propertyNodeId = '9';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -168,6 +171,7 @@ describe('Sidenav', () => {
       },
     ];
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '1',
       treeModel,
     };
@@ -213,6 +217,7 @@ describe('Sidenav', () => {
 
   it('should collapse all nodes', async () => {
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -259,6 +264,7 @@ describe('Sidenav', () => {
 
   it('should expand all nodes after all are collapsed', async () => {
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -310,6 +316,7 @@ describe('Sidenav', () => {
   it('should start resizing on mousemove over resizer', async () => {
     const nodeIdToSelect = '1';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -332,6 +339,7 @@ describe('Sidenav', () => {
 
   it('should emit event when tab changed', async () => {
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -356,6 +364,7 @@ describe('Sidenav', () => {
   it('should filter and display search results matching the search term', async () => {
     const searchValue = 'Stormtrooper';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -395,6 +404,7 @@ describe('Sidenav', () => {
   it('should reset search correctly', async () => {
     const searchValue = 'Stormtrooper';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -437,6 +447,7 @@ describe('Sidenav', () => {
   it('should filter and display nodes matching a in-sensitive search term', async () => {
     const searchValue = 'STORMtrooPer';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {
@@ -473,6 +484,7 @@ describe('Sidenav', () => {
   it('should find number values', async () => {
     const searchValue = '10';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '1',
       treeModel: [
         {
@@ -512,6 +524,7 @@ describe('Sidenav', () => {
     const searchValue = 'STORMtrooPer';
     const selectedNodeId = '3';
     const props: SidenavProps = {
+      sidenavPosition: 'left',
       selectedNodeId: '9',
       treeModel: [
         {

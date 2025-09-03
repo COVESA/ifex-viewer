@@ -10,7 +10,11 @@ import Playground from './Playground.vue'
 
 # Playground
 
-Edit your IFEX API definition and see the API visualized in real-time. This playground provides a live environment for building and validating your APIs.
+The Playground allows you to edit your IFEX API and visualize them in real-time. It features syntax highlighting, error validation, and support for multiple document layers. The editor provides a live preview of your API structure, ensuring accurate and efficient API design.
+
+::: tip
+To create multiple specification documents, separate each document with three dashes (`---`).
+:::
 
 <Playground />
 
@@ -26,18 +30,21 @@ Edit your IFEX API definition and see the API visualized in real-time. This play
 }
 
 .playground-page {
-  padding: 0 24px; /* Same padding as navbar wrapper */
+  padding: 4px 24px; /* Same padding as navbar wrapper */
 }
-
-@media (min-width: 1440px) {
-  .playground-page {
-    padding: 0 8rem;
-  }
-}
-
 
 .playground-page p {
   line-height: 28px;
   margin: 16px 0;
+}
+
+.custom-block-title {
+  margin: 0 !important;
+}
+
+@media (min-width: 1440px) {
+  .playground-page {
+    padding: 2px 8rem;
+  }
 }
 </style>

@@ -26,7 +26,7 @@ const renderComponent = (props: IfexViewerProps, slots?: Slots) => {
 
 describe('App', () => {
   it('should error message when no specifications are given', async () => {
-    const props: IfexViewerProps = { specifications: [] };
+    const props: IfexViewerProps = { specifications: [], layout: { sidenavPosition: 'left' } };
     renderComponent({
       ...props,
     });
@@ -37,7 +37,7 @@ describe('App', () => {
   });
 
   it('should be able to handle null values in specifications input', async () => {
-    const props: IfexViewerProps = { specifications: [null as any, specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [null as any, specificationItemMock], layout: { sidenavPosition: 'left' } };
     renderComponent({
       ...props,
     });
@@ -48,7 +48,7 @@ describe('App', () => {
   });
 
   it('should render correct breadcrumbs for the selected node', async () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -66,7 +66,7 @@ describe('App', () => {
   });
 
   it('should emit specloaded event when parsing is done', () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { emitted } = renderComponent({
       ...props,
     });
@@ -75,7 +75,7 @@ describe('App', () => {
   });
 
   it('should render sidenav correctly with given specification', () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     renderComponent({
       ...props,
     });
@@ -97,7 +97,7 @@ describe('App', () => {
   });
 
   it('should select api detail page initially', () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     renderComponent({
       ...props,
     });
@@ -111,7 +111,7 @@ describe('App', () => {
   it('should select detail page via breadcrumbs correctly', async () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -132,7 +132,7 @@ describe('App', () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
     const eventToSelect = 'DeathStarDestroyed';
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -149,7 +149,7 @@ describe('App', () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
     const structToSelect = 'Starship';
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -166,7 +166,7 @@ describe('App', () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
     const typedefToSelect = 'GalacticCoordinates';
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -183,7 +183,7 @@ describe('App', () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
     const propertyToSelect = 'emperor';
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -200,7 +200,7 @@ describe('App', () => {
     const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
     const enumerationToSelect = 'Rank';
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user } = renderComponent({
       ...props,
     });
@@ -218,7 +218,7 @@ describe('App', () => {
     const eventToSelect = 'DeathStarDestroyed';
     const expectedDotNotationPath = `GalacticEmpire.${eventToSelect}`;
 
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const { user, emitted } = renderComponent({
       ...props,
     });
@@ -233,7 +233,7 @@ describe('App', () => {
   });
 
   it('should update viewer model when content of given specifications did change', async () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
 
     const { rerender } = renderComponent({
@@ -246,7 +246,7 @@ describe('App', () => {
   });
 
   it('should update viewer model when filenames of given specifications did change', async () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
 
     const { rerender } = renderComponent({
@@ -259,7 +259,7 @@ describe('App', () => {
   });
 
   it('should NOT update viewer model when content of given specifications has no changes', async () => {
-    const props: IfexViewerProps = { specifications: [specificationItemMock] };
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
     const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
 
     const { rerender } = renderComponent({
@@ -268,14 +268,14 @@ describe('App', () => {
 
     expect(getViewerModelSpy).toHaveBeenCalledTimes(1);
 
-    await rerender({ specifications: [specificationItemMock] });
+    await rerender({ specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } });
 
     expect(getViewerModelSpy).toHaveBeenCalledTimes(1); // should still call only once
   });
 
   it('should NOT update viewer model when order of content of given specifications changes', async () => {
     const givenSpecifications = [specificationItemMock, { filename: 'two-docs.yml', content: specificationWithTwoDocs }];
-    const props: IfexViewerProps = { specifications: givenSpecifications };
+    const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
     const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
 
     const { rerender } = renderComponent({
@@ -284,14 +284,93 @@ describe('App', () => {
 
     expect(getViewerModelSpy).toHaveBeenCalledTimes(1);
 
-    await rerender({ specifications: givenSpecifications.reverse() }); // Reverse order of given specifications
+    await rerender({ specifications: givenSpecifications.reverse(), layout: { sidenavPosition: 'left' } }); // Reverse order of given specifications
 
     expect(getViewerModelSpy).toHaveBeenCalledTimes(1); // should still call only once
   });
 
+  it('should keep currently selected node when given specifications did change and node still exists', async () => {
+    const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
+    const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
+    const eventToSelect = 'DeathStarDestroyed';
+
+    const { rerender, user, emitted } = renderComponent({
+      ...props,
+    });
+
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+
+    const nodeToSelect = screen.getByText(eventToSelect);
+    await user.click(nodeToSelect);
+
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+
+    await rerender({ specifications: [{ filename: 'different.yml', content: specificationItemMock.content }], layout: { sidenavPosition: 'left' } });
+
+    expect(getViewerModelSpy).toHaveBeenCalledTimes(2);
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+    expect(emitted('specloaded')).toBeTruthy();
+  });
+
+  it('should NOT keep currently selected node when given specifications did change and node does not exist in new specification anymore', async () => {
+    const getDetailPageContainer = () => screen.getByTestId('detail-page-container');
+    const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
+    const getViewerModelSpy = vi.spyOn(specificationModel, 'getViewerModel');
+    const eventToSelect = 'DeathStarDestroyed';
+
+    const { rerender, user, emitted } = renderComponent({
+      ...props,
+    });
+
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+
+    const nodeToSelect = screen.getByText(eventToSelect);
+    await user.click(nodeToSelect);
+
+    expect(within(getDetailPageContainer()).getByText(eventToSelect)).toBeInTheDocument();
+
+    await rerender({
+      specifications: [
+        {
+          filename: 'updated.yml',
+          content: `
+name: "GalacticEmpireCustomAPI"
+description: "Custom layer for the operations and command structure of the Galactic Empire"
+major_version: 1
+minor_version: 1
+namespaces:
+  - name: "GalacticEmpire"
+    description: "Namespace for operations related to the Galactic Empire"
+    major_version: 1
+    minor_version: 1
+    events:
+      - name: "RebelBaseDiscovered"
+        description: "Event triggered when a Rebel base is discovered"
+        input:
+          - name: "baseLocation"
+            datatype: "GalacticCoordinates"
+            description: "The coordinates of the discovered Rebel base"
+            example: "12.345, 67.891"
+          - name: "discoveredBy"
+            datatype: "string"
+            description: "The name of the entity that discovered the base"
+            example: "Darth Vader"
+    `,
+        },
+      ],
+      layout: { sidenavPosition: 'left' },
+    });
+
+    expect(getViewerModelSpy).toHaveBeenCalledTimes(2);
+    expect(within(getDetailPageContainer()).queryByText(eventToSelect)).not.toBeInTheDocument();
+    expect(within(getDetailPageContainer()).getByText('Merged document')).toBeInTheDocument();
+    expect(emitted('specloaded')).toBeTruthy();
+  });
+
   it('should show merge view as default view', async () => {
     const givenSpecifications = [specificationItemMock, { filename: 'two-docs.yml', content: specificationWithTwoDocs }];
-    const props: IfexViewerProps = { specifications: givenSpecifications };
+    const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
     renderComponent({
       ...props,
@@ -305,7 +384,7 @@ describe('App', () => {
 
   it('should switch from merge view to layered view', async () => {
     const givenSpecifications = [specificationItemMock, { filename: 'two-docs.yml', content: specificationWithTwoDocs }];
-    const props: IfexViewerProps = { specifications: givenSpecifications };
+    const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
     const { user } = renderComponent({
       ...props,
@@ -325,7 +404,7 @@ describe('App', () => {
 
   it('should not show tabs when only one document is provided', () => {
     const givenSpecifications = [specificationItemMock];
-    const props: IfexViewerProps = { specifications: givenSpecifications };
+    const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
     renderComponent({
       ...props,
@@ -334,6 +413,45 @@ describe('App', () => {
     // Reason for hiding tabs: Merged view and layered view are the same then
     const tabs = screen.queryByTestId('view-tabs');
     expect(tabs).not.toBeInTheDocument();
+  });
+
+  it('should change sidenav position on view column icon click in sidenav', async () => {
+    const givenSpecifications = [specificationItemMock];
+    const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
+
+    const { user, emitted } = renderComponent({
+      ...props,
+    });
+
+    expect(screen.getByTestId('view-left-icon')).toBeInTheDocument();
+    expect(screen.queryByTestId('view-right-icon')).not.toBeInTheDocument();
+    expect(screen.getByTestId('ifex-viewer-container')).toHaveClass('flex-row');
+    expect(screen.getByTestId('ifex-viewer-container')).not.toHaveClass('flex-row-reverse');
+    expect(screen.getByTestId('sidenav')).toHaveClass('flex-row');
+    expect(screen.getByTestId('sidenav')).not.toHaveClass('flex-row-reverse');
+
+    await user.click(screen.getByTestId('btn-change-sidenav-position'));
+
+    expect(screen.queryByTestId('view-left-icon')).not.toBeInTheDocument();
+    expect(screen.getByTestId('view-right-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('ifex-viewer-container')).not.toHaveClass('flex-row');
+    expect(screen.getByTestId('ifex-viewer-container')).toHaveClass('flex-row-reverse');
+    expect(screen.getByTestId('sidenav')).not.toHaveClass('flex-row');
+    expect(screen.getByTestId('sidenav')).toHaveClass('flex-row-reverse');
+
+    expect(emitted('sidenavPositionChanged')[0]).toEqual(['right']);
+
+    await user.click(screen.getByTestId('btn-change-sidenav-position'));
+
+    expect(screen.getByTestId('view-left-icon')).toBeInTheDocument();
+    expect(screen.queryByTestId('view-right-icon')).not.toBeInTheDocument();
+    expect(screen.getByTestId('ifex-viewer-container')).toHaveClass('flex-row');
+    expect(screen.getByTestId('ifex-viewer-container')).not.toHaveClass('flex-row-reverse');
+    expect(screen.getByTestId('sidenav')).toHaveClass('flex-row');
+    expect(screen.getByTestId('sidenav')).not.toHaveClass('flex-row-reverse');
+
+    expect(emitted('sidenavPositionChanged')[1]).toEqual(['left']);
+    expect(emitted('sidenavPositionChanged')).toHaveLength(2); // Ensure sidenavPositionChanged event was emitted only twice
   });
 
   /**
@@ -346,7 +464,7 @@ describe('App', () => {
   it('should select node from outside the web component', async () => {
     const { options } = getTestOptions({});
 
-    const wrapper = mount(App, { props: { specifications: [specificationItemMock] }, ...options });
+    const wrapper = mount(App, { props: { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } }, ...options });
 
     wrapper.vm.selectNode('GalacticEmpire.recruitStormtrooper');
 
@@ -358,7 +476,7 @@ describe('App', () => {
   describe('slot capabilities', () => {
     describe('of property viewers', () => {
       it('should not render slot content in input property of a method when dot notation is NOT provided in lowercase', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.FleetCommand.coordinateAttack.fleetSize';
         const content = 'Darth Vader was here ...';
@@ -382,7 +500,7 @@ describe('App', () => {
       });
 
       it('should render slot content in input property of a method', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.FleetCommand.coordinateAttack.fleetSize'.toLowerCase();
         const content = 'Darth Vader was here ...';
@@ -406,7 +524,7 @@ describe('App', () => {
       });
 
       it('should render slot content in output property of a method', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.FleetCommand.coordinateAttack.attackPlan'.toLowerCase();
         const content = 'Darth Vader wants to see you';
@@ -429,7 +547,7 @@ describe('App', () => {
       });
 
       it('should render slot content in returns property of a method', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.deployTIEFighters.remainingFighters'.toLowerCase();
         const content = 'Report to Darth Vader';
@@ -452,7 +570,7 @@ describe('App', () => {
       });
 
       it('should render slot content in errors property of a method', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.deployTIEFighters.invalidSector'.toLowerCase();
         const content = 'Report to Darth Vader';
@@ -475,7 +593,7 @@ describe('App', () => {
       });
 
       it('should render slot content in input property of an event', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.DeathStarDestroyed.deathStarId'.toLowerCase();
         const content = 'Copy Id';
@@ -498,7 +616,7 @@ describe('App', () => {
       });
 
       it('should render slot content in member property of a struct', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.Starship.hyperdriveRating'.toLowerCase();
         const content = 'Increase acceleration';
@@ -521,7 +639,7 @@ describe('App', () => {
       });
 
       it('should render slot content in option property of an enumeration', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.Rank.General'.toLowerCase();
         const content = 'Rank up';
@@ -546,7 +664,7 @@ describe('App', () => {
 
     describe('of detail pages headline', () => {
       it('should not render slot content in headline when dot notation is NOT provided in lowercase', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy-headline';
         const content = 'Deploy fleet';
@@ -569,7 +687,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of the namespace detail page', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy-headline'.toLowerCase();
         const content = 'Deploy fleet';
@@ -592,7 +710,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of the interface detail page', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.FleetCommand-headline'.toLowerCase();
         const content = 'Change command';
@@ -615,7 +733,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of a method', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.DeathStarDestroyed-headline'.toLowerCase();
         const content = 'Build new one';
@@ -638,7 +756,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of an event', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.recruitStormtrooper-headline'.toLowerCase();
         const content = 'Try out';
@@ -661,7 +779,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of an enumeration', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.Rank-headline'.toLowerCase();
         const content = 'Uprank all';
@@ -684,7 +802,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of a property', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.emperor-headline'.toLowerCase();
         const content = 'Depose';
@@ -707,7 +825,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of a struct', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.Starship-headline'.toLowerCase();
         const content = 'Start the engine';
@@ -730,7 +848,7 @@ describe('App', () => {
       });
 
       it('should render slot content in headline of a typedef', async () => {
-        const props: IfexViewerProps = { specifications: [specificationItemMock] };
+        const props: IfexViewerProps = { specifications: [specificationItemMock], layout: { sidenavPosition: 'left' } };
 
         const dotNotation = 'GalacticEmpire.ImperialNavy.FleetCommand.GalacticCoordinates-headline'.toLowerCase();
         const content = 'Orbit';
@@ -758,7 +876,7 @@ describe('App', () => {
     it('should select complex datatype node from enumeration detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,
@@ -781,7 +899,7 @@ describe('App', () => {
     it('should select complex datatype node from typedef detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,
@@ -804,7 +922,7 @@ describe('App', () => {
     it('should select complex datatype node from property detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,
@@ -827,7 +945,7 @@ describe('App', () => {
     it('should select complex datatype node from method detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,
@@ -850,7 +968,7 @@ describe('App', () => {
     it('should select complex datatype node from event detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,
@@ -873,7 +991,7 @@ describe('App', () => {
     it('should select complex datatype node from struct detail page', async () => {
       const getHeadline = () => screen.getByTestId('headline-title');
       const givenSpecifications = [{ filename: 'complex-datatypes.yml', content: specificationMockWithComplexDatatypes }];
-      const props: IfexViewerProps = { specifications: givenSpecifications };
+      const props: IfexViewerProps = { specifications: givenSpecifications, layout: { sidenavPosition: 'left' } };
 
       const { user } = renderComponent({
         ...props,

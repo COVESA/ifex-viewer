@@ -35,8 +35,14 @@ This example shows how it looks like when providing only one specification to th
 
 This example shows how it looks like when providing a specification with validation errors.
 
+::: tip
+The item containing validation errors is `GalacticCoordinates`. It's missing the required property `datatype`.
+
+Depending on the size of your screen, you might need to expand the sidenav to see the validation error icon.
+:::
+
 <div v-if="mounted" >
-    <ifex-viewer :specifications="[{ ...specificationItemMock, content: specificationMockWithValidationErrors }]" :class="isDark ? 'ifex-viewer dark' :'ifex-viewer'"></ifex-viewer>
+    <ifex-viewer :specifications="[{ ...specificationItemMock, content: specificationMockWithValidationErrors }]" :class="isDark ? 'ifex-viewer ifex-viewer-validation-errors dark' :'ifex-viewer ifex-viewer-validation-errors'"></ifex-viewer>
 </div>
 
 ## With Multiple Specifications
@@ -96,5 +102,13 @@ This example shows passing multiple specifications to the viewer, each represent
 .examples-page p {
   line-height: 28px;
   margin: 16px 0;
+}
+
+.custom-block-title {
+  margin: 0 !important;
+}
+
+.ifex-viewer-validation-errors {
+  margin-top: 2rem;
 }
 </style>

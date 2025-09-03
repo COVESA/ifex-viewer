@@ -1,5 +1,18 @@
 # IFEX Viewer Changelog
 
+## v1.2.0 (2025-09-03)
+
+### Features
+
+- Selected nodes are kept open when specification input files are updated and node still exists ([#33](https://github.com/COVESA/ifex-viewer/pull/33))
+- Sidenav position is now configurable via property `layout.sidenavPosition`. Default value is `left` ([#34](https://github.com/COVESA/ifex-viewer/pull/34))
+- Sidenav position can be changed by the user via a button in the header ([#34](https://github.com/COVESA/ifex-viewer/pull/34))
+
+## Bug Fixes
+
+- Fix to prevent sharing pinia state between multiple viewer instances on the same page ([#37](https://github.com/COVESA/ifex-viewer/pull/37))
+- Improved responsiveness of `ErrorNotification` component ([#37](https://github.com/COVESA/ifex-viewer/pull/37))
+
 ## v1.1.0 (2025-08-20)
 
 ### Features
