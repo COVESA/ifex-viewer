@@ -3,11 +3,22 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <div ref="sidenavEl" class="flex h-full self-stretch bg-gray-100 dark:bg-gray-900" data-testid="sidenav">
+  <div ref="sidenavEl" :class="sidenavPosition === 'left' ? 'flex-row' : 'flex-row-reverse'" class="flex h-full self-stretch bg-gray-100 dark:bg-gray-900" data-testid="sidenav">
     <div class="flex flex-col h-full">
-      <h1 class="p-4">
-        <img src="../../assets/logo.svg" type="image/svg+xml" class="h-10" alt="IFEX Logo" />
-      </h1>
+      <div class="p-4 flex justify-between items-center">
+        <h1>
+          <img src="../../assets/logo.svg" type="image/svg+xml" class="h-10" alt="IFEX Logo" />
+        </h1>
+        <button
+          class="cursor-pointer text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200 transition-colors"
+          data-testid="btn-change-sidenav-position"
+          title="Change the position of the side-navigation"
+          @click="emits('sidenavPositionChanged')"
+        >
+          <ViewLeftIcon v-if="sidenavPosition === 'left'" data-testid="view-left-icon" class="size-6" />
+          <ViewRightIcon v-else data-testid="view-right-icon" class="size-6" />
+        </button>
+      </div>
       <div
         :id="SCROLL_CONTAINER_ID"
         :style="{ width: sidenavSize + 'px' }"
@@ -87,11 +98,13 @@ import SearchInput from './search-input/SearchInput.vue';
 import { useSearch } from './composables/use-search.ts';
 import Text from '../shared/components/text/Text.vue';
 import SearchResults from './search-results/SearchResults.vue';
+import ViewLeftIcon from '../shared/components/icons/ViewLeftIcon.vue';
+import ViewRightIcon from '../shared/components/icons/ViewRightIcon.vue';
 
-const { treeModel, selectedNodeId, showTabs = true } = defineProps<SidenavProps>();
+const { treeModel, selectedNodeId, showTabs = true, sidenavPosition } = defineProps<SidenavProps>();
 
 // eslint-disable-next-line no-unused-vars
-const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: ViewTabs): void }>();
+const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: ViewTabs): void; (e: 'sidenavPositionChanged'): void }>();
 
 const SCROLL_CONTAINER_ID = 'scroll-container';
 
@@ -132,11 +145,12 @@ const resize = (event: MouseEvent) => {
     return;
   }
 
-  const { left } = sidenavEl.value.getBoundingClientRect();
+  const { left, right } = sidenavEl.value.getBoundingClientRect();
 
-  // By subtracting the left x-axis position of the sidenav we prevent an initial jump of the sidenav size
-  // e.g. if the ifex-viewer is having a margin-left of 100px then event.x would be 100px + sidenavSize and
-  // on the first mouse move it would add 100px on top of the current size.
-  sidenavSize.value = event.x - left;
+  if (sidenavPosition === 'left') {
+    sidenavSize.value = event.x - left;
+  } else {
+    sidenavSize.value = right - event.x;
+  }
 };
 </script>
