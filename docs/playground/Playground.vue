@@ -17,6 +17,7 @@ import { indentWithTab } from '@codemirror/commands';
 import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
+const ifexViewerInstance = useTemplateRef<HTMLElement>('ifex-viewer');
 
 const mounted = ref(false);
 const { isDark } = useData();
@@ -101,6 +102,8 @@ onMounted(() => {
   if (parentElement) {
     const parentWidth = parentElement.offsetWidth;
     editorSize.value = parentWidth / 2 - 19; // 50% - 1rem (16px) - 3px
+
+    ifexViewerSize.value = parentWidth / 2 - 19; // 50% - 1rem (16px) - 3px
   }
 
   const initialEditorState = EditorState.create({
@@ -140,7 +143,9 @@ watch(errorMap, newErrorMap => {
   });
 });
 
-const editorSize = ref(0); // TODO: set initial size dynamically by the current screensize
+const editorSize = ref(0);
+const ifexViewerSize = ref(0);
+
 const SCROLL_CONTAINER_ID = 'scroll-container';
 
 const startResizing = () => {
@@ -176,6 +181,9 @@ const resize = (event: MouseEvent) => {
   // Ensure the sizes remain within bounds
   if (newEditorSize > 0 && newEditorSize < containerWidth) {
     editorSize.value = newEditorSize;
+
+    // Calculate and set the width of the ifex-viewer
+    ifexViewerSize.value = containerWidth - newEditorSize;
   }
 };
 </script>
@@ -184,9 +192,11 @@ const resize = (event: MouseEvent) => {
   <div class="playground-container">
     <div :id="SCROLL_CONTAINER_ID" ref="editor" class="editor" :style="{ width: editorSize + 'px' }"></div>
     <div class="resizer" data-testid="resizer" @mousedown="startResizing"></div>
-    <div v-if="mounted" class="ifex-viewer-playground-container">
+    <div v-if="mounted" class="ifex-viewer-playground-container" :style="{ width: ifexViewerSize + 'px' }">
       <!-- eslint-disable-next-line vue/html-self-closing -->
       <ifex-viewer
+        ref="ifex-viewer"
+        :style="{ width: ifexViewerSize + 'px' }"
         :specifications="ifexSpecificationItems"
         :layout="{ sidenavPosition: 'right' }"
         :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"
@@ -244,7 +254,6 @@ const resize = (event: MouseEvent) => {
   .ifex-viewer-playground-container {
     height: 100%;
     max-height: 75vh;
-    flex-grow: 1;
   }
 
   .resizer {
