@@ -7,10 +7,9 @@ import { defineCustomElement } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
 
-const pinia = createPinia();
-
 export const IfexViewerWc = defineCustomElement(App, {
   configureApp(app) {
+    const pinia = createPinia();
     app.use(pinia);
   },
 });
