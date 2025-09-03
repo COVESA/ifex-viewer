@@ -186,7 +186,11 @@ const resize = (event: MouseEvent) => {
     <div class="resizer" data-testid="resizer" @mousedown="startResizing"></div>
     <div v-if="mounted" class="ifex-viewer-playground-container">
       <!-- eslint-disable-next-line vue/html-self-closing -->
-      <ifex-viewer :specifications="ifexSpecificationItems" :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"></ifex-viewer>
+      <ifex-viewer
+        :specifications="ifexSpecificationItems"
+        :layout="{ sidenavPosition: 'right' }"
+        :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"
+      ></ifex-viewer>
     </div>
   </div>
 </template>
