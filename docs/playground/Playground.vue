@@ -17,7 +17,6 @@ import { indentWithTab } from '@codemirror/commands';
 import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
-const ifexViewerInstance = useTemplateRef<HTMLElement>('ifex-viewer');
 
 const mounted = ref(false);
 const { isDark } = useData();
