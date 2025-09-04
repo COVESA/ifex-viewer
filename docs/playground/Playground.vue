@@ -100,9 +100,9 @@ onMounted(() => {
   const parentElement = document.getElementById(SCROLL_CONTAINER_ID)?.parentElement;
   if (parentElement) {
     const parentWidth = parentElement.offsetWidth;
-    editorSize.value = parentWidth / 2 - 19; // 50% - 1rem (16px) - 3px
+    editorSize.value = parentWidth / 2 - 35; // 50% - 2rem (32px) - 3px
 
-    ifexViewerSize.value = parentWidth / 2 - 19; // 50% - 1rem (16px) - 3px
+    ifexViewerSize.value = parentWidth / 2 - 35; // 50% - 2rem (32px) - 3px
   }
 
   const initialEditorState = EditorState.create({
@@ -179,10 +179,10 @@ const resize = (event: MouseEvent) => {
 
   // Ensure the sizes remain within bounds
   if (newEditorSize > 0 && newEditorSize < containerWidth) {
-    editorSize.value = newEditorSize;
+    editorSize.value = newEditorSize - 35;
 
     // Calculate and set the width of the ifex-viewer
-    ifexViewerSize.value = containerWidth - newEditorSize;
+    ifexViewerSize.value = containerWidth - newEditorSize - 35;
   }
 };
 </script>
