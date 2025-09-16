@@ -2,12 +2,15 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Viewer',
+  title: 'IFEX Viewer Documentation',
   base: '/ifex-viewer/',
   description: 'The IFEX Viewer is a web component designed to display API specifications created with the Interface Exchange Framework (IFEX).',
   themeConfig: {
     logo: './logo.svg',
     siteTitle: false,
+    search: {
+      provider: "local",
+    },
     nav: [
       { text: 'Guide', link: '/guide/about/introduction' },
       { text: 'API', link: '/api/' },
