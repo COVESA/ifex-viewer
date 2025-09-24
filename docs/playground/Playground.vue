@@ -15,6 +15,8 @@ import YAML, { Document as YAMLDocument, YAMLError } from 'yaml';
 import { gutter, GutterMarker, keymap } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
+import { useEditorSync } from './composables/use-editor-sync';
+import { useEditorResizing } from './composables/use-editor-resizing.js';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
 
@@ -23,7 +25,7 @@ const { isDark } = useData();
 
 const view = ref<null | EditorView>(null);
 
-const specifications = defineModel<string>({ default: simpleSpecificationMock });
+const specifications = ref<string>(simpleSpecificationMock);
 
 const specificationYAMLDocs = computed<YAMLDocument[]>(() => YAML.parseAllDocuments(specifications.value));
 
@@ -90,6 +92,20 @@ const errorMap = computed<Map<number, string[]>>(() => {
 });
 
 const errorGutterCompartment = new Compartment();
+const syncEditorPosition = defineModel<boolean>({ default: true });
+const selectedEditorNode = ref<string>('');
+
+const { getDotNotationPathOfSelectedNode } = useEditorSync(specificationYAMLDocs);
+watch(selectedEditorNode, newValue => {
+  if (syncEditorPosition.value && newValue && mounted.value) {
+    const ifexViewer = document.querySelector('ifex-viewer');
+    (ifexViewer as any)?.selectNode(newValue);
+  }
+});
+
+const SCROLL_CONTAINER_ID = 'scroll-container';
+
+const { editorSize, ifexViewerSize, startResizing } = useEditorResizing(codemirrorInstance);
 
 onMounted(() => {
   // Workaround for lazy loading web components in SSR
@@ -112,9 +128,12 @@ onMounted(() => {
       basicSetup,
       yaml(),
       keymap.of([indentWithTab]),
-      EditorView.updateListener.of(update => {
-        if (update.docChanged) {
-          specifications.value = update.state.doc.toString();
+      EditorView.updateListener.of(updated => {
+        if (updated.docChanged) {
+          specifications.value = updated.state.doc.toString();
+        }
+        if (updated.selectionSet && syncEditorPosition.value) {
+          selectedEditorNode.value = getDotNotationPathOfSelectedNode(updated.state);
         }
       }),
       errorGutterCompartment.of(errorGutter(errorMap.value)),
@@ -124,7 +143,7 @@ onMounted(() => {
   // Custom styles for codemirror are located in custom.css
   view.value = new EditorView({
     state: initialEditorState,
-    parent: codemirrorInstance.value,
+    parent: codemirrorInstance.value || undefined,
   });
 });
 
@@ -141,80 +160,41 @@ watch(errorMap, newErrorMap => {
     effects: errorGutterCompartment.reconfigure(errorGutter(newErrorMap)),
   });
 });
-
-const editorSize = ref(0);
-const ifexViewerSize = ref(0);
-
-const SCROLL_CONTAINER_ID = 'scroll-container';
-
-const startResizing = () => {
-  // Reset initialOffset when starting a new resize operation
-  initialOffset = 0;
-  document.addEventListener('mousemove', resize);
-  document.addEventListener('mouseup', () => {
-    document.removeEventListener('mousemove', resize);
-    // Reset initialOffset after resizing is complete
-    initialOffset = 0;
-  });
-};
-
-let initialOffset = 0;
-
-const resize = (event: MouseEvent) => {
-  if (!codemirrorInstance.value) {
-    return;
-  }
-
-  const container = document.querySelector('.playground-container') as HTMLElement;
-  if (!container) {
-    return;
-  }
-
-  const { left } = codemirrorInstance.value.getBoundingClientRect();
-  const containerWidth = container.offsetWidth;
-
-  // Calculate the initial offset only on the first resize event
-  // This should be the difference between mouse position and current editor right edge
-  if (initialOffset === 0) {
-    initialOffset = event.x - (left + editorSize.value + 35); // +35 to account for the current padding/gap
-  }
-
-  // Calculate new editor size without the jump
-  const newEditorSize = event.x - left - initialOffset - 35; // -35 for consistent spacing
-
-  // Ensure the sizes remain within bounds (accounting for minimum sizes and gaps)
-  const minEditorSize = 200; // Minimum editor width
-  const minViewerSize = 200; // Minimum viewer width
-  const totalGap = 70; // Total gap/padding (35px each side)
-
-  if (newEditorSize >= minEditorSize &&
-      (containerWidth - newEditorSize - totalGap) >= minViewerSize) {
-    editorSize.value = newEditorSize;
-
-    // Calculate and set the width of the ifex-viewer
-    ifexViewerSize.value = containerWidth - newEditorSize - totalGap;
-  }
-};
 </script>
 
 <template>
-  <div class="playground-container">
-    <div :id="SCROLL_CONTAINER_ID" ref="editor" class="editor" :style="{ width: editorSize + 'px' }"></div>
-    <div class="resizer" data-testid="resizer" @mousedown="startResizing"></div>
-    <div v-if="mounted" class="ifex-viewer-playground-container" :style="{ width: ifexViewerSize + 'px' }">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
-      <ifex-viewer
-        ref="ifex-viewer"
-        :style="{ width: ifexViewerSize + 'px' }"
-        :specifications="ifexSpecificationItems"
-        :layout="{ sidenavPosition: 'right' }"
-        :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"
-      ></ifex-viewer>
+  <div class="container">
+    <div class="action-row">
+      <label class="sync-toggle" title="When enabled the cursor position in the editor will be synced with the viewer.">
+        <input v-model="syncEditorPosition" type="checkbox" name="sync-editor-position" />
+        Sync cursor position with viewer
+      </label>
+    </div>
+    <div class="playground-container">
+      <div :id="SCROLL_CONTAINER_ID" ref="editor" class="editor" :style="{ width: editorSize + 'px' }"></div>
+      <div class="resizer" data-testid="resizer" @mousedown="startResizing"></div>
+      <div v-if="mounted" class="ifex-viewer-playground-container" :style="{ width: ifexViewerSize + 'px' }">
+        <!-- eslint-disable-next-line vue/html-self-closing -->
+        <ifex-viewer
+          :style="{ width: ifexViewerSize + 'px' }"
+          :specifications="ifexSpecificationItems"
+          :layout="{ sidenavPosition: 'right' }"
+          :class="isDark ? 'ifex-viewer-playground dark' : 'ifex-viewer-playground'"
+        ></ifex-viewer>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+  display: flex;
+  margin-top: 2rem;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
 .playground-container {
   width: 100%;
   display: flex;
