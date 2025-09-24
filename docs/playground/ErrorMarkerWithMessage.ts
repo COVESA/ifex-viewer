@@ -1,3 +1,8 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
+ */
+
 import { GutterMarker } from '@codemirror/view';
 
 class ErrorMarkerWithMessage extends GutterMarker {

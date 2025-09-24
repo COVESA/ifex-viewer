@@ -49,10 +49,10 @@ namespaces:
               description: "The number of weapons the starship can carry"
             - name: "shipType"
               datatype: "Starship"
-      typedefs:
-        - name: "GalacticCoordinates"
-          datatype: "SectorDetails"
-          description: "Represents galactic coordinates for navigation and targeting"
+        typedefs:
+          - name: "GalacticCoordinates"
+            datatype: "SectorDetails"
+            description: "Represents galactic coordinates for navigation and targeting"
     structs:
       - name: "Starship"
         description: "A struct representing a starship in the Imperial fleet"
