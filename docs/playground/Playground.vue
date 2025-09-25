@@ -19,6 +19,7 @@ import { useEditorSync } from './composables/use-editor-sync';
 import { useEditorResizing } from './composables/use-editor-resizing.js';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
+const viewerRef = useTemplateRef<HTMLElement>('viewer');
 
 const mounted = ref(false);
 const { isDark } = useData();
@@ -98,8 +99,7 @@ const selectedEditorNode = ref<string>('');
 const { getDotNotationPathOfSelectedNode } = useEditorSync(specificationYAMLDocs);
 watch(selectedEditorNode, newValue => {
   if (syncEditorPosition.value && newValue && mounted.value) {
-    const ifexViewer = document.querySelector('ifex-viewer');
-    (ifexViewer as any)?.selectNode(newValue);
+    (viewerRef.value as any)?.selectNode(newValue);
   }
 });
 
@@ -113,7 +113,7 @@ const calculateSizes = () => {
     const parentWidth = parentElement.offsetWidth;
     const totalGap = 70; // Total gap/padding (35px each side)
     const availableWidth = parentWidth - totalGap;
-    
+
     // If sizes haven't been set yet, use 50/50 split
     if (editorSize.value === 0 && ifexViewerSize.value === 0) {
       editorSize.value = availableWidth / 2;
@@ -154,7 +154,7 @@ onMounted(() => {
   });
 
   calculateSizes();
-  
+
   // Add window resize listener
   window.addEventListener('resize', handleWindowResize);
 
@@ -188,10 +188,10 @@ onBeforeUnmount(() => {
   if (view.value) {
     view.value.destroy();
   }
-  
+
   // Remove window resize listener
   window.removeEventListener('resize', handleWindowResize);
-  
+
   // Clear any pending resize timeout
   if (resizeTimeout) {
     clearTimeout(resizeTimeout);
@@ -222,6 +222,7 @@ watch(errorMap, newErrorMap => {
       <div v-if="mounted" class="ifex-viewer-playground-container" :style="{ width: ifexViewerSize + 'px' }">
         <!-- eslint-disable-next-line vue/html-self-closing -->
         <ifex-viewer
+          ref="viewer"
           :style="{ width: ifexViewerSize + 'px' }"
           :specifications="ifexSpecificationItems"
           :layout="{ sidenavPosition: 'right' }"
