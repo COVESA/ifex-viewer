@@ -34,6 +34,7 @@ export const useEditorResizing = (codemirrorInstance: Readonly<ShallowRef<HTMLEl
 
     const { left } = codemirrorInstance.value.getBoundingClientRect();
     const containerWidth = container.offsetWidth;
+    const totalGap = 70; // Total gap/padding (35px each side)
 
     // Calculate the initial offset only on the first resize event
     // This should be the difference between mouse position and current editor right edge
@@ -47,13 +48,13 @@ export const useEditorResizing = (codemirrorInstance: Readonly<ShallowRef<HTMLEl
     // Ensure the sizes remain within bounds (accounting for minimum sizes and gaps)
     const minEditorSize = 200; // Minimum editor width
     const minViewerSize = 200; // Minimum viewer width
-    const totalGap = 70; // Total gap/padding (35px each side)
+    const availableWidth = containerWidth - totalGap;
 
-    if (newEditorSize >= minEditorSize && containerWidth - newEditorSize - totalGap >= minViewerSize) {
+    if (newEditorSize >= minEditorSize && availableWidth - newEditorSize >= minViewerSize) {
       editorSize.value = newEditorSize;
 
       // Calculate and set the width of the ifex-viewer
-      ifexViewerSize.value = containerWidth - newEditorSize - totalGap;
+      ifexViewerSize.value = availableWidth - newEditorSize;
     }
   };
 
