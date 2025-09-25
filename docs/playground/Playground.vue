@@ -107,19 +107,56 @@ const SCROLL_CONTAINER_ID = 'scroll-container';
 
 const { editorSize, ifexViewerSize, startResizing } = useEditorResizing(codemirrorInstance);
 
+const calculateSizes = () => {
+  const parentElement = document.getElementById(SCROLL_CONTAINER_ID)?.parentElement;
+  if (parentElement) {
+    const parentWidth = parentElement.offsetWidth;
+    const totalGap = 70; // Total gap/padding (35px each side)
+    const availableWidth = parentWidth - totalGap;
+    
+    // If sizes haven't been set yet, use 50/50 split
+    if (editorSize.value === 0 && ifexViewerSize.value === 0) {
+      editorSize.value = availableWidth / 2;
+      ifexViewerSize.value = availableWidth / 2;
+    } else {
+      // Maintain the current ratio when resizing
+      const currentTotal = editorSize.value + ifexViewerSize.value;
+      if (currentTotal > 0) {
+        const editorRatio = editorSize.value / currentTotal;
+        editorSize.value = availableWidth * editorRatio;
+        ifexViewerSize.value = availableWidth * (1 - editorRatio);
+      } else {
+        // Fallback to 50/50 if something went wrong
+        editorSize.value = availableWidth / 2;
+        ifexViewerSize.value = availableWidth / 2;
+      }
+    }
+  }
+};
+
+let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+const handleWindowResize = () => {
+  // Debounce the resize calculation to avoid excessive recalculations
+  if (resizeTimeout) {
+    clearTimeout(resizeTimeout);
+  }
+  resizeTimeout = setTimeout(() => {
+    calculateSizes();
+    resizeTimeout = null;
+  }, 100);
+};
+
 onMounted(() => {
   // Workaround for lazy loading web components in SSR
   import('../../dist/ifex-viewer.es.js').then(() => {
     mounted.value = true;
   });
 
-  const parentElement = document.getElementById(SCROLL_CONTAINER_ID)?.parentElement;
-  if (parentElement) {
-    const parentWidth = parentElement.offsetWidth;
-    editorSize.value = parentWidth / 2 - 35; // 50% - 2rem (32px) - 3px
-
-    ifexViewerSize.value = parentWidth / 2 - 35; // 50% - 2rem (32px) - 3px
-  }
+  calculateSizes();
+  
+  // Add window resize listener
+  window.addEventListener('resize', handleWindowResize);
 
   const initialEditorState = EditorState.create({
     doc: simpleSpecificationMock,
@@ -150,6 +187,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (view.value) {
     view.value.destroy();
+  }
+  
+  // Remove window resize listener
+  window.removeEventListener('resize', handleWindowResize);
+  
+  // Clear any pending resize timeout
+  if (resizeTimeout) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = null;
   }
 });
 
