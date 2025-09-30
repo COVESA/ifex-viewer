@@ -4,10 +4,10 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
   <Button size="s" variant="tertiary" class="flex gap-1.5 ml-auto" @click="copy(yamlData)">
-    <div v-if="copied" data-testid="copy-successful-btn">
+    <div v-if="copied">
       <ClipboardDocumentCheckIcon class="size-5" />
     </div>
-    <div v-else data-testid="copy-btn">
+    <div v-else>
       <ClipboardDocumentIcon class="size-5" />
     </div>
     YAML
