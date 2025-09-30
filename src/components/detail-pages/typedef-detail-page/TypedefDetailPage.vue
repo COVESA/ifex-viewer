@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="typedef.description" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="typedef.name" :dot-notation="dotNotationFullPath" page-type="typedef">
+      <Headline :headline="typedef.name" :dot-notation="dotNotationFullPath" page-type="typedef" :node-raw-data="typedef">
         <template #default>
           <Badge v-if="typedef.datatypes?.length" type="primitiveType"> Variant type</Badge>
           <DataTypeBadge v-if="!typedef.datatypes?.length && typedef.datatype" :datatype="typedef.datatype" @selected="selectDatatypeNode"> {{ typedef.datatype }}</DataTypeBadge>

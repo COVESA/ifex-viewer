@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="struct.description" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="struct.name" :dot-notation="dotNotationFullPath" page-type="struct">
+      <Headline :headline="struct.name" :dot-notation="dotNotationFullPath" page-type="struct" :node-raw-data="struct">
         <template #default>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
         </template>

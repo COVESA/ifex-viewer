@@ -10,4 +10,4 @@ export interface ButtonProps {
 
 export type ButtonSize = 's' | 'm' | 'l';
 
-export type ButtonVariant = 'primary' | 'secondary';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';

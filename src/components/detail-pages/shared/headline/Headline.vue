@@ -8,6 +8,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
       <h2 class="font-medium text-3xl dark:text-gray-100 text-ellipsis overflow-hidden" data-testid="headline-title" :title="headline">{{ headline }}</h2>
       <Badge v-if="pageType" :type="pageType" />
       <slot></slot>
+      <PageActionsButton :raw-data="nodeRawData" />
     </div>
 
     <div v-if="dotNotation?.length" class="flex gap-2 items-center">
@@ -20,6 +21,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 import { HeadlineProps } from './types';
 import Badge from '../../../shared/components/badge/Badge.vue';
 import CopyButton from '../../../shared/components/copy-button/CopyButton.vue';
+import PageActionsButton from './page-actions-button/PageActionsButton.vue';
 
 defineProps<HeadlineProps>();
 </script>

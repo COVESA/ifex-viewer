@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="event.description" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="event.name" :dot-notation="dotNotationFullPath" page-type="event">
+      <Headline :headline="event.name" :dot-notation="dotNotationFullPath" page-type="event" :node-raw-data="event">
         <template #default> <slot :name="dotNotationFullPath + '-headline'"></slot> </template>
       </Headline>
     </template>

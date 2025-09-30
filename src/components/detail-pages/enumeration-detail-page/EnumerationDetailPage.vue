@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="enumeration.description" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="enumeration.name" :dot-notation="dotNotationFullPath" page-type="enumeration">
+      <Headline :headline="enumeration.name" :dot-notation="dotNotationFullPath" page-type="enumeration" :node-raw-data="enumeration">
         <template #default>
           <DataTypeBadge :datatype="enumeration.datatype" @selected="selectDatatypeNode"> {{ enumeration.datatype }}</DataTypeBadge>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
