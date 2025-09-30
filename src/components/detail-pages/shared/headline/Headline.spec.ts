@@ -22,7 +22,7 @@ describe('Headline', () => {
   it('should render headline with dot notation and page type badge', () => {
     const headline = methodMock.name;
     const dotNotation = `GalacticEmpire.${methodMock.name}`;
-    renderComponent({ headline, pageType: 'method', dotNotation });
+    renderComponent({ headline, pageType: 'method', dotNotation, nodeRawData: methodMock });
 
     const headlineEl = screen.getByText(headline);
     const dotNotationEl = screen.getByText(dotNotation);
@@ -41,7 +41,7 @@ describe('Headline', () => {
     };
     const headline = methodMock.name;
     const dotNotation = `GalacticEmpire.${methodMock.name}`;
-    renderComponent({ headline, pageType: 'method', dotNotation }, slots);
+    renderComponent({ headline, pageType: 'method', dotNotation, nodeRawData: methodMock }, slots);
 
     const headlineEl = screen.getByText(headline);
 

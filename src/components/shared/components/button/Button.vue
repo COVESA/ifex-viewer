@@ -21,7 +21,7 @@ const emits = defineEmits(['clicked']);
 
 const sizeClasses = computed(() => {
   const sizeClassesMap: Record<ButtonSize, string> = {
-    s: 'h-7 w-auto',
+    s: 'h-7 w-auto text-sm',
     m: 'h-8 w-auto',
     l: 'h-9 w-auto',
   };
@@ -32,7 +32,8 @@ const sizeClasses = computed(() => {
 const variantClasses = computed(() => {
   const variantClassesMap: Record<ButtonVariant, string> = {
     primary: '',
-    secondary: 'border-gray-200 dark:bg-gray-800 hover:bg-gray-200 dark:text-gray-100 dark:border-gray-700',
+    secondary: 'dark:bg-gray-800 hover:bg-gray-200 dark:text-gray-100 dark:border-gray-700',
+    tertiary: 'px-3 border border-gray-300 dark:bg-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:border-gray-700',
   };
 
   return variantClassesMap[props.variant];

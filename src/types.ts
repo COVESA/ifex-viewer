@@ -44,7 +44,7 @@ export interface ParsedIfexSpecificationItem {
 /**
  * TODO: add documentation what each type stands for
  */
-export type ClipboardActionType = 'dotNotation' | 'validationError' | 'sourcecode';
+export type ClipboardActionType = 'dotNotation' | 'validationError' | 'sourcecode' | 'nodeYamlContent';
 
 export interface ClipboardCopiedEvent {
   type: ClipboardActionType;

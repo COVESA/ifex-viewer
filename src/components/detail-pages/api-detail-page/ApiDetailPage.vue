@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="api.description || ''" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="api.name ?? 'API'">
+      <Headline :headline="api.name ?? 'API'" :node-raw-data="api">
         <template #default>
           <Badge v-if="apiVersion?.length" data-testid="api-version-badge">{{ apiVersion }}</Badge>
         </template>

@@ -1,5 +1,11 @@
 # IFEX Viewer Changelog
 
+## v1.3.0 (2025-09-30)
+
+### Features
+
+- Add button to copy the current active node content as YAML (e.g. the currently open method) ([#50](https://github.com/COVESA/ifex-viewer/pull/50))
+
 ## v1.2.0 (2025-09-03)
 
 ### Features

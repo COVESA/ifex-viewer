@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 <template>
   <DetailPageContainer :description="propertyData.description" :validation-errors="validationErrors" :custom-properties="customProps">
     <template #headline>
-      <Headline :headline="propertyData.name" :dot-notation="dotNotationFullPath" page-type="property">
+      <Headline :headline="propertyData.name" :dot-notation="dotNotationFullPath" page-type="property" :node-raw-data="propertyData">
         <template #default>
           <DataTypeBadge :datatype="propertyData.datatype" @selected="selectDatatypeNode"> {{ propertyData.datatype }}</DataTypeBadge>
           <Badge v-if="propertyData.arraysize !== undefined" type="secondary" data-testid="badge-arraysize-metadata">Arraysize::[{{ propertyData.arraysize }}]</Badge>
