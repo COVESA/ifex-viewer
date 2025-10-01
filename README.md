@@ -11,7 +11,7 @@
   <h1 align="center">Interface Exchange Framework (IFEX) Viewer</h1>
     
   <p align="center">
-    The IFEX Viewer is a web component designed to display API specifications created with the Interface Exchange Framework (<a href="https://github.com/COVESA/ifex">IFEX</a>) and is capable of rendering all elements specified in the <a href="https://covesa.github.io/ifex/ifex-specification">IFEX Core IDL</a>.<br/>
+    The IFEX Viewer is a web component designed to display API specifications created with the Interface Exchange Framework (<a href="https://github.com/COVESA/ifex">IFEX</a>) and is capable of rendering all elements specified in the <a href="https://covesa.github.io/ifex/specification/">IFEX Core IDL</a>.<br/>
     <br />
     <a href="https://covesa.github.io/ifex-viewer/">View Documentation</a>
     .
