@@ -184,6 +184,18 @@ onMounted(() => {
   });
 });
 
+const resetSelectedEditorNode = () => {
+  selectedEditorNode.value = '';
+};
+
+watch(
+  viewerRef,
+  () => {
+    viewerRef.value.addEventListener('nodeselected', resetSelectedEditorNode);
+  },
+  { once: true },
+);
+
 onBeforeUnmount(() => {
   if (view.value) {
     view.value.destroy();
@@ -197,6 +209,9 @@ onBeforeUnmount(() => {
     clearTimeout(resizeTimeout);
     resizeTimeout = null;
   }
+
+  // Remove event listener from viewer
+  viewerRef.value.removeEventListener('nodeselected', resetSelectedEditorNode);
 });
 
 watch(errorMap, newErrorMap => {
