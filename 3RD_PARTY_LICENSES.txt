@@ -1,6 +1,6 @@
 Copyright 2025
 
-[IFEX Viewer : 1.1.0]
+[IFEX Viewer : 1.3.0]
 
 Phase: DEVELOPMENT
 Distribution: EXTERNAL
@@ -96,7 +96,7 @@ hookable 5.5.3 npmjs:hookable/5.5.3: https://github.com/jsless/hookable#readme
 is-what 4.1.16 npmjs:is-what/4.1.16: https://github.com/mesqueeb/isWhat#readme
 	Copyright (c) 2018 Luca Ban - Mesqueeb
 @jridgewell/sourcemap-codec 1.5.5 npmjs:@jridgewell/sourcemap-codec/1.5.5: https://github.com/jridgewell/sourcemap-codec#readme
-	No Copyrights found
+	Copyright (c) 2024 Justin Ridgewell <justin@ridgewell.name>
 json-schema-traverse 1.0.0 npmjs:json-schema-traverse/1.0.0: https://github.com/epoberezkin/json-schema-traverse
 	Copyright (c) 2017 Evgeny Poberezkin Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the S
 magic-string 0.30.17 npmjs:magic-string/0.30.17: https://github.com/rich-harris/magic-string
@@ -186,13 +186,13 @@ Vue.js 3.5.18 npmjs:vue/3.5.18: https://vuejs.org/
 	Copyright (c) 2018present Yuxi (Evan) You and Vue contributors
 	Copyright (c) 2018present, Yuxi (Evan) You
 @vueuse/core 13.7.0 npmjs:@vueuse/core/13.7.0: https://github.com/antfu/vueuse#readme
-	No Copyrights found
+	Copyright (c) 2019PRESENT Anthony Fu<https://github.com/antfu>
 @vueuse/metadata 13.7.0 npmjs:@vueuse/metadata/13.7.0: https://github.com/vueuse/vueuse/tree/main/packages/metadata#readme
-	No Copyrights found
+	Copyright (c) 2019PRESENT Anthony Fu<https://github.com/antfu>
 @vueuse/shared 13.7.0 npmjs:@vueuse/shared/13.7.0: https://github.com/antfu/vueuse/tree/master/packages/shared#readme
-	No Copyrights found
+	Copyright (c) 2019PRESENT Anthony Fu<https://github.com/antfu>
 yaml 2.8.1 npmjs:yaml/2.8.1: https://github.com/tj/js-yaml
-	No Copyrights found
+	Copyright (c) Eemeli Aro <eemeli@gmail.com> Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice
 zeekay/highlight.js 11.11.1 npmjs:highlight.js/11.11.1: https://github.com/zeekay/highlight.js
 	Copyright (c) 2006 Ivan Sagalaev. All rights reserved
 	Copyright (c) 2017present Arctic Ice Studio <development@arcticicestudio.com>
