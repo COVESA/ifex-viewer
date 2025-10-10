@@ -9,8 +9,11 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
       <ErrorNotification v-for="validationError of validationErrors" :key="JSON.stringify(validationError)" :validation-error="validationError" />
     </div>
     <slot name="above-description"></slot>
-    <Text v-if="description?.length" data-testid="detail-page-description">{{ description }}</Text>
-    <slot></slot>
+    <Text v-if="description?.length && !showYamlView" data-testid="detail-page-description">{{ description }}</Text>
+    <SourceCodeViewer v-if="showYamlView" :code="rawData as Record<string, unknown>" data-testid="node-yaml-view" />
+    <template v-else>
+      <slot></slot>
+    </template>
     <!--    TODO: add tooltip for explaining what is meant by custom properties -->
     <template v-if="hasCustomProperties">
       <div class="flex flex-col gap-4">
@@ -27,7 +30,7 @@ import { DetailPageContainerProps } from './types';
 import SourceCodeViewer from '../../../shared/components/source-code-viewer/SourceCodeViewer.vue';
 import { computed } from 'vue';
 
-const { customProperties } = defineProps<DetailPageContainerProps>();
+const { customProperties, showYamlView, rawData } = defineProps<DetailPageContainerProps>();
 
 const hasCustomProperties = computed(() => customProperties && Object.keys(customProperties).length > 0);
 </script>

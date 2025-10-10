@@ -11,9 +11,11 @@ import { structMock, structWithCustomPropertiesMock } from '../../../tests/mocks
 import { describe, expect, it } from 'vitest';
 
 const renderComponent = (props: StructDetailPageProps) => {
-  const { options } = getTestOptions({ usePinia: true });
+  const { options, user } = getTestOptions({ usePinia: true });
 
   render(StructDetailPage, { ...options, props });
+
+  return { user };
 };
 
 describe('StructDetailPage', () => {
@@ -45,5 +47,24 @@ describe('StructDetailPage', () => {
     const customPropertiesSection = screen.getByText('Custom properties');
 
     expect(customPropertiesSection).toBeInTheDocument();
+  });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespace.structs.${structMock.name}`;
+    const { user } = renderComponent({ struct: structMock, dotNotationFullPath });
+
+    expect(screen.getByText(structMock.description!)).toBeInTheDocument();
+    expect(screen.getByText('Members')).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(structMock.description!)).not.toBeInTheDocument();
+    expect(screen.queryByText('Members')).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
   });
 });

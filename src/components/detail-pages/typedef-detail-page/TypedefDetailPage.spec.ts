@@ -12,9 +12,11 @@ import { typedefMock, typedefWithCustomPropertiesMock } from '../../../tests/moc
 import { Typedef } from '../../../types/ifex-core';
 
 const renderComponent = (props: TypedefDetailPageProps) => {
-  const { options } = getTestOptions({ usePinia: true });
+  const { options, user } = getTestOptions({ usePinia: true });
 
   render(TypedefDetailPage, { ...options, props });
+
+  return { user };
 };
 
 describe('TypedefDetailPage', () => {
@@ -121,5 +123,22 @@ describe('TypedefDetailPage', () => {
     expect(variantTypeTag).toBeInTheDocument();
     expect(stringType).toBeInTheDocument();
     expect(booleanType).toBeInTheDocument();
+  });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespace.typedefs.${typedefMock.name}`;
+    const { user } = renderComponent({ typedef: typedefMock, dotNotationFullPath });
+
+    expect(screen.getByText(typedefMock.description!)).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(typedefMock.description!)).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
   });
 });

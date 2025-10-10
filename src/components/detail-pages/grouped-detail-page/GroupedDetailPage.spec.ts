@@ -91,4 +91,21 @@ describe('GroupedDetailPage', () => {
 
     expect(customPropertiesSection).toBeInTheDocument();
   });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespaces.interface.${interfaceMock.name}`;
+    const { user } = renderComponent({ data: interfaceWithCustomPropertiesMock, type: 'interface', dotNotationFullPath });
+
+    expect(screen.getByText(interfaceMock.description!)).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(interfaceMock.description!)).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
+  });
 });

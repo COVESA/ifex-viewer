@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="typedef.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="typedef.description" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="typedef">
     <template #headline>
-      <Headline :headline="typedef.name" :dot-notation="dotNotationFullPath" page-type="typedef" :node-raw-data="typedef">
+      <Headline :headline="typedef.name" :dot-notation="dotNotationFullPath" page-type="typedef" :node-raw-data="typedef" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default>
           <Badge v-if="typedef.datatypes?.length" type="primitiveType"> Variant type</Badge>
           <DataTypeBadge v-if="!typedef.datatypes?.length && typedef.datatype" :datatype="typedef.datatype" @selected="selectDatatypeNode"> {{ typedef.datatype }}</DataTypeBadge>
@@ -36,7 +36,7 @@ import DetailPageContainer from '../shared/detail-page-container/DetailPageConta
 import Headline from '../shared/headline/Headline.vue';
 import Badge from '../../shared/components/badge/Badge.vue';
 import { Typedef } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import DataTypeBadge from '../../shared/components/datatype-badge/DataTypeBadge.vue';
 import { useGetComplexDatatypeNode } from '../../../composables/use-get-complex-datatype-node.ts';
@@ -54,6 +54,8 @@ const knownTypedefProperties: KnownTypedefProperties = {
   min: undefined,
   max: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(typedef, knownTypedefProperties));
 

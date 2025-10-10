@@ -12,9 +12,11 @@ import PropertyDetailPage from './PropertyDetailPage.vue';
 import { PropertyDetailPageProps } from './types';
 
 const renderComponent = (props: PropertyDetailPageProps) => {
-  const { options } = getTestOptions({ usePinia: true });
+  const { options, user } = getTestOptions({ usePinia: true });
 
   render(PropertyDetailPage, { ...options, props });
+
+  return { user };
 };
 
 describe('PropertyDetailPage', () => {
@@ -63,5 +65,22 @@ describe('PropertyDetailPage', () => {
     const customPropertiesSection = screen.getByText('Custom properties');
 
     expect(customPropertiesSection).toBeInTheDocument();
+  });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespace.properties.${propertyMock.name}`;
+    const { user } = renderComponent({ propertyData: propertyMock, dotNotationFullPath });
+
+    expect(screen.getByText(propertyMock.description!)).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(propertyMock.description!)).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
   });
 });

@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="api.description || ''" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="api.description || ''" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="api">
     <template #headline>
-      <Headline :headline="api.name ?? 'API'" :node-raw-data="api">
+      <Headline :headline="api.name ?? 'API'" :node-raw-data="api" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default>
           <Badge v-if="apiVersion?.length" data-testid="api-version-badge">{{ apiVersion }}</Badge>
         </template>
@@ -20,7 +20,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
   </DetailPageContainer>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getVersion } from '../../../utils/version/version';
 import Badge from '../../shared/components/badge/Badge.vue';
 import DetailPageContainer from '../shared/detail-page-container/DetailPageContainer.vue';
@@ -45,6 +45,8 @@ const knownASTProperties: KnownASTProperties = {
   namespaces: undefined,
   schema: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(api, knownASTProperties));
 </script>

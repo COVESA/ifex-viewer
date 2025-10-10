@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="data.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="data.description" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="data">
     <template #headline>
-      <Headline :headline="data.name" :page-type="type" :dot-notation="dotNotationFullPath" :node-raw-data="data">
+      <Headline :headline="data.name" :page-type="type" :dot-notation="dotNotationFullPath" :node-raw-data="data" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default>
           <Badge v-if="version" data-testid="grouped-version-badge">{{ version }}</Badge>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
@@ -15,7 +15,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
   </DetailPageContainer>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getVersion } from '../../../utils/version/version';
 import Badge from '../../shared/components/badge/Badge.vue';
 import DetailPageContainer from '../shared/detail-page-container/DetailPageContainer.vue';
@@ -52,6 +52,8 @@ const knownNamespaceProperties: KnownNamespaceProperties = {
   ...knownInterfaceProperties,
   interface: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(data, type === 'interface' ? knownInterfaceProperties : knownNamespaceProperties));
 </script>

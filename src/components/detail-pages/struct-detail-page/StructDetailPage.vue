@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="struct.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="struct.description" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="struct">
     <template #headline>
-      <Headline :headline="struct.name" :dot-notation="dotNotationFullPath" page-type="struct" :node-raw-data="struct">
+      <Headline :headline="struct.name" :dot-notation="dotNotationFullPath" page-type="struct" :node-raw-data="struct" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
         </template>
@@ -33,7 +33,7 @@ import Headline from '../shared/headline/Headline.vue';
 import PropertyViewer from '../shared/property-viewer/PropertyViewer.vue';
 import { StructDetailPageProps } from './types';
 import { ArgumentWithCustomProperties, Struct } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import { useGetComplexDatatypeNode } from '../../../composables/use-get-complex-datatype-node.ts';
 
@@ -46,6 +46,8 @@ const knownStructProperties: KnownStructProperties = {
   description: undefined,
   members: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(struct, knownStructProperties));
 

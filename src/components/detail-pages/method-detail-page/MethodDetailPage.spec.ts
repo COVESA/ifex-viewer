@@ -104,4 +104,29 @@ describe('MethodDetailPage', () => {
 
     expect(customPropertiesSection).toBeInTheDocument();
   });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespaces.methods.${methodMock.name}`;
+    const { user } = renderComponent({ method: methodMock, dotNotationFullPath });
+
+    expect(screen.getByText(methodMock.description!)).toBeInTheDocument();
+    expect(screen.getByText('Input')).toBeInTheDocument();
+    expect(screen.getByText('Output')).toBeInTheDocument();
+    expect(screen.getByText('Returns')).toBeInTheDocument();
+    expect(screen.getByText('Errors')).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(methodMock.description!)).not.toBeInTheDocument();
+    expect(screen.queryByText('Input')).not.toBeInTheDocument();
+    expect(screen.queryByText('Output')).not.toBeInTheDocument();
+    expect(screen.queryByText('Returns')).not.toBeInTheDocument();
+    expect(screen.queryByText('Errors')).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
+  });
 });

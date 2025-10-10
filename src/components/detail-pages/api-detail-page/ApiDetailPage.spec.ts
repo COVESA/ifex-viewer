@@ -8,7 +8,7 @@ import { getTestOptions } from '../../../tests/base-test-options';
 import { ApiDetailPageProps } from './types';
 import ApiDetailPage from './ApiDetailPage.vue';
 import { apiMock, apiWithCustomPropertiesMock } from '../../../tests/mocks/api';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { validationErrorMock } from '../../../tests/mocks/validation-error';
 
 const renderComponent = (props: ApiDetailPageProps) => {
@@ -64,5 +64,21 @@ describe('ApiDetailPage', () => {
     const customPropertiesSection = screen.getByText('Custom properties');
 
     expect(customPropertiesSection).toBeInTheDocument();
+  });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const { user } = renderComponent({ api: apiMock });
+
+    expect(screen.getByText(apiMock.description!)).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(apiMock.description!)).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
   });
 });

@@ -64,4 +64,23 @@ describe('EnumerationDetailPage', () => {
 
     expect(within(screen.getByTestId('property-viewer-container')).getByText('directAccessToDeathStar', { exact: false })).toBeInTheDocument();
   });
+
+  it('should toggle view and show node content as yaml', async () => {
+    const dotNotationFullPath = `namespace.enumerations.${enumerationMock.name}`;
+    const { user } = renderComponent({ enumeration: enumerationMock, dotNotationFullPath });
+
+    expect(screen.getByText(enumerationMock.description!)).toBeInTheDocument();
+    expect(screen.getByText('Options')).toBeInTheDocument();
+    expect(screen.queryByTestId('node-yaml-view')).not.toBeInTheDocument();
+
+    const expandDropdownButton = screen.getByTestId('btn-expand-view-options');
+    await user.click(expandDropdownButton);
+
+    const yamlViewButton = screen.getByText('View as YAML');
+    await user.click(yamlViewButton);
+
+    expect(screen.queryByText(enumerationMock.description!)).not.toBeInTheDocument();
+    expect(screen.queryByText('Options')).not.toBeInTheDocument();
+    expect(screen.getByTestId('node-yaml-view')).toBeInTheDocument();
+  });
 });
