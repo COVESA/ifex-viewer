@@ -1,5 +1,12 @@
 # IFEX Viewer Changelog
 
+## v1.4.0 (2025-10-10)
+
+### Features
+
+- Add button to toggle between pretty view and yaml view on each detail page ([#55](https://github.com/COVESA/ifex-viewer/pull/55))
+- Upgraded dependencies ([#55](https://github.com/COVESA/ifex-viewer/pull/55))
+
 ## v1.3.0 (2025-09-30)
 
 ### Features
