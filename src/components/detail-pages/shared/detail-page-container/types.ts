@@ -4,9 +4,12 @@
  */
 
 import { ErrorObject } from 'ajv';
+import { IFEXTreeModelNode } from '../../../../types/node.ts';
 
 export interface DetailPageContainerProps {
   description?: string;
   validationErrors?: ErrorObject[];
   customProperties?: Record<string, unknown>;
+  showYamlView?: boolean;
+  rawData?: IFEXTreeModelNode['node'];
 }
