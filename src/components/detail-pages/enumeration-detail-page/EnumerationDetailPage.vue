@@ -3,9 +3,21 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="enumeration.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer
+    :description="enumeration.description"
+    :validation-errors="validationErrors"
+    :custom-properties="customProps"
+    :show-yaml-view="showYAMLView"
+    :raw-data="enumeration"
+  >
     <template #headline>
-      <Headline :headline="enumeration.name" :dot-notation="dotNotationFullPath" page-type="enumeration" :node-raw-data="enumeration">
+      <Headline
+        :headline="enumeration.name"
+        :dot-notation="dotNotationFullPath"
+        page-type="enumeration"
+        :node-raw-data="enumeration"
+        @toggle-yaml-view="showYAMLView = !showYAMLView"
+      >
         <template #default>
           <DataTypeBadge :datatype="enumeration.datatype" @selected="selectDatatypeNode"> {{ enumeration.datatype }}</DataTypeBadge>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
@@ -42,7 +54,7 @@ import DetailPageContainer from '../shared/detail-page-container/DetailPageConta
 import Headline from '../shared/headline/Headline.vue';
 import { EnumerationDetailPageProps } from './types';
 import { Enumeration, Option } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import SourceCodeViewer from '../../shared/components/source-code-viewer/SourceCodeViewer.vue';
 import DataTypeBadge from '../../shared/components/datatype-badge/DataTypeBadge.vue';
@@ -58,6 +70,8 @@ const knownEnumerationProperties: KnownEnumerationProperties = {
   datatype: undefined,
   options: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(enumeration, knownEnumerationProperties));
 

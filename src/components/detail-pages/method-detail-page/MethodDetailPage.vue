@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="method.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="method.description" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="method">
     <template #headline>
-      <Headline :headline="method.name" :dot-notation="dotNotationFullPath" page-type="method" :node-raw-data="method">
+      <Headline :headline="method.name" :dot-notation="dotNotationFullPath" page-type="method" :node-raw-data="method" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default>
           <slot :name="dotNotationFullPath + '-headline'"></slot>
         </template>
@@ -70,7 +70,7 @@ import Headline from '../shared/headline/Headline.vue';
 import PropertyViewer from '../shared/property-viewer/PropertyViewer.vue';
 import { MethodDetailPageProps } from './types';
 import { ArgumentWithCustomProperties, ErrorWithCustomProperties, Method } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import { useGetComplexDatatypeNode } from '../../../composables/use-get-complex-datatype-node.ts';
 
@@ -88,6 +88,8 @@ const knownMethodProperties: KnownMethodProperties = {
 };
 
 const customProps = computed(() => getCustomProperties(method, knownMethodProperties));
+
+const showYAMLView = ref(false);
 
 const getLastElementOfDotNotation = (dotNotationPath: string) => {
   const dotNotationParts = dotNotationPath.split('.');

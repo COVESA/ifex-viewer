@@ -3,9 +3,21 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="propertyData.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer
+    :description="propertyData.description"
+    :validation-errors="validationErrors"
+    :custom-properties="customProps"
+    :show-yaml-view="showYAMLView"
+    :raw-data="propertyData"
+  >
     <template #headline>
-      <Headline :headline="propertyData.name" :dot-notation="dotNotationFullPath" page-type="property" :node-raw-data="propertyData">
+      <Headline
+        :headline="propertyData.name"
+        :dot-notation="dotNotationFullPath"
+        page-type="property"
+        :node-raw-data="propertyData"
+        @toggle-yaml-view="showYAMLView = !showYAMLView"
+      >
         <template #default>
           <DataTypeBadge :datatype="propertyData.datatype" @selected="selectDatatypeNode"> {{ propertyData.datatype }}</DataTypeBadge>
           <Badge v-if="propertyData.arraysize !== undefined" type="secondary" data-testid="badge-arraysize-metadata">Arraysize::[{{ propertyData.arraysize }}]</Badge>
@@ -21,7 +33,7 @@ import DetailPageContainer from '../shared/detail-page-container/DetailPageConta
 import Headline from '../shared/headline/Headline.vue';
 import { PropertyDetailPageProps } from './types';
 import { Property } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import DataTypeBadge from '../../shared/components/datatype-badge/DataTypeBadge.vue';
 import { useGetComplexDatatypeNode } from '../../../composables/use-get-complex-datatype-node.ts';
@@ -36,6 +48,8 @@ const knownPropertyDataProperties: KnownPropertyDataProperties = {
   arraysize: undefined,
   datatype: undefined,
 };
+
+const showYAMLView = ref(false);
 
 const customProps = computed(() => getCustomProperties(propertyData, knownPropertyDataProperties));
 

@@ -3,9 +3,9 @@ SPDX-License-Identifier: Apache-2.0
 SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
-  <DetailPageContainer :description="event.description" :validation-errors="validationErrors" :custom-properties="customProps">
+  <DetailPageContainer :description="event.description" :validation-errors="validationErrors" :custom-properties="customProps" :show-yaml-view="showYAMLView" :raw-data="event">
     <template #headline>
-      <Headline :headline="event.name" :dot-notation="dotNotationFullPath" page-type="event" :node-raw-data="event">
+      <Headline :headline="event.name" :dot-notation="dotNotationFullPath" page-type="event" :node-raw-data="event" @toggle-yaml-view="showYAMLView = !showYAMLView">
         <template #default> <slot :name="dotNotationFullPath + '-headline'"></slot> </template>
       </Headline>
     </template>
@@ -31,7 +31,7 @@ import Headline from '../shared/headline/Headline.vue';
 import PropertyViewer from '../shared/property-viewer/PropertyViewer.vue';
 import { EventDetailPageProps } from './types';
 import { ArgumentWithCustomProperties, Event } from '../../../types/ifex-core.ts';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCustomProperties } from '../../../utils/get-custom-properties/get-custom-properties.ts';
 import { useGetComplexDatatypeNode } from '../../../composables/use-get-complex-datatype-node.ts';
 
@@ -48,6 +48,8 @@ const knownEventProperties: KnownEventProperties = {
 const customProps = computed(() => getCustomProperties(event, knownEventProperties));
 
 const emits = defineEmits<{ selectDatatypeNode: [nodeId: string] }>();
+
+const showYAMLView = ref(false);
 
 const { getNodeIdOfComplexDatatype } = useGetComplexDatatypeNode();
 

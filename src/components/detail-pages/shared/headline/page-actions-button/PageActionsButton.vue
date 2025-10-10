@@ -26,7 +26,9 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
     <div v-if="dropdownOpen" ref="dropdown" class="absolute right-0 top-8 w-48 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl shadow-lg z-10">
       <ul class="p-1.5">
         <li>
-          <Button size="s" variant="secondary" class="w-full hover:!bg-gray-100 dark:hover:!bg-gray-900" @clicked="toggleYamlView"> View as YAML </Button>
+          <Button size="s" variant="secondary" class="w-full hover:!bg-gray-100 dark:hover:!bg-gray-900" @clicked="toggleYamlView">
+            {{ showYAMLView ? 'Pretty view' : 'View as YAML' }}
+          </Button>
         </li>
       </ul>
     </div>
@@ -47,6 +49,8 @@ const { rawData } = defineProps<PageActionsButtonProps>();
 const emits = defineEmits(['toggle-yaml-view']);
 
 const dropdownOpen = ref(false);
+
+const showYAMLView = ref(false);
 
 const { copy, copied } = useClipboard();
 
@@ -75,6 +79,7 @@ onClickOutside(dropdownRef, () => (dropdownOpen.value = false), { ignore: [ignor
 
 const toggleYamlView = () => {
   emits('toggle-yaml-view');
+  showYAMLView.value = !showYAMLView.value;
   dropdownOpen.value = false;
 };
 </script>
