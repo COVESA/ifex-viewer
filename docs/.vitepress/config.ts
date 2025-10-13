@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/ifex-viewer/',
   description: 'The IFEX Viewer is a web component designed to display API specifications created with the Interface Exchange Framework (IFEX).',
   themeConfig: {
-    logo: './logo.svg',
+    logo: '/logo.svg',
     siteTitle: false,
     search: {
       provider: "local",
