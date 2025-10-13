@@ -17,6 +17,7 @@ import { indentWithTab } from '@codemirror/commands';
 import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
 import { useEditorSync } from './composables/use-editor-sync';
 import { useEditorResizing } from './composables/use-editor-resizing.js';
+import { useStorage } from '@vueuse/core';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
 const viewerRef = useTemplateRef<HTMLElement>('viewer');
@@ -26,7 +27,8 @@ const { isDark } = useData();
 
 const view = ref<null | EditorView>(null);
 
-const specifications = ref<string>(simpleSpecificationMock);
+// Persist specifications content in localStorage so user edits are not lost on tab close
+const specifications = useStorage<string>('ifex-playground-specifications', simpleSpecificationMock);
 
 const specificationYAMLDocs = computed<YAMLDocument[]>(() => YAML.parseAllDocuments(specifications.value));
 
@@ -159,7 +161,7 @@ onMounted(() => {
   window.addEventListener('resize', handleWindowResize);
 
   const initialEditorState = EditorState.create({
-    doc: simpleSpecificationMock,
+    doc: specifications.value, // Initialize editor with stored or default specification
     extensions: [
       oneDark,
       basicSetup,
