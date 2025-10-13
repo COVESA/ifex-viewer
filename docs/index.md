@@ -6,10 +6,12 @@ hero:
   name: 'IFEX Viewer'
   text: 'Web Component for displaying API Specifications'
   tagline: Visualize API Specs with IFEX Viewer effortlessly within your application
+  image: /hero.png
+  alt: IFEX Hero Image
   actions:
     - theme: brand
       text: Getting started
-      link: /guide/integration/getting-started
+      link: /guide/integration/getting-started 
     - theme: alt
       text: Playground
       link: /playground/
