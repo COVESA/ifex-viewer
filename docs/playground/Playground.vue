@@ -17,7 +17,7 @@ import { indentWithTab } from '@codemirror/commands';
 import ErrorMarkerWithMessage from './ErrorMarkerWithMessage';
 import { useEditorSync } from './composables/use-editor-sync';
 import { useEditorResizing } from './composables/use-editor-resizing.js';
-import { useStorage } from '@vueuse/core';
+import { useStorage, useFileDialog } from '@vueuse/core';
 
 const codemirrorInstance = useTemplateRef<HTMLElement>('editor');
 const viewerRef = useTemplateRef<HTMLElement>('viewer');
@@ -223,11 +223,49 @@ watch(errorMap, newErrorMap => {
     effects: errorGutterCompartment.reconfigure(errorGutter(newErrorMap)),
   });
 });
+
+const { open, files } = useFileDialog({
+  accept: '.yml,.yaml',
+});
+
+const handleFileUpload = async () => {
+  open();
+};
+
+// Helper to replace editor content safely
+const replaceEditorContent = (content: string) => {
+  if (!view.value) {
+    // Fallback: update reactive store; when editor mounts it will pick this up
+    specifications.value = content;
+    return;
+  }
+  view.value.dispatch({
+    changes: { from: 0, to: view.value.state.doc.length, insert: content },
+    selection: { anchor: 0 }, // Move cursor to start after replacement
+  });
+};
+
+watch(files, async newFiles => {
+  if (newFiles && newFiles.length > 0) {
+    const file = newFiles[0];
+    const content = await file.text();
+    try {
+      // Validate YAML content before overwriting (throws if invalid)
+      YAML.parse(content);
+      replaceEditorContent(content);
+    } catch (error) {
+      console.error('Invalid YAML file:', error);
+      alert('The uploaded file contains invalid YAML. Please check and try again.');
+    }
+  }
+});
 </script>
 
 <template>
   <div class="container">
     <div class="action-row">
+      <button ref="uploadButton" class="btn-upload" @click="handleFileUpload">Upload specification</button>
+      <div class="separator"></div>
       <label class="sync-toggle" title="When enabled the cursor position in the editor will be synced with the viewer.">
         <input v-model="syncEditorPosition" type="checkbox" name="sync-editor-position" />
         Sync cursor position with viewer
@@ -255,7 +293,6 @@ watch(errorMap, newErrorMap => {
   width: 100%;
   display: flex;
   margin-top: 2rem;
-  align-items: flex-end;
   flex-direction: column;
 }
 
@@ -292,6 +329,37 @@ watch(errorMap, newErrorMap => {
 
 .resizer {
   display: none; /* Hide by default, only show on larger screens */
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.separator {
+  width: 1px;
+  background-color: var(--vp-c-gray-1);
+  height: 1.5rem;
+}
+
+.btn-upload {
+  background-color: var(--vp-c-gray-3);
+  color: var(--vp-badge-info-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-upload:hover {
+  background-color: var(--vp-c-gray-soft);
+}
+
+.btn-upload:focus {
+  background-color: var(--vp-c-gray-soft);
 }
 
 @media (min-width: 768px) {
