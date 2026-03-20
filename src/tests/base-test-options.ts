@@ -28,7 +28,19 @@ export interface TestOptions {
 /**
  * Use this for setting up required test options in a reusable way.
  */
-export const getTestOptions = (testOptions: TestOptions) => {
+export interface TestOptionsReturn {
+  options: {
+    global: {
+      mocks: any;
+      stubs: Stubs | undefined;
+      plugins: any[];
+      provide: Record<string, any>;
+    };
+  };
+  user: ReturnType<typeof userEvent.setup>;
+}
+
+export const getTestOptions = (testOptions: TestOptions): TestOptionsReturn => {
   const { mocks, stubs, usePinia } = testOptions;
 
   const plugins = [];
