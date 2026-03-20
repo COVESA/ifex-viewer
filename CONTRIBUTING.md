@@ -19,9 +19,10 @@ In addition to the prerequisites mentioned [here](./README.md#prerequisites) you
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Run `pnpm install`
-4. Run `pnpm start`
-5. Implement your contribution
-6. Add proper tests :wink:
-7. Commit your Changes (`git commit -m 'Add some AmazingFeature'`). Please check out [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for creating your commit messages.
-8. Push your Branch (`git push origin feature/AmazingFeature`)
-9. Open a Pull Request
+4. Run `pnpm dev`
+5. Run `pnpm storybook` to see your changes in the Storybook environment
+6. Implement your contribution
+7. Add proper tests :wink:
+8. Commit your Changes (`git commit -m 'Add some AmazingFeature'`). Please check out [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for creating your commit messages.
+9. Push your Branch (`git push origin feature/AmazingFeature`)
+10. Open a Pull Request
