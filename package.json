@@ -63,8 +63,8 @@
     "highlight.js": "11.11.1",
     "pinia": "3.0.3",
     "uuid": "11.1.0",
-    "vue": "3.5.22",
-    "yaml": "2.8.1"
+    "vue": "3.5.30",
+    "yaml": "2.8.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "21.2.3",
@@ -83,7 +83,7 @@
     "@codemirror/theme-one-dark": "6.1.3",
     "@codemirror/view": "6.38.1",
     "@eslint/js": "9.33.0",
-    "@pinia/testing": "1.0.2",
+    "@pinia/testing": "1.0.3",
     "@playwright/test": "1.54.2",
     "@storybook/addon-docs": "9.1.2",
     "@storybook/addon-links": "9.1.2",
