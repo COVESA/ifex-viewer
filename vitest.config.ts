@@ -9,7 +9,7 @@ export default mergeConfig(
     test: {
       globals: true,
       environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/*', '**/stencil/**'],
+      exclude: [...configDefaults.exclude, 'e2e/*'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       setupFiles: './test-setup.ts',
       clearMocks: true,
