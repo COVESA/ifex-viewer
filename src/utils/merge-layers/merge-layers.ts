@@ -19,6 +19,9 @@ export const mergeDocuments = (...docs: Record<string, unknown>[]): [MergedDocum
 
   for (const overlayDoc of docs) {
     for (const [key, overlayValue] of Object.entries(overlayDoc)) {
+      if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+        continue;
+      }
       const baseValue = mergedMap[key];
       const exists = baseValue !== undefined;
 
@@ -138,7 +141,7 @@ const getNameAttribute = (value: unknown): [MergedDocument | null, boolean, stri
   }
 
   const nameValue = valueMap['name'];
-  if (typeof nameValue === 'string') {
+  if (typeof nameValue === 'string' && nameValue !== '__proto__' && nameValue !== 'constructor' && nameValue !== 'prototype') {
     return [valueMap, true, nameValue];
   }
 
