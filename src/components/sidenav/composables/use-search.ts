@@ -67,7 +67,13 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     return filteredNodes;
   };
 
-  const searchInContent = (valueToSearchIn: IFEXTreeModelNode['node'] | string | number, searchValue: string): boolean => {
+  const MAX_SEARCH_DEPTH = 20;
+
+  const searchInContent = (valueToSearchIn: IFEXTreeModelNode['node'] | string | number, searchValue: string, depth = 0): boolean => {
+    if (depth > MAX_SEARCH_DEPTH) {
+      return false;
+    }
+
     if (typeof valueToSearchIn === 'string') {
       return valueToSearchIn.toLowerCase().includes(searchValue);
     }
@@ -77,11 +83,11 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     }
 
     if (Array.isArray(valueToSearchIn)) {
-      return valueToSearchIn.some(item => searchInContent(item, searchValue));
+      return valueToSearchIn.some(item => searchInContent(item, searchValue, depth + 1));
     }
 
     if (typeof valueToSearchIn === 'object' && valueToSearchIn !== null) {
-      return Object.values(valueToSearchIn).some(value => searchInContent(value, searchValue));
+      return Object.values(valueToSearchIn).some(value => searchInContent(value, searchValue, depth + 1));
     }
 
     return false;

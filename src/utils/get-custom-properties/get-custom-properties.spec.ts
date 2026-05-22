@@ -43,4 +43,13 @@ describe('get-custom-properties', () => {
       },
     });
   });
+
+  it('should not include unsafe keys such as __proto__, constructor and prototype', () => {
+    const malicious = JSON.parse('{"__proto__":{"polluted":true},"constructor":"evil","name":"safe","custom_field":"value"}');
+    const result = getCustomProperties(malicious, knownNamespaceProperties);
+
+    expect(result).not.toHaveProperty('__proto__');
+    expect(result).not.toHaveProperty('constructor');
+    expect(result).toHaveProperty('custom_field', 'value');
+  });
 });
