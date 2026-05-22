@@ -34,9 +34,9 @@ const unknownPropsYaml = computed(() => YAML.stringify(code));
 
 const codeBlock = useTemplateRef<HTMLElement>('code');
 
-watch(codeBlock, () => {
+watch(unknownPropsYaml, () => {
   if (codeBlock.value) {
     hljs.highlightElement(codeBlock.value);
   }
-});
+}, { immediate: true, flush: 'post' });
 </script>
