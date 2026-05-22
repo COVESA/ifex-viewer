@@ -1,8 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, signal, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, signal, ViewChild } from '@angular/core';
 import { specificationItemMock } from '../../../../src/tests/mocks/specification';
 import { ClipboardCopiedEvent } from '../../../../src/types';
 import { ActivatedRoute } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { of, Subscription, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { fleetSizeMethodSlotContent, fleetSizeMethodSlotPath, headlineSlotPath, headlineSlotText, initialNodePathQueryName, slotQueryName } from '../../../e2e-apps-setup';
 
@@ -14,7 +14,7 @@ import { fleetSizeMethodSlotContent, fleetSizeMethodSlotPath, headlineSlotPath, 
   imports: [CommonModule],
   standalone: true,
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   @ViewChild('ifexViewer') ifexViewer: any;
 
   specifications = signal([specificationItemMock]);
@@ -23,6 +23,7 @@ export class AppComponent {
   clipboardCopiedEventPayload = signal<ClipboardCopiedEvent | null>(null);
 
   private readonly route = inject(ActivatedRoute);
+  private readonly queryParamsSub = new Subscription();
 
   hasSlots$ = this.route.queryParams.pipe(switchMap(params => of(params[slotQueryName] === 'true')));
 
@@ -33,12 +34,18 @@ export class AppComponent {
   protected readonly fleetSizeMethodSlotContent = fleetSizeMethodSlotContent;
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const initialNodePath = params[initialNodePathQueryName];
-      if (params[initialNodePathQueryName]) {
-        this.ifexViewer.nativeElement.selectNode(initialNodePath);
-      }
-    });
+    this.queryParamsSub.add(
+      this.route.queryParams.subscribe(params => {
+        const initialNodePath = params[initialNodePathQueryName];
+        if (params[initialNodePathQueryName]) {
+          this.ifexViewer.nativeElement.selectNode(initialNodePath);
+        }
+      }),
+    );
+  }
+
+  ngOnDestroy() {
+    this.queryParamsSub.unsubscribe();
   }
 
   onNodeSelected(evt: Event) {
