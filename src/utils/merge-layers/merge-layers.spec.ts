@@ -278,4 +278,12 @@ describe('merge-layers', () => {
       ),
     ]);
   });
+
+  it('should not allow prototype-polluting keys to be merged', () => {
+    const malicious = JSON.parse('{"__proto__":{"polluted":true},"name":"safe"}');
+
+    const result = mergeDocuments({}, malicious);
+    expect((({}) as any).polluted).toBeUndefined();
+    expect(result[0]).not.toHaveProperty('__proto__');
+  });
 });
