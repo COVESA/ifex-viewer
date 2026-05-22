@@ -54,7 +54,6 @@ import NamespaceIcon from '../shared/components/icons/NamespaceIcon.vue';
 
 defineProps<BreadcrumbsProps>();
 
-// eslint-disable-next-line no-unused-vars
 const emits = defineEmits<{ (e: 'breadcrumbSelected', nodeId: string): void }>();
 
 const selectBreadcrumb = (nodeId: string, isLast: boolean) => {

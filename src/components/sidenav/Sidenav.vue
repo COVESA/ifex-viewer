@@ -103,7 +103,6 @@ import ViewRightIcon from '../shared/components/icons/ViewRightIcon.vue';
 
 const { treeModel, selectedNodeId, showTabs = true, sidenavPosition } = defineProps<SidenavProps>();
 
-// eslint-disable-next-line no-unused-vars
 const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: ViewTabs): void; (e: 'sidenavPositionChanged'): void }>();
 
 const SCROLL_CONTAINER_ID = 'scroll-container';

@@ -63,7 +63,6 @@ type StylesMap = {
 
 const props = defineProps<SidenavItemProps>();
 
-// eslint-disable-next-line no-unused-vars
 const emits = defineEmits<{ (e: 'toggleChildren', event: NodeToggleEvent): void; (e: 'selected', nodeId: string): void }>();
 
 const styles = computed<StylesMap>(() => ({

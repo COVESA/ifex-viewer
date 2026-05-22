@@ -22,7 +22,6 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/outline';
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), { expanded: true, withLabel: false });
 
-// eslint-disable-next-line no-unused-vars
 const emits = defineEmits<{ (e: 'toggled', expandedState: boolean): void }>();
 
 const expandedState = ref(props.expanded);

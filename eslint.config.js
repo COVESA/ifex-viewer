@@ -30,6 +30,12 @@ export default [
   {
     files: ['**/*.vue'],
     rules: {
+      // The built-in no-unused-vars rule incorrectly flags the return value of
+      // defineEmits() as unused because the emits function is only called from
+      // within the template, which the rule cannot see. Turn it off for Vue
+      // files; the vue/no-unused-vars rule from eslint-plugin-vue covers the
+      // template-aware equivalent.
+      'no-unused-vars': 'off',
       'vue/html-indent': 'off',
       'vue/max-attributes-per-line': 'off',
       'vue/html-self-closing': [
@@ -52,7 +58,6 @@ export default [
         },
       ],
     },
-    // TODO: fix no-unused-var problem for defineEmits
     languageOptions: {
       parser: vueParser,
       parserOptions: {

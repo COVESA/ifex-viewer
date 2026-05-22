@@ -29,9 +29,9 @@ import { watchDebounced, useEventListener } from '@vueuse/core';
 import { useTemplateRef } from 'vue';
 
 enum Platform {
-  MacOs = 'MacOs', // eslint-disable-line no-unused-vars
-  Windows = 'Windows', // eslint-disable-line no-unused-vars
-  Other = 'Meta', // eslint-disable-line no-unused-vars
+  MacOs = 'MacOs',
+  Windows = 'Windows',
+  Other = 'Meta',
 }
 
 const emits = defineEmits<{
