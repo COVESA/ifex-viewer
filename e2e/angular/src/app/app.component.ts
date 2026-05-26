@@ -1,8 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, signal, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { specificationItemMock } from '../../../../src/tests/mocks/specification';
 import { ClipboardCopiedEvent } from '../../../../src/types';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subscription, switchMap } from 'rxjs';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { fleetSizeMethodSlotContent, fleetSizeMethodSlotPath, headlineSlotPath, headlineSlotText, initialNodePathQueryName, slotQueryName } from '../../../e2e-apps-setup';
 
@@ -14,7 +14,7 @@ import { fleetSizeMethodSlotContent, fleetSizeMethodSlotPath, headlineSlotPath, 
   imports: [CommonModule],
   standalone: true,
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('ifexViewer') ifexViewer: any;
 
   specifications = signal([specificationItemMock]);
@@ -23,7 +23,7 @@ export class AppComponent implements OnDestroy {
   clipboardCopiedEventPayload = signal<ClipboardCopiedEvent | null>(null);
 
   private readonly route = inject(ActivatedRoute);
-  private readonly queryParamsSub = new Subscription();
+  private readonly destroy$ = new Subject<void>();
 
   hasSlots$ = this.route.queryParams.pipe(switchMap(params => of(params[slotQueryName] === 'true')));
 
@@ -34,18 +34,17 @@ export class AppComponent implements OnDestroy {
   protected readonly fleetSizeMethodSlotContent = fleetSizeMethodSlotContent;
 
   ngOnInit() {
-    this.queryParamsSub.add(
-      this.route.queryParams.subscribe(params => {
-        const initialNodePath = params[initialNodePathQueryName];
-        if (params[initialNodePathQueryName]) {
-          this.ifexViewer.nativeElement.selectNode(initialNodePath);
-        }
-      }),
-    );
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      const initialNodePath = params[initialNodePathQueryName];
+      if (params[initialNodePathQueryName]) {
+        this.ifexViewer.nativeElement.selectNode(initialNodePath);
+      }
+    });
   }
 
   ngOnDestroy() {
-    this.queryParamsSub.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onNodeSelected(evt: Event) {
