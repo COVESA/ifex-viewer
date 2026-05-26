@@ -286,4 +286,45 @@ describe('merge-layers', () => {
     expect((({}) as any).polluted).toBeUndefined();
     expect(result[0]).not.toHaveProperty('__proto__');
   });
+
+  it('should ignore constructor key during merge', () => {
+    const malicious = JSON.parse('{"constructor":{"prototype":{"polluted":true}},"name":"safe"}');
+
+    const result = mergeDocuments({}, malicious);
+    expect((({}) as any).polluted).toBeUndefined();
+    expect(result[0]).not.toHaveProperty('constructor');
+    expect(result[0]).toEqual({ name: 'safe' });
+  });
+
+  it('should ignore prototype key during merge', () => {
+    const malicious = JSON.parse('{"prototype":{"polluted":true},"name":"safe"}');
+
+    const result = mergeDocuments({}, malicious);
+    expect((({}) as any).polluted).toBeUndefined();
+    expect(result[0]).not.toHaveProperty('prototype');
+    expect(result[0]).toEqual({ name: 'safe' });
+  });
+
+  it('should ignore unsafe keys recursively in nested objects', () => {
+    const mockA = { config: { setting: 'value' } };
+    const malicious = JSON.parse('{"config":{"setting":"overwrite","__proto__":{"polluted":true},"constructor":{"bad":true}}}');
+
+    const result = mergeDocuments(mockA, malicious);
+    expect((({}) as any).polluted).toBeUndefined();
+    expect(result[0]).toEqual({ config: { setting: 'overwrite' } });
+    expect(result[0]!['config']).not.toHaveProperty('__proto__');
+    expect(result[0]!['config']).not.toHaveProperty('constructor');
+  });
+
+  it('should reject unsafe name values in array merge path', () => {
+    const mockA = {
+      users: [{ name: '__proto__', value: 1 }],
+    };
+    const mockB = {
+      users: [{ name: 'safeUser', value: 2 }],
+    };
+
+    const result = mergeDocuments(mockA, mockB);
+    expect(result[0]).toEqual({ users: [{ name: 'safeUser', value: 2 }] });
+  });
 });
