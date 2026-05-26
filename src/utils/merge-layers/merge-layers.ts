@@ -5,6 +5,9 @@
 
 type MergedDocument = { [key: string]: any };
 
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+const isUnsafeKey = (key: string): boolean => UNSAFE_KEYS.has(key);
+
 /**
  * Merge multiple IFEX documents into one document.
  * It takes the order of the documents into account. The last document has the highest priority
@@ -19,7 +22,7 @@ export const mergeDocuments = (...docs: Record<string, unknown>[]): [MergedDocum
 
   for (const overlayDoc of docs) {
     for (const [key, overlayValue] of Object.entries(overlayDoc)) {
-      if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      if (isUnsafeKey(key)) {
         continue;
       }
       const baseValue = mergedMap[key];
@@ -141,7 +144,7 @@ const getNameAttribute = (value: unknown): [MergedDocument | null, boolean, stri
   }
 
   const nameValue = valueMap['name'];
-  if (typeof nameValue === 'string' && nameValue !== '__proto__' && nameValue !== 'constructor' && nameValue !== 'prototype') {
+  if (typeof nameValue === 'string' && !isUnsafeKey(nameValue)) {
     return [valueMap, true, nameValue];
   }
 
