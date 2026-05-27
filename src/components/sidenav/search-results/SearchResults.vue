@@ -4,6 +4,9 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
 -->
 <template>
   <div class="flex flex-col">
+    <p v-if="searchDepthLimitReached" class="text-xs text-amber-600 dark:text-amber-400 px-1 pb-2">
+      Some results may be missing — content nested beyond 20 levels was not searched.
+    </p>
     <p v-if="searchResults.length === 0" class="text-center text-gray-400">
       No search results found<template v-if="searchQuery.length > 0"> for "{{ searchQuery }}"</template>.
     </p>

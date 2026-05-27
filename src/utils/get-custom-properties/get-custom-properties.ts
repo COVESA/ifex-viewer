@@ -3,12 +3,12 @@
  * SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
  */
 
-const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+import { isUnsafeKey } from '../unsafe-keys/unsafe-keys.ts';
 
 export const getCustomProperties = <T>(node: T, knownProperties: Record<keyof T, undefined>) => {
   const allKnownProperties = Object.keys(knownProperties) as (keyof T)[];
   const unknownKeys = Object.keys(node as object).filter(
-    key => !UNSAFE_KEYS.has(key) && !allKnownProperties.includes(key as keyof T),
+    key => !isUnsafeKey(key) && !allKnownProperties.includes(key as keyof T),
   );
 
   const unknownPropsObj: Record<string, unknown> = {};

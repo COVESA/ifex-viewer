@@ -9,13 +9,23 @@ import { SearchResult } from '../search-results/types.ts';
 import { BadgeType } from '../../shared/components/badge/types.ts';
 import { Interface, Namespace } from '../../../types/ifex-core.ts';
 
+const MAX_SEARCH_DEPTH = 20;
+
 export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModelNode[]>) => {
+  let _depthLimitReached = false;
+
   const searchResults = computed(() => {
+    _depthLimitReached = false;
     if (!searchValue.value) {
       return [];
     }
 
     return filterTreeNodes(treeNodes.value, searchValue.value.toLowerCase());
+  });
+
+  const searchDepthLimitReached = computed(() => {
+    void searchResults.value;
+    return _depthLimitReached;
   });
 
   const filterTreeNodes = (treeNodes: IFEXTreeModelNode[], searchValue: string): SearchResult[] => {
@@ -67,10 +77,9 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     return filteredNodes;
   };
 
-  const MAX_SEARCH_DEPTH = 20;
-
   const searchInContent = (valueToSearchIn: IFEXTreeModelNode['node'] | string | number, searchValue: string, depth = 0): boolean => {
     if (depth > MAX_SEARCH_DEPTH) {
+      _depthLimitReached = true;
       return false;
     }
 
@@ -93,5 +102,5 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     return false;
   };
 
-  return { searchResults };
+  return { searchResults, searchDepthLimitReached };
 };
