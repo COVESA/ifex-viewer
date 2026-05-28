@@ -97,6 +97,8 @@ export const createTreeModel = (
   validationErrors: Map<string, ErrorObject[]> = new Map<string, ErrorObject[]>(),
   isInterface = false,
 ): IFEXTreeModelNode[] => {
+  if (!Array.isArray(nodes)) return [];
+
   return nodes.map((node, currNodeIndex): IFEXTreeModelNode => {
     const currentPath = `${path}/${currNodeIndex}`;
     const children = [];
