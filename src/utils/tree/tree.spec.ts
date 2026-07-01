@@ -26,6 +26,11 @@ describe('tree', () => {
   afterEach(() => vi.restoreAllMocks());
 
   describe('should generate tree', () => {
+    it('should return empty array when nodes is not an array', () => {
+      const result = createTreeModel(null as unknown as Array<Namespace>);
+      expect(result).toEqual([]);
+    });
+
     it('with namespaces only', () => {
       const id1 = '1234';
       const id2 = '12345';
