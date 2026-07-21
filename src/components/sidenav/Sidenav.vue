@@ -124,11 +124,13 @@ const sidenavSize = ref(350); // TODO: set initial size dynamically by the curre
 const sidenavEl = ref<HTMLDivElement | null>(null);
 
 // TODO: set min-width for sidenav
+const stopResizing = () => {
+  document.removeEventListener('mousemove', resize);
+};
+
 const startResizing = () => {
   document.addEventListener('mousemove', resize);
-  document.addEventListener('mouseup', () => {
-    document.removeEventListener('mousemove', resize);
-  });
+  document.addEventListener('mouseup', stopResizing, { once: true });
 };
 
 const onTabChange = (tabName: string) => {
