@@ -31,19 +31,19 @@ the language).
 
 ## Core concepts (node types)
 
-| Node | Purpose | Key fields |
-|---|---|---|
-| **Namespace** | Logical grouping of methods/events/properties/types; can nest arbitrarily deep; isolates names from sibling namespaces | `name` (req), `description`, `major_version`, `minor_version`, `version_label`, `events`, `methods`, `typedefs`, `structs`, `enumerations`, `properties`, `namespaces`, `includes`, `interface` |
-| **Interface** | The "public API" subset of a Namespace's contents; does NOT introduce a new visibility level; only one per Namespace; cannot nest another Interface | Same optional fields as Namespace, minus `interface` itself |
-| **Method** | An RPC — has input/output/return params and errors; reliable/guaranteed delivery | `name` (req), `description`, `input[]`, `output[]`, `returns[]`, `errors[]` |
-| **Event** | Fire-and-forget message, no return value, no delivery guarantee | `name` (req), `description`, `input[]` |
-| **Property** | An observable, gettable/settable/subscribable shared data item (≈ a VSS signal) | `name`, `datatype` (req), `description`, `arraysize` |
-| **Argument** | An input/output/return parameter of a Method or Event | `name`, `datatype` (req), `description`, `arraysize`, `range` |
-| **Error** | A named error return type for a Method (multiple independent error types allowed, unlike a single enum) | `datatype` (req), `name`, `description`, `arraysize`, `range` |
-| **Struct** / **Member** | Aggregate/composite data type and its fields | Struct: `name` (req), `description`, `members[]`. Member: `name`, `datatype` (req), `description`, `arraysize` |
-| **Enumeration** / **Option** | Named set of integer/string-valued options | Enumeration: `name`, `datatype`, `options[]` (req); Option: `name`, `value` (req) |
-| **Typedef** | Alias/constrained type, or a variant type via `datatypes` (list, mutually exclusive with `datatype`) | `name` (req), `datatype` OR `datatypes[]`, `description`, `arraysize`, `min`, `max` |
-| **Include** | Merges another IFEX file's structs/typedefs/enumerations/methods/events/properties into the hosting namespace | `file` (req), `description` |
+| Node                         | Purpose                                                                                                                                             | Key fields                                                                                                                                                                                      |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Namespace**                | Logical grouping of methods/events/properties/types; can nest arbitrarily deep; isolates names from sibling namespaces                              | `name` (req), `description`, `major_version`, `minor_version`, `version_label`, `events`, `methods`, `typedefs`, `structs`, `enumerations`, `properties`, `namespaces`, `includes`, `interface` |
+| **Interface**                | The "public API" subset of a Namespace's contents; does NOT introduce a new visibility level; only one per Namespace; cannot nest another Interface | Same optional fields as Namespace, minus `interface` itself                                                                                                                                     |
+| **Method**                   | An RPC — has input/output/return params and errors; reliable/guaranteed delivery                                                                    | `name` (req), `description`, `input[]`, `output[]`, `returns[]`, `errors[]`                                                                                                                     |
+| **Event**                    | Fire-and-forget message, no return value, no delivery guarantee                                                                                     | `name` (req), `description`, `input[]`                                                                                                                                                          |
+| **Property**                 | An observable, gettable/settable/subscribable shared data item (≈ a VSS signal)                                                                     | `name`, `datatype` (req), `description`, `arraysize`                                                                                                                                            |
+| **Argument**                 | An input/output/return parameter of a Method or Event                                                                                               | `name`, `datatype` (req), `description`, `arraysize`, `range`                                                                                                                                   |
+| **Error**                    | A named error return type for a Method (multiple independent error types allowed, unlike a single enum)                                             | `datatype` (req), `name`, `description`, `arraysize`, `range`                                                                                                                                   |
+| **Struct** / **Member**      | Aggregate/composite data type and its fields                                                                                                        | Struct: `name` (req), `description`, `members[]`. Member: `name`, `datatype` (req), `description`, `arraysize`                                                                                  |
+| **Enumeration** / **Option** | Named set of integer/string-valued options                                                                                                          | Enumeration: `name`, `datatype`, `options[]` (req); Option: `name`, `value` (req)                                                                                                               |
+| **Typedef**                  | Alias/constrained type, or a variant type via `datatypes` (list, mutually exclusive with `datatype`)                                                | `name` (req), `datatype` OR `datatypes[]`, `description`, `arraysize`, `min`, `max`                                                                                                             |
+| **Include**                  | Merges another IFEX file's structs/typedefs/enumerations/methods/events/properties into the hosting namespace                                       | `file` (req), `description`                                                                                                                                                                     |
 
 Fundamental (primitive) types (same as VSS): `uint8`, `int8`, `uint16`,
 `int16`, `uint32`, `int32`, `uint64`, `int64`, `boolean`, `float`, `double`,
@@ -57,12 +57,43 @@ target/protocol-specific detail into separate **layer** files:
 - **Layer Type**: a category of extra metadata (e.g. a D-Bus or SOME/IP
   mapping), usually with its own schema, documented in the developer manual.
 - **Layer instance**: an actual file conforming to a Layer Type's schema.
-- **Overlay**: a layer file using the *same* schema as an original IFEX file,
-  which extends or redefines parts of it (e.g. adding a parameter to an
-  existing event, or narrowing a typedef's range). Tools typically merge
-  same-named list objects recursively and apply "last file wins" for
-  conflicting scalar values, but this is tool-defined behavior, not part of
-  the core spec.
+- **Overlay**: a layer file based on IFEX Core IDL with potential schema enhancements that extends or redefines parts of the API definition (e.g. adding a parameter to an existing event, or narrowing a typedef's range). Tools typically merge same-named list objects recursively and apply "last file wins" for conflicting scalar values, but this is tool-defined behavior, not part of the core spec.
+
+**Example usage of Overlays:**
+
+Base IFEX file (`comfort-service.yml`):
+
+```yaml
+name: comfort
+  typedefs:
+    - name: movement_t
+      datatype: int16
+      min: -1000
+      max: 1000
+      description: The movement of a seat component
+```
+
+Overlay file (`refine-movement-type.yml`):
+
+```yaml
+name: comfort
+  typedefs:
+    - name: movement_t
+      datatype: int8 # Replaces int16 of the original type
+```
+
+Resulting merged file:
+
+````yaml
+name: comfort
+  typedefs:
+    - name: movement_t
+      datatype: int8 # (Replaced datatype)
+      min: -1000
+      max: 1000
+      description: The movement of a seat component
+```
+
 - **Deployment layer**: a layer that adds environment-specific keys (e.g.
   `dbus_interface`) that are not valid in plain IFEX Core IDL.
 
@@ -89,3 +120,4 @@ rationale).
   → fetch the developer manual's "Mapping documents" pages.
 - Terminology disputes (layer vs. overlay vs. layer type vs. layer
   specification) → fetch the FAQ.
+````
