@@ -14,6 +14,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
         :tree-model="activeView"
         :show-tabs="hasMoreThanOneLayer"
         :sidenav-position="currentSidenavPosition"
+        :search-shortcut="searchShortcut"
         @node-selected="onNodeSelected"
         @view-tab-changed="viewerModelStore.changeSelectedView"
         @sidenav-position-changed="changeSidenavPosition"
@@ -65,6 +66,7 @@ import { storeToRefs } from 'pinia';
 
 const {
   specifications,
+  searchShortcut,
   layout = {
     sidenavPosition: 'left',
   },

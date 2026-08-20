@@ -5,13 +5,14 @@
 
 import { IFEXTreeModelNode, NodeType } from '../../types/node';
 import { BadgeType } from '../shared/components/badge/types.ts';
-import { SidenavPosition } from '../../types.ts';
+import { IfexViewerSearchShortcut, SidenavPosition } from '../../types.ts';
 
 export interface SidenavProps {
   treeModel: IFEXTreeModelNode[];
   selectedNodeId: string;
   showTabs?: boolean;
   sidenavPosition: SidenavPosition;
+  searchShortcut?: IfexViewerSearchShortcut;
 }
 
 export interface TreeNode {

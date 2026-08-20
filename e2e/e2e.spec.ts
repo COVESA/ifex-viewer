@@ -3,8 +3,34 @@
  * SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
  */
 
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import { fleetSizeMethodSlotContent, headlineSlotText, initialNodePathQueryName, slotQueryName } from './e2e-apps-setup';
+
+type Platform = 'mac' | 'windows' | 'linux' | 'other';
+
+const getPlatform = async (page: Page): Promise<Platform> =>
+  page.evaluate(() => {
+    const platform = ('userAgentData' in navigator ? (navigator.userAgentData as { platform: string }).platform : navigator.platform).toLowerCase();
+
+    if (platform.includes('mac')) {
+      return 'mac';
+    } else if (platform.includes('win')) {
+      return 'windows';
+    } else if (platform.includes('linux')) {
+      return 'linux';
+    }
+
+    return 'other';
+  });
+
+const setSearchShortcut = async (page: Page, shortcut: Record<string, string>) => {
+  await page.locator('ifex-viewer').evaluate(
+    (viewer, configuredShortcut) => {
+      (viewer as HTMLElement & { searchShortcut?: Record<string, string> }).searchShortcut = configuredShortcut;
+    },
+    shortcut,
+  );
+};
 
 test.describe('e2e ifex viewer', () => {
   test.beforeEach(async ({ page }) => {
@@ -99,6 +125,47 @@ test.describe('e2e ifex viewer', () => {
 
       const detailPageContainer = page.getByTestId('detail-page-container');
       await expect(detailPageContainer.getByText(nodeToSelect, { exact: true })).toBeVisible();
+    });
+
+    test('should focus the search input with the default platform shortcut', async ({ page }) => {
+      const platform = await getPlatform(page);
+      const shortcut = platform === 'mac' ? 'Meta+G' : 'Control+G';
+      const searchInput = page.getByRole('searchbox');
+
+      await page.keyboard.press(shortcut);
+
+      await expect(searchInput).toBeFocused();
+    });
+
+    test('should focus the search input with a configured single-key shortcut', async ({ page }) => {
+      const searchInput = page.getByRole('searchbox');
+      await setSearchShortcut(page, { mac: 'F', windows: 'F', linux: 'F', default: 'F' });
+
+      await page.keyboard.press('F');
+
+      await expect(searchInput).toBeFocused();
+    });
+
+    test('should focus the search input with a configured three-part shortcut', async ({ page }) => {
+      const platform = await getPlatform(page);
+      const shortcut = platform === 'mac' ? 'Meta+Alt+L' : 'Control+Alt+L';
+      const searchInput = page.getByRole('searchbox');
+      await setSearchShortcut(page, { mac: 'Meta+Alt+L', windows: 'Control+Alt+L', linux: 'Control+Alt+L', default: 'Control+Alt+L' });
+
+      await page.keyboard.press(shortcut);
+
+      await expect(searchInput).toBeFocused();
+    });
+
+    test('should fall back to the default platform shortcut for an invalid configured shortcut', async ({ page }) => {
+      const platform = await getPlatform(page);
+      const shortcut = platform === 'mac' ? 'Meta+G' : 'Control+G';
+      const searchInput = page.getByRole('searchbox');
+      await setSearchShortcut(page, { mac: 'Control+Shift', windows: 'Control+Shift', linux: 'Control+Shift', default: 'Control+Shift' });
+
+      await page.keyboard.press(shortcut);
+
+      await expect(searchInput).toBeFocused();
     });
   });
 });

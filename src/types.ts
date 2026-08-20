@@ -15,6 +15,25 @@ export interface IfexViewerLayout {
   sidenavPosition: SidenavPosition;
 }
 
+export interface IfexViewerSearchShortcut {
+  /**
+   * Shortcut used on macOS. Use modifier names such as `Meta`, `Control`, `Alt`, and `Shift`.
+   */
+  mac?: string;
+  /**
+   * Shortcut used on Windows. Use modifier names such as `Meta`, `Control`, `Alt`, and `Shift`.
+   */
+  windows?: string;
+  /**
+   * Shortcut used on Linux. Use modifier names such as `Meta`, `Control`, `Alt`, and `Shift`.
+   */
+  linux?: string;
+  /**
+   * Shortcut used when no platform-specific shortcut is configured or the platform cannot be determined.
+   */
+  default?: string;
+}
+
 export interface IfexViewerProps {
   /**
    * An array of IFEX specification items to be displayed in the viewer.
@@ -24,6 +43,11 @@ export interface IfexViewerProps {
    * Specifies the layout configuration for the IFEX viewer.
    */
   layout: IfexViewerLayout;
+  /**
+   * Configures the keyboard shortcut that focuses the sidenav search input.
+   * Defaults to `Meta+G` on macOS and `Control+G` on other platforms.
+   */
+  searchShortcut?: IfexViewerSearchShortcut;
 }
 
 /**
