@@ -27,6 +27,46 @@ interface IfexViewerLayout {
 }
 ```
 
+### `searchShortcut?: IfexViewerSearchShortcut`
+
+Configures the keyboard shortcut that focuses the search input in the sidenav. Shortcut strings use `+` to join modifiers and a key. Supported modifiers are `Meta` (also `Cmd` or `Command`), `Control` (also `Ctrl`), `Alt` (also `Option`), and `Shift`.
+
+```ts
+interface IfexViewerSearchShortcut {
+  mac?: string;
+  windows?: string;
+  linux?: string;
+  default?: string;
+}
+```
+
+When omitted, the viewer uses `Meta+G` on macOS and `Control+G` on Windows and Linux. A platform-specific entry takes precedence; `default` is used for platforms without an entry or platforms that cannot be identified. Invalid shortcut strings fall back to the built-in default for the current platform.
+
+::: warning
+Use at least two keys (a modifier and a key) for a shortcut. A single-key shortcut can be triggered while users are typing elsewhere on the page.
+:::
+
+#### Shortcut examples
+
+| Keys | Shortcut string | Example |
+| --- | --- | --- |
+| 1 | `F` | `windows: 'F'` |
+| 2 | `Control+K` | `windows: 'Control+K'` |
+| 3 | `Meta+Option+L` | `mac: 'Meta+Option+L'` |
+
+#### Platform-specific example
+
+```ts
+const viewer = document.querySelector('ifex-viewer');
+
+viewer.searchShortcut = {
+  mac: 'Meta+K',
+  windows: 'Control+K',
+  linux: 'Control+K',
+  default: 'Control+K',
+};
+```
+
 ## Events
 
 ### `specloaded`

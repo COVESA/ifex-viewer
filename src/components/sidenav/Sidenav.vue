@@ -28,7 +28,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
         <div class="flex flex-col gap-3 sticky left-0 top-auto bg-gray-100 dark:bg-gray-900">
           <Tabs v-if="showTabs" :tabs="[ViewTabs.MERGE_VIEW, ViewTabs.LAYERED_VIEW]" data-testid="view-tabs" @tab-changed="onTabChange" />
 
-          <SearchInput @query-updated="value => (searchValue = value)" />
+          <SearchInput :search-shortcut="searchShortcut" @query-updated="value => (searchValue = value)" />
 
           <div v-if="!searchValue" class="flex justify-between items-center">
             <Text class="text-md tracking-wide">Specification</Text>
@@ -101,7 +101,7 @@ import SearchResults from './search-results/SearchResults.vue';
 import ViewLeftIcon from '../shared/components/icons/ViewLeftIcon.vue';
 import ViewRightIcon from '../shared/components/icons/ViewRightIcon.vue';
 
-const { treeModel, selectedNodeId, showTabs = true, sidenavPosition } = defineProps<SidenavProps>();
+const { treeModel, selectedNodeId, showTabs = true, sidenavPosition, searchShortcut } = defineProps<SidenavProps>();
 
 // eslint-disable-next-line no-unused-vars
 const emits = defineEmits<{ (e: 'nodeSelected', nodeId: string): void; (e: 'viewTabChanged', tabName: ViewTabs): void; (e: 'sidenavPositionChanged'): void }>();

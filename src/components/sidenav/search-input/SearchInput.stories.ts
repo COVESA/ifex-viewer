@@ -18,3 +18,20 @@ export const Default: Story = {
   }),
   args: {},
 };
+
+export const ConfiguredShortcut: Story = {
+  render: args => ({
+    components: { SearchInput },
+    setup() {
+      return { args };
+    },
+    template: '<SearchInput v-bind="args" />',
+  }),
+  args: {
+    searchShortcut: {
+      mac: 'Meta+K',
+      windows: 'Control+K',
+      linux: 'Control+K',
+    },
+  },
+};
