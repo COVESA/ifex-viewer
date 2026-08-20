@@ -68,6 +68,7 @@ SPDX-FileCopyrightText: © 2025 Mercedes-Benz Tech Innovation GmbH
           v-if="searchValue.length"
           :search-results="searchResults"
           :search-query="searchValue"
+          :search-depth-limit-reached="searchDepthLimitReached"
           @search-result-selected="searchResult => onNodeSelected(searchResult.id)"
         />
 
@@ -112,7 +113,7 @@ const searchValue = ref('');
 
 const treeModelRef = computed(() => treeModel);
 
-const { searchResults } = useSearch(searchValue, treeModelRef);
+const { searchResults, searchDepthLimitReached } = useSearch(searchValue, treeModelRef);
 
 const { collapseAllNodes, expandAllNodes, onToggleChildren, treeNodes, allNodesExpanded } = useTree(treeModelRef, () => selectedNodeId);
 

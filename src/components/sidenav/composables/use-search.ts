@@ -9,13 +9,23 @@ import { SearchResult } from '../search-results/types.ts';
 import { BadgeType } from '../../shared/components/badge/types.ts';
 import { Interface, Namespace } from '../../../types/ifex-core.ts';
 
+const MAX_SEARCH_DEPTH = 20;
+
 export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModelNode[]>) => {
+  let _depthLimitReached = false;
+
   const searchResults = computed(() => {
+    _depthLimitReached = false;
     if (!searchValue.value) {
       return [];
     }
 
     return filterTreeNodes(treeNodes.value, searchValue.value.toLowerCase());
+  });
+
+  const searchDepthLimitReached = computed(() => {
+    void searchResults.value;
+    return _depthLimitReached;
   });
 
   const filterTreeNodes = (treeNodes: IFEXTreeModelNode[], searchValue: string): SearchResult[] => {
@@ -67,7 +77,12 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     return filteredNodes;
   };
 
-  const searchInContent = (valueToSearchIn: IFEXTreeModelNode['node'] | string | number, searchValue: string): boolean => {
+  const searchInContent = (valueToSearchIn: IFEXTreeModelNode['node'] | string | number, searchValue: string, depth = 0): boolean => {
+    if (depth > MAX_SEARCH_DEPTH) {
+      _depthLimitReached = true;
+      return false;
+    }
+
     if (typeof valueToSearchIn === 'string') {
       return valueToSearchIn.toLowerCase().includes(searchValue);
     }
@@ -77,15 +92,15 @@ export const useSearch = (searchValue: Ref<string>, treeNodes: Ref<IFEXTreeModel
     }
 
     if (Array.isArray(valueToSearchIn)) {
-      return valueToSearchIn.some(item => searchInContent(item, searchValue));
+      return valueToSearchIn.some(item => searchInContent(item, searchValue, depth + 1));
     }
 
     if (typeof valueToSearchIn === 'object' && valueToSearchIn !== null) {
-      return Object.values(valueToSearchIn).some(value => searchInContent(value, searchValue));
+      return Object.values(valueToSearchIn).some(value => searchInContent(value, searchValue, depth + 1));
     }
 
     return false;
   };
 
-  return { searchResults };
+  return { searchResults, searchDepthLimitReached };
 };
